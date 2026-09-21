@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevRef · Guia de Comandos</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="portal-topbar">
+    <div class="portal-topbar-inner">
+        <a href="#" class="portal-brand">
+            <img class="portal-brand-mark" src="assets/logo-icon.png" alt="DevRef">
+            DevRef
+        </a>
+        <nav class="portal-topnav">
+            <a href="#curso" class="is-active">Curso</a>
+            <a href="#reference">Referência</a>
+        </nav>
+    </div>
+</header>
+
+<div class="portal-lang-bar">
+    <div class="portal-lang-bar-inner">
+        <div class="portal-lang-tabs" id="lang-tabs">
+            <button class="portal-lang-tab is-active" data-lang="web">WEB</button>
+            <button class="portal-lang-tab" data-lang="python">Python</button>
+            <button class="portal-lang-tab" data-lang="c">C</button>
+            <button class="portal-lang-tab" data-lang="cpp">C++</button>
+            <button class="portal-lang-tab" data-lang="csharp">C#</button>
+            <button class="portal-lang-tab" data-lang="sql">SQL</button>
+        </div>
+    </div>
+</div>
+
+<section class="portal-auth-shell portal-hero">
+    <div class="portal-auth-visual" aria-label="DevRef">
+        <div class="portal-eyebrow">DEVREF · GUIA TÉCNICO</div>
+        <h2>Seus comandos.<br/>Um só <span>lugar.</span></h2>
+        <p id="hero-description">HTML, CSS, JavaScript, React e TypeScript reunidos em uma referência rápida, com exemplos prontos para consulta.</p>
+        <img class="portal-network-art" src="assets/hero-illustration.png" alt="" aria-hidden="true">
+    </div>
+
+    <div class="portal-auth-card portal-hero-card">
+        <div class="portal-eyebrow">RESUMO DO GUIA</div>
+        <h1>Referência rápida.</h1>
+        <p class="portal-lead" id="hero-lead">56 comandos, tags e propriedades organizados por tecnologia, com descrição e exemplo de código prontos para consulta.</p>
+
+        <div class="portal-hero-stats" id="hero-stats"></div>
+
+        <a href="#reference" class="btn btn-primary portal-auth-submit">Ver comandos</a>
+    </div>
+</section>
+
+<section class="portal-main" id="curso">
+
+    <div class="portal-page-header">
+        <div>
+            <div class="portal-eyebrow">Curso Básico e Intermediário</div>
+            <h1 id="curso-title">Do zero ao React &amp; TypeScript</h1>
+            <p class="portal-subtitle" id="curso-subtitle">Guia completo com explicação e código de cada módulo: HTML, CSS, JavaScript, React e TypeScript.</p>
+        </div>
+    </div>
+
+    <div class="portal-course-modules" id="course-modules"></div>
+
+    <div class="portal-card portal-summary-card" id="course-summary"></div>
+
+</section>
+
+<main class="portal-main" id="reference">
+
+    <div class="portal-page-header">
+        <div>
+            <div class="portal-eyebrow">Guia de Comandos</div>
+            <h1>Comandos</h1>
+            <p class="portal-subtitle" id="reference-subtitle">Consulta de tags, propriedades e métodos de HTML, CSS, JavaScript, React e TypeScript.</p>
+        </div>
+
+        <span class="portal-status portal-status-ok" id="result-count">
+            56 comandos
+        </span>
+    </div>
+
+    <div class="portal-toolbar">
+        <div class="portal-tabs" id="tech-tabs"></div>
+
+        <input
+            type="search"
+            id="search-input"
+            class="form-control portal-search"
+            placeholder="Buscar comando, categoria ou descrição..."
+        />
+    </div>
+
+    <div class="portal-card portal-table-card">
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <colgroup>
+                    <col style="width: 9%">
+                    <col style="width: 13%">
+                    <col style="width: 18%">
+                    <col style="width: 22%">
+                    <col style="width: 38%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Tecnologia</th>
+                        <th>Categoria / Módulo</th>
+                        <th>Comando / Tag / Propriedade</th>
+                        <th>Descrição</th>
+                        <th>Exemplo</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="portal-pagination">
+        <div class="portal-pagination-summary" id="pagination-summary">
+        </div>
+
+        <div class="portal-pagination-actions" id="pagination-actions">
+        </div>
+    </div>
+
+</main>
+
+<footer class="portal-footer">
+    <div class="portal-footer-inner">
+        <span>DevRef &middot; Guia técnico multi-linguagem</span>
+    </div>
+</footer>
+
+<script src="data/data.js"></script>
+<script src="data/course-data.js"></script>
+<script src="data/data-python.js"></script>
+<script src="data/course-data-python.js"></script>
+<script src="data/data-c.js"></script>
+<script src="data/course-data-c.js"></script>
+<script src="data/data-cpp.js"></script>
+<script src="data/course-data-cpp.js"></script>
+<script src="data/data-csharp.js"></script>
+<script src="data/course-data-csharp.js"></script>
+<script src="data/data-sql.js"></script>
+<script src="data/course-data-sql.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
