@@ -1,6 +1,6 @@
 # DevRef · Guia de Comandos
 
-Site estático de referência técnica com comandos, cursos e resumos para múltiplas linguagens (WEB — HTML/CSS/JavaScript/React/TypeScript —, Python, C, C++, C# e SQL).
+Um site com o propósito de espalhar conhecimento de uma maneira simples e dinâmica: referência técnica com comandos, cursos e resumos para múltiplas linguagens (WEB — HTML/CSS/JavaScript/React/TypeScript —, Python, C, C++, C# e SQL).
 
 ## Estrutura do projeto
 
