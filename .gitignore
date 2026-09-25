@@ -15,3 +15,9 @@ _scratch*
 
 # Office lock files
 ~$*
+
+# Node projects embedded under projetos/
+node_modules/
+.env
+.env.local
+*.tsbuildinfo
