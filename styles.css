@@ -924,3 +924,61 @@ a:hover {
 .apostila-links li {
     margin-bottom: 6px;
 }
+
+.apostila-preview-frame {
+    border: 1px solid var(--portal-border);
+    border-radius: var(--portal-radius);
+    overflow: hidden;
+    background: var(--portal-bg-alt);
+}
+
+.apostila-preview-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--portal-surface-raised);
+    border-bottom: 1px solid var(--portal-border);
+}
+
+.apostila-preview-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--portal-border-strong);
+}
+
+.apostila-preview-url {
+    margin-left: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--portal-text-faint);
+    background: var(--portal-bg);
+    border: 1px solid var(--portal-border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.apostila-preview-frame iframe {
+    display: block;
+    width: 100%;
+    height: 640px;
+    border: none;
+    background: #ffffff;
+}
+
+.apostila-preview-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 14px 0;
+}
+
+@media (max-width: 560px) {
+    .apostila-preview-frame iframe {
+        height: 480px;
+    }
+}
