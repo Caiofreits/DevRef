@@ -331,9 +331,9 @@ function renderModules() {
     if (!container || !modules) return;
 
     container.innerHTML = modules
-        .map((mod, index) => `
-        <article class="portal-module ${index === 0 ? "is-open" : ""}" data-module="${mod.id}">
-            <button class="portal-module-header" type="button" aria-expanded="${index === 0 ? "true" : "false"}">
+        .map((mod) => `
+        <article class="portal-module" data-module="${mod.id}">
+            <button class="portal-module-header" type="button" aria-expanded="false">
                 <span class="portal-module-heading">
                     <span class="portal-badge ${techBadgeClass[mod.tech] || "portal-badge-neutral"}">${escapeHtml(mod.tech)}</span>
                     <span class="portal-module-title">Módulo ${mod.number} &middot; ${escapeHtml(mod.title)}</span>
