@@ -6,7 +6,19 @@ const COURSE_MODULES = [
     title: "HTML & CSS — Estrutura e Estilo de uma Página Web",
     readMoreUrl: "curso/html-css.html",
     intro: "HTML e CSS trabalham juntos como o esqueleto e o acabamento de uma página: o HTML (HyperText Markup Language) estrutura e dá significado ao conteúdo, enquanto o CSS (Cascading Style Sheets) cuida da apresentação visual e do layout. Neste módulo, as duas tecnologias são aplicadas ao mesmo projeto guiado — o site fictício Café Horizonte — da estrutura de pastas até a publicação final, passando por semântica, modelo de caixa, Flexbox, responsividade, formulários e acessibilidade.",
-    sections: []
+    sections: [
+      {
+        heading: "Antes de Começar: Ferramentas e Método de Estudo",
+        text: "Não é necessário conhecer programação para começar: basta saber criar, renomear e localizar pastas no computador. O objetivo final é conseguir criar uma página institucional simples, adaptá-la para celular e computador e publicá-la — usando como fio condutor o projeto fictício Café Horizonte, aplicado em cada capítulo.",
+        listLabel: "Ferramentas necessárias",
+        list: [
+          ["Navegador atualizado", "Chrome, Edge ou Firefox, usados para visualizar e depurar o resultado."],
+          ["Editor de código", "Visual Studio Code ou outro editor de sua preferência."],
+          ["Pasta exclusiva por projeto", "Cada projeto vive em sua própria pasta, organizada desde o início."],
+          ["Extensão Live Server (opcional)", "Atualiza a página automaticamente a cada alteração salva."]
+        ]
+      }
+    ]
   },
   {
     id: "javascript",
