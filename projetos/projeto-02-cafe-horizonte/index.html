@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Café Horizonte</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header container">
+      <a class="brand" href="#top">Café Horizonte</a>
+      <button
+        type="button"
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        Menu
+      </button>
+      <nav id="site-nav" aria-label="Navegação principal">
+        <a href="#menu">Cardápio</a>
+        <a href="#about">Sobre</a>
+        <a href="#contact">Contato</a>
+        <button
+          type="button"
+          id="theme-toggle"
+          class="theme-toggle"
+          aria-pressed="false"
+        >
+          Tema escuro
+        </button>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-content">
+          <p class="eyebrow">Café local desde 2018</p>
+          <h1>Uma pausa boa no meio do dia</h1>
+          <p>Grãos selecionados, preparo cuidadoso e um lugar tranquilo.</p>
+          <a class="button" href="#menu">Conhecer o cardápio</a>
+        </div>
+      </section>
+
+      <section class="container section" id="menu" aria-labelledby="titulo-cardapio">
+        <h2 id="titulo-cardapio">Cardápio em destaque</h2>
+        <div
+          class="menu-filters"
+          id="menu-filters"
+          role="group"
+          aria-label="Filtrar cardápio"
+        >
+          <button type="button" class="filter-button" data-category="all" aria-pressed="true">
+            Todos
+          </button>
+          <button type="button" class="filter-button" data-category="bebidas" aria-pressed="false">
+            Bebidas
+          </button>
+          <button type="button" class="filter-button" data-category="doces" aria-pressed="false">
+            Doces
+          </button>
+        </div>
+        <p id="menu-status" class="menu-status" aria-live="polite"></p>
+        <div class="menu" id="menu-list">
+          <article class="menu-card" data-id="cappuccino" data-category="bebidas">
+            <img src="img/cappuccino.webp" alt="Cappuccino servido em uma xícara branca" />
+            <h3>Cappuccino</h3>
+            <p>Espresso, leite vaporizado e espuma cremosa.</p>
+            <p class="price">R$ 14,00</p>
+            <a class="button" href="#contact">Reservar uma mesa</a>
+          </article>
+          <article class="menu-card" data-id="espresso" data-category="bebidas">
+            <img src="img/cafe-expresso.avif" alt="Xícara de espresso recém-preparado" />
+            <h3>Espresso</h3>
+            <p>Extração curta e sabor intenso.</p>
+            <p class="price">R$ 8,00</p>
+          </article>
+          <article class="menu-card" data-id="cafe-coado" data-category="bebidas">
+            <img src="img/cafe-coado.png" alt="Café coado sendo preparado no filtro" />
+            <h3>Coado do dia</h3>
+            <p>Grão selecionado e preparo individual.</p>
+            <p class="price">R$ 11,00</p>
+          </article>
+          <article class="menu-card" data-id="torta-de-maca" data-category="doces">
+            <img src="img/torta-maca.png" alt="Fatia de torta de maçã com canela" />
+            <h3>Torta de maçã</h3>
+            <p>Fatia generosa com canela, servida morna.</p>
+            <p class="price">R$ 13,00</p>
+          </article>
+          <article class="menu-card" data-id="cha-gelado" data-category="bebidas">
+            <img src="img/cha-gelado.webp" alt="Copo de chá gelado de frutas vermelhas com gelo e hortelã" />
+            <h3>Chá gelado de frutas vermelhas</h3>
+            <p>Preparo do dia, servido com gelo e hortelã.</p>
+            <p class="price">R$ 9,00</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="about">
+        <div class="container">
+          <h2>Sobre o café</h2>
+          <p>Trabalhamos com produtores locais e mudamos os grãos ao longo do ano.</p>
+          <img src="img/fachada.avif" alt="Fachada do Café Horizonte com mesas na calçada" />
+        </div>
+      </section>
+
+      <section class="container section" id="suggestions" aria-labelledby="titulo-sugestoes">
+        <h2 id="titulo-sugestoes">Sugestões do dia</h2>
+        <p id="suggestions-status" class="menu-status" aria-live="polite"></p>
+        <div class="menu" id="suggestions-list"></div>
+        <button type="button" id="suggestions-retry" class="button" hidden>
+          Tentar novamente
+        </button>
+      </section>
+
+      <section class="container section" id="contact" aria-labelledby="titulo-contato">
+        <h2 id="titulo-contato">Contato e reservas</h2>
+        <form class="reservation-form" id="reservation-form" action="/reservas" method="post" novalidate>
+          <fieldset>
+            <legend>Dados da reserva</legend>
+            <div class="field">
+              <label for="name">Nome</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+              <p class="field-error" id="name-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <p class="field-error" id="email-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="date">Data</label>
+              <input id="date" name="date" type="date" required />
+              <p class="field-error" id="date-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="time">Horário</label>
+              <input
+                id="time"
+                name="time"
+                type="time"
+                min="08:00"
+                max="18:00"
+                step="1800"
+                aria-describedby="time-hint"
+                required
+              />
+              <p id="time-hint" class="field-hint">
+                Escolha um horário entre 8h e 18h, de terça a domingo.
+              </p>
+              <p class="field-error" id="time-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="people">Número de pessoas</label>
+              <input id="people" name="people" type="number" min="1" max="12" value="2" required />
+              <p class="field-error" id="people-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="notes">Observações</label>
+              <textarea id="notes" name="notes" rows="4"></textarea>
+            </div>
+          </fieldset>
+          <button type="submit">Solicitar reserva</button>
+          <p id="reservation-summary" class="reservation-summary" role="status"></p>
+        </form>
+        <address>
+          Rua Exemplo, 100 &middot; Café Horizonte<br />
+          Horário: terça a domingo, 8h às 18h
+        </address>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Café Horizonte &middot; Rua Exemplo, 100</p>
+      </div>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
