@@ -11,7 +11,7 @@ The site's content is written in **Brazilian Portuguese** (`lang="pt-BR"`).
 
 | Track  | Technologies                                  | Course                                       | Reference entries |
 |--------|-----------------------------------------------|----------------------------------------------|-------------------|
-| WEB    | HTML, CSS, JavaScript, React, TypeScript      | From zero to React & TypeScript (5 modules)  | 56 |
+| FRONT END | HTML, CSS, JavaScript, React, TypeScript   | From zero to React & TypeScript (4 modules)  | 56 |
 | Python | Python                                        | From zero to OOP (5 modules)                 | 56 |
 | C      | C                                             | Fundamentals to pointers and structs (5 modules) | 56 |
 | C++    | C++                                           | Syntax to OOP, STL and templates (5 modules) | 56 |
@@ -22,7 +22,7 @@ The site's content is written in **Brazilian Portuguese** (`lang="pt-BR"`).
 
 - **Language switcher**: the top bar swaps the whole page (hero text, course, summary and reference table) between tracks without reloading.
 - **Search**: filters the reference table as you type, matching category, command and description (case-insensitive).
-- **Filter tabs**: on multi-technology tracks (WEB) the tabs filter by technology; on single-language tracks they filter by category/module.
+- **Filter tabs**: on multi-technology tracks (FRONT END) the tabs filter by technology; on single-language tracks they filter by category/module.
 - **Pagination**: 12 entries per page (`PAGE_SIZE` in `script.js`).
 - **Collapsible course modules**: accordion with `aria-expanded`; the first module starts open.
 - **Responsive layout**: breakpoints at 860px and 560px.
@@ -43,7 +43,7 @@ styles.css           Site styles (design tokens as CSS custom properties)
 script.js            Logic: language switching, filters, search, pagination, module accordion
 
 data/                Content for each track (commands, course modules, summary)
-  data.js / course-data.js                 WEB
+  data.js / course-data.js                 FRONT END
   data-python.js / course-data-python.js   Python
   data-c.js / course-data-c.js             C
   data-cpp.js / course-data-cpp.js         C++

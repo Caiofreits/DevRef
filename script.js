@@ -3,6 +3,7 @@ const PAGE_SIZE = 12;
 const techBadgeClass = {
     HTML: "portal-badge-html",
     CSS: "portal-badge-css",
+    "HTML & CSS": "portal-badge-htmlcss",
     JavaScript: "portal-badge-js",
     React: "portal-badge-react",
     TypeScript: "portal-badge-ts",
@@ -15,7 +16,7 @@ const techBadgeClass = {
 
 const LANG_CONTENT = {
     web: {
-        label: "WEB",
+        label: "FRONT END",
         heroDescription: "HTML, CSS, JavaScript, React e TypeScript reunidos em uma referência rápida, com exemplos prontos para consulta.",
         heroLead: "56 comandos, tags e propriedades organizados por tecnologia, com descrição e exemplo de código prontos para consulta.",
         courseTitle: "Do zero ao React & TypeScript",

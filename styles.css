@@ -546,8 +546,9 @@ a:hover {
     color: var(--portal-ok);
 }
 
-.portal-badge-html   { background: rgba(228, 77, 38, 0.15); color: #ff8a5c; }
-.portal-badge-css    { background: rgba(38, 132, 228, 0.15); color: #6fb3ff; }
+.portal-badge-html    { background: rgba(228, 77, 38, 0.15); color: #ff8a5c; }
+.portal-badge-css     { background: rgba(38, 132, 228, 0.15); color: #6fb3ff; }
+.portal-badge-htmlcss { background: rgba(228, 122, 38, 0.15); color: #ffab5c; }
 .portal-badge-js     { background: rgba(240, 219, 79, 0.15); color: #f0db4f; }
 .portal-badge-react  { background: rgba(97, 218, 251, 0.15); color: #61dafb; }
 .portal-badge-ts     { background: rgba(49, 120, 198, 0.15); color: #7ab3ec; }
