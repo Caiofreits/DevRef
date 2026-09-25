@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript do Fundamento ao Navegador — Apostila · DevRef</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="portal-topbar">
+    <div class="portal-topbar-inner">
+        <a href="../index.html" class="portal-brand">
+            <img class="portal-brand-mark" src="../assets/logo-icon.png" alt="DevRef">
+            DevRef
+        </a>
+        <nav class="portal-topnav">
+            <a href="../index.html#curso">Curso</a>
+            <a href="../index.html#reference">Referência</a>
+        </nav>
+    </div>
+</header>
+
+<main class="portal-main">
+
+    <div class="portal-page-header">
+        <div>
+            <a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a>
+            <div class="portal-eyebrow">Módulo 02 · Apostila completa</div>
+            <h1>JavaScript do Fundamento ao Navegador</h1>
+            <p class="portal-subtitle">Tornando o site Café Horizonte interativo — apostila prática com explicações progressivas, exemplos completos, exercícios e o projeto guiado.</p>
+        </div>
+    </div>
+
+    <ul class="apostila-toc">
+        <li><a href="#c1">1. Preparação e pré-requisitos</a></li>
+        <li><a href="#c2">2. Valores, variáveis e operadores</a></li>
+        <li><a href="#c3">3. Decisões e repetições</a></li>
+        <li><a href="#c4">4. Funções e organização da lógica</a></li>
+        <li><a href="#c5">5. Arrays e objetos</a></li>
+        <li><a href="#c6">6. Depuração antes da interface</a></li>
+        <li><a href="#c7">7. DOM e criação da interface</a></li>
+        <li><a href="#c8">8. Eventos e formulários</a></li>
+        <li><a href="#c9">9. Armazenamento local</a></li>
+        <li><a href="#c10">10. Assincronismo, requisições e erros</a></li>
+        <li><a href="#c11">11. Módulos e JavaScript moderno</a></li>
+        <li><a href="#c12">12. Projeto final Café Horizonte interativo</a></li>
+        <li><a href="#c13">13. Projetos originais e competências</a></li>
+        <li><a href="#c14">14. Exercícios de consolidação</a></li>
+        <li><a href="#c15">15. Avaliação de autonomia</a></li>
+        <li><a href="#c16">16. Mapa do curso original</a></li>
+        <li><a href="#c17">17. Referências para atualização</a></li>
+        <li><a href="#c18">18. Próxima etapa</a></li>
+        <li><a href="#c19">19. Resumo do que foi estudado</a></li>
+        <li><a href="#c20">20. Tabela de comandos e sintaxes</a></li>
+        <li><a href="#c21">21. O site construído</a></li>
+    </ul>
+
+    <div class="portal-card" style="padding: 8px 28px;">
+
+    <article class="apostila-chapter" id="c1">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">01</span> Preparação e pré-requisitos</h2>
+        <p class="portal-section-text">Esta apostila continua diretamente o projeto Café Horizonte construído na apostila HTML e CSS. Você deve saber criar uma página, selecionar elementos por classe ou identificador e usar um formulário HTML. Em vez de abandonar esse site e começar outro sem contexto, você acrescentará comportamento à estrutura que já conhece: menu móvel, filtro do cardápio, formulário validado, preferências salvas e dados carregados de forma assíncrona.</p>
+        <p class="portal-section-text">Todos os conceitos principais serão ensinados com dados e situações do Café Horizonte. Assim, variáveis representam produtos e reservas; arrays representam o cardápio; eventos partem dos controles da página; e as requisições preparam a integração com a API estudada posteriormente.</p>
+
+        <h3 class="apostila-subheading">Ponto de partida herdado</h3>
+        <p class="portal-section-text">Copie a versão final da pasta criada na apostila HTML e CSS e preserve a estrutura já funcional:</p>
+        <pre class="portal-code-block"><code>cafe-horizonte/
+  index.html
+  css/
+    styles.css
+  img/</code></pre>
+        <p class="portal-section-text">Crie então js/app.js. Antes de programar, abra o site e confirme que HTML, estilos, imagens, links e formulário ainda funcionam. Esta versão estática é o seu ponto de restauração: se uma funcionalidade JavaScript quebrar a página, você deve conseguir comparar o antes e o depois.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>O que já existe</th><th>O que JavaScript acrescentará</th></tr></thead>
+                <tbody>
+                    <tr><td>Cabeçalho e navegação</td><td>Abrir e fechar o menu em telas pequenas.</td></tr>
+                    <tr><td>Cartões do cardápio</td><td>Filtrar itens por categoria e atualizar a contagem.</td></tr>
+                    <tr><td>Formulário de contato ou reserva</td><td>Validar, apresentar mensagens e preparar os dados.</td></tr>
+                    <tr><td>Layout responsivo</td><td>Preservar usabilidade com e sem JavaScript.</td></tr>
+                    <tr><td>Conteúdo estático</td><td>Carregar sugestões e representar carregamento, vazio e erro.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="apostila-subheading">Como praticar</h3>
+        <p class="portal-section-text">Use exemplos pequenos. Antes de executar um trecho, tente prever o resultado. Depois altere uma parte de cada vez. Quando ocorrer um erro, leia a primeira mensagem relevante do console e localize o arquivo e a linha indicados.</p>
+
+        <h3 class="apostila-subheading">Conectando o primeiro arquivo</h3>
+        <p class="portal-section-text">Crie js/app.js e adicione antes de fechar body:</p>
+        <pre class="portal-code-block"><code>&lt;script src="js/app.js"&gt;&lt;/script&gt;</code></pre>
+        <p class="portal-section-text">Outra opção é carregar no head com defer:</p>
+        <pre class="portal-code-block"><code>&lt;script src="js/app.js" defer&gt;&lt;/script&gt;</code></pre>
+        <p class="portal-section-text">defer permite que o navegador continue lendo o HTML e execute o script depois que a estrutura do documento estiver disponível.</p>
+        <pre class="portal-code-block"><code>console.log("JavaScript carregado");</code></pre>
+        <p class="portal-section-text">Abra o console das ferramentas do navegador. Se a mensagem não aparecer, confirme o caminho do arquivo e procure erros na guia Network.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c2">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">02</span> Valores, variáveis e operadores</h2>
+        <p class="portal-section-text">Um programa recebe valores, transforma esses valores e produz resultados. JavaScript possui números, textos, booleanos e valores especiais como null e undefined.</p>
+        <pre class="portal-code-block"><code>const itemName = "Cappuccino";
+const price = 14;
+const available = true;
+const imageUrl = null;
+
+console.log(typeof itemName);  // string
+console.log(typeof price);     // number
+console.log(typeof available); // boolean</code></pre>
+
+        <h3 class="apostila-subheading">Const e let</h3>
+        <p class="portal-section-text">Use const quando a variável não receberá outra atribuição. Use let quando o valor precisará ser substituído.</p>
+        <pre class="portal-code-block"><code>const tableCapacity = 12;
+let occupiedTables = 7;
+occupiedTables = occupiedTables + 1;
+
+console.log(occupiedTables);</code></pre>
+        <p class="portal-section-text">const não torna um objeto imutável. Ele impede que a variável passe a apontar para outro valor.</p>
+        <pre class="portal-code-block"><code>const menuItem = { name: "Café coado", available: true };
+menuItem.available = false; // permitido</code></pre>
+
+        <h3 class="apostila-subheading">Conversão e comparação</h3>
+        <p class="portal-section-text">Dados de campos HTML chegam como texto. Converta antes de fazer cálculos.</p>
+        <pre class="portal-code-block"><code>const inputValue = "20";
+const quantity = Number(inputValue);
+
+console.log(quantity + 5);   // 25
+console.log(inputValue + 5); // "205"</code></pre>
+        <p class="portal-section-text">Prefira === e !==, que comparam valor e tipo sem conversão implícita.</p>
+        <pre class="portal-code-block"><code>console.log(5 === "5"); // false
+console.log(5 == "5");  // true por conversão implícita</code></pre>
+
+        <h3 class="apostila-subheading">Template strings</h3>
+        <pre class="portal-code-block"><code>const customerName = "Ana";
+const availableTables = tableCapacity - occupiedTables;
+const message = `Olá, ${customerName}. Temos ${availableTables} mesas disponíveis.`;
+
+console.log(message);</code></pre>
+
+        <h3 class="apostila-subheading">Exercício calculadora do pedido</h3>
+        <p class="portal-section-text">Crie variáveis para preço e quantidade de cappuccinos. Calcule o subtotal, um desconto de 10 por cento e o total final. Depois receba a quantidade como string e compare o resultado antes e depois de usar Number.</p>
+        <p class="portal-section-text"><strong>Critério de conclusão:</strong> você consegue explicar o tipo de cada variável e prever quando + soma ou concatena.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c3">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">03</span> Decisões e repetições</h2>
+        <p class="portal-section-text">Condições permitem escolher um caminho. Laços repetem uma operação enquanto uma condição for atendida ou para cada item de uma coleção.</p>
+
+        <h3 class="apostila-subheading">If else e operadores lógicos</h3>
+        <pre class="portal-code-block"><code>const requestedPeople = 4;
+const maximumPeople = 6;
+
+if (requestedPeople <= maximumPeople) {
+  console.log("A reserva pode ser solicitada");
+} else {
+  console.log("Entre em contato para grupos maiores");
+}</code></pre>
+        <p class="portal-section-text">Use &amp;&amp; quando todas as condições precisam ser verdadeiras e || quando pelo menos uma delas basta.</p>
+        <pre class="portal-code-block"><code>const hasCustomerName = true;
+const hasValidDate = true;
+
+if (hasCustomerName && hasValidDate) {
+  console.log("Dados básicos da reserva válidos");
+}</code></pre>
+
+        <h3 class="apostila-subheading">Valores truthy e falsy</h3>
+        <p class="portal-section-text">Em uma condição, false, 0, string vazia, null, undefined e NaN são tratados como falsos. Outros valores são tratados como verdadeiros. Use esse comportamento quando ele expressar claramente a intenção.</p>
+        <pre class="portal-code-block"><code>const customerName = "";
+
+if (!customerName.trim()) {
+  console.log("Digite o nome da reserva");
+}</code></pre>
+
+        <h3 class="apostila-subheading">For e for...of</h3>
+        <pre class="portal-code-block"><code>const categories = ["bebidas", "doces", "salgados"];
+
+for (let index = 0; index < categories.length; index += 1) {
+  console.log(index, categories[index]);
+}
+
+for (const category of categories) {
+  console.log(category);
+}</code></pre>
+        <p class="portal-section-text">Use for...of quando precisa do valor. Use o índice quando a posição também faz parte do problema.</p>
+
+        <h3 class="apostila-subheading">Evitando laços infinitos</h3>
+        <p class="portal-section-text">Um while precisa de uma condição que possa se tornar falsa.</p>
+        <pre class="portal-code-block"><code>let attempts = 0;
+
+while (attempts < 3) {
+  console.log(`Tentativa ${attempts + 1}`);
+  attempts += 1;
+}</code></pre>
+    </article>
+
+    <article class="apostila-chapter" id="c4">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">04</span> Funções e organização da lógica</h2>
+        <p class="portal-section-text">Uma função reúne uma responsabilidade, recebe dados por parâmetros e pode devolver um resultado.</p>
+        <pre class="portal-code-block"><code>function calculateSubtotal(price, quantity) {
+  return price * quantity;
+}
+
+const subtotal = calculateSubtotal(14, 2);
+console.log(subtotal); // 28</code></pre>
+        <p class="portal-section-text">return encerra a função e entrega um valor ao ponto que a chamou. Uma função sem return explícito devolve undefined.</p>
+
+        <h3 class="apostila-subheading">Funções pequenas e previsíveis</h3>
+        <pre class="portal-code-block"><code>function normalizeName(name) {
+  return name.trim();
+}
+
+function isValidItemName(name) {
+  return normalizeName(name).length >= 3;
+}
+
+function createMenuItem(name, category, price) {
+  const normalizedName = normalizeName(name);
+
+  if (!isValidItemName(normalizedName) || price < 0) {
+    return null;
+  }
+
+  return {
+    id: crypto.randomUUID(),
+    name: normalizedName,
+    category,
+    price,
+    available: true,
+  };
+}</code></pre>
+        <p class="portal-section-text">Cada função responde a uma pergunta. Isso facilita testar e localizar erros.</p>
+
+        <h3 class="apostila-subheading">Escopo</h3>
+        <p class="portal-section-text">Variáveis declaradas dentro de uma função ou bloco não devem ser usadas como se fossem globais.</p>
+        <pre class="portal-code-block"><code>function greet() {
+  const message = "Olá";
+  console.log(message);
+}
+
+greet();
+// console.log(message); // ReferenceError</code></pre>
+
+        <h3 class="apostila-subheading">Arrow functions</h3>
+        <pre class="portal-code-block"><code>const double = (value) => value * 2;
+const numbers = [1, 2, 3];
+const doubled = numbers.map((number) => double(number));</code></pre>
+        <p class="portal-section-text">Arrow functions são úteis para funções curtas e callbacks. Elas também possuem regras próprias para this; por isso não substituem todas as funções tradicionais automaticamente.</p>
+
+        <h3 class="apostila-subheading">Exercício</h3>
+        <p class="portal-section-text">Crie uma função calculateOrderTotal(price, quantity) e outra formatCurrency(value). Teste quantidade zero, preço decimal e valores inválidos. Depois use as funções para apresentar o total de um pedido do Café Horizonte.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c5">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">05</span> Arrays e objetos</h2>
+        <p class="portal-section-text">Arrays representam coleções ordenadas. Objetos agrupam propriedades relacionadas.</p>
+        <pre class="portal-code-block"><code>const menuItems = [
+  { id: "espresso", name: "Espresso", category: "bebidas", price: 8, available: true },
+  { id: "brownie", name: "Brownie", category: "doces", price: 12, available: false },
+];</code></pre>
+
+        <h3 class="apostila-subheading">Operações sem alterar o array original</h3>
+        <pre class="portal-code-block"><code>const availableItems = menuItems.filter((item) => item.available);
+const names = menuItems.map((item) => item.name);
+const totalPrice = menuItems.reduce(
+  (total, item) => total + item.price,
+  0,
+);</code></pre>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Método</th><th>Resultado</th></tr></thead>
+                <tbody>
+                    <tr><td>map</td><td>Novo array com um resultado para cada item.</td></tr>
+                    <tr><td>filter</td><td>Novo array apenas com itens aprovados pela condição.</td></tr>
+                    <tr><td>find</td><td>Primeiro item que atende à condição ou undefined.</td></tr>
+                    <tr><td>some</td><td>Booleano indicando se algum item atende à condição.</td></tr>
+                    <tr><td>every</td><td>Booleano indicando se todos atendem à condição.</td></tr>
+                    <tr><td>reduce</td><td>Um valor acumulado produzido a partir da coleção.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="apostila-subheading">Adicionando, atualizando e removendo</h3>
+        <pre class="portal-code-block"><code>const newItem = { id: "cookie", name: "Cookie", category: "doces", price: 9, available: true };
+const withNewItem = [...menuItems, newItem];
+
+const updatedItems = withNewItem.map((item) =>
+  item.id === "brownie" ? { ...item, available: true } : item,
+);
+
+const remainingItems = updatedItems.filter((item) => item.id !== "espresso");</code></pre>
+        <p class="portal-section-text">Esses padrões criam novos arrays e objetos. Eles serão importantes em React, onde atualizações imutáveis permitem detectar mudanças com previsibilidade.</p>
+
+        <h3 class="apostila-subheading">Desestruturação</h3>
+        <pre class="portal-code-block"><code>const { name, price } = newItem;
+const [firstItem, secondItem] = menuItems;</code></pre>
+        <p class="portal-section-text">Desestruturação retira propriedades ou posições para variáveis. Use nomes claros e evite encadear recursos apenas para reduzir linhas.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c6">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">06</span> Depuração antes da interface</h2>
+        <p class="portal-section-text">Depurar é observar o estado do programa e reduzir o problema até encontrar a suposição incorreta.</p>
+
+        <h3 class="apostila-subheading">Leitura de erros</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Erro</th><th>Significado comum</th></tr></thead>
+                <tbody>
+                    <tr><td>SyntaxError</td><td>O código não segue a sintaxe esperada.</td></tr>
+                    <tr><td>ReferenceError</td><td>Um nome não existe naquele escopo.</td></tr>
+                    <tr><td>TypeError</td><td>Uma operação foi aplicada a um valor incompatível.</td></tr>
+                    <tr><td>RangeError</td><td>Um valor ultrapassou um intervalo permitido.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="apostila-subheading">Processo de investigação</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>Reproduza o problema com os mesmos dados.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>Leia a mensagem e abra a primeira linha do seu próprio arquivo.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>Inspecione os valores imediatamente antes da falha.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>Reduza o trecho até restar o comportamento inesperado.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>Corrija a causa e repita o cenário original.</dd></div>
+        </dl>
+        <pre class="portal-code-block"><code>console.log({ menuItems, totalPrice });
+console.table(menuItems);</code></pre>
+        <p class="portal-section-text">Use pontos de interrupção na guia Sources para pausar a execução e acompanhar variáveis sem espalhar muitos logs.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c7">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">07</span> DOM e criação da interface</h2>
+        <p class="portal-section-text">O DOM é a representação em objetos da estrutura HTML. JavaScript pode selecionar elementos, alterar conteúdo e criar novos elementos.</p>
+
+        <h3 class="apostila-subheading">HTML do filtro de cardápio</h3>
+        <pre class="portal-code-block"><code>&lt;main class="container"&gt;
+  &lt;h1&gt;Cardápio do Café Horizonte&lt;/h1&gt;
+  &lt;div id="menu-filters" aria-label="Filtrar cardápio"&gt;
+    &lt;button type="button" data-category="all"&gt;Todos&lt;/button&gt;
+    &lt;button type="button" data-category="bebidas"&gt;Bebidas&lt;/button&gt;
+    &lt;button type="button" data-category="doces"&gt;Doces&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p id="menu-status" aria-live="polite"&gt;&lt;/p&gt;
+  &lt;div id="menu-list"&gt;&lt;/div&gt;
+&lt;/main&gt;</code></pre>
+
+        <h3 class="apostila-subheading">Selecionando elementos</h3>
+        <pre class="portal-code-block"><code>const filters = document.querySelector("#menu-filters");
+const menuList = document.querySelector("#menu-list");
+const menuStatus = document.querySelector("#menu-status");</code></pre>
+        <p class="portal-section-text">querySelector devolve o primeiro elemento correspondente ou null. Em páginas maiores, valide seletores importantes ou mantenha o script restrito à página onde eles existem.</p>
+
+        <h3 class="apostila-subheading">Renderização segura</h3>
+        <p class="portal-section-text">Prefira criar elementos e preencher textContent quando o texto pode vir do usuário.</p>
+        <pre class="portal-code-block"><code>function createMenuItemElement(menuItem) {
+  const card = document.createElement("article");
+  card.className = "menu-card";
+  card.dataset.itemId = menuItem.id;
+
+  const title = document.createElement("h2");
+  title.textContent = menuItem.name;
+
+  const price = document.createElement("p");
+  price.textContent = menuItem.price.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
+  if (!menuItem.available) {
+    card.classList.add("is-unavailable");
+  }
+
+  card.append(title, price);
+  return card;
+}
+
+function renderMenu(items) {
+  menuList.replaceChildren(...items.map(createMenuItemElement));
+  menuStatus.textContent = `${items.length} itens encontrados.`;
+}</code></pre>
+        <p class="portal-section-text">innerHTML é conveniente para conteúdo controlado pelo desenvolvedor, mas inserir texto não confiável diretamente pode criar vulnerabilidades. textContent trata o valor como texto.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c8">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">08</span> Eventos e formulários</h2>
+        <p class="portal-section-text">Eventos informam que algo aconteceu. Um ouvinte registra qual função será executada.</p>
+        <pre class="portal-code-block"><code>filters.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-category]");
+  if (!button) return;
+
+  const category = button.dataset.category;
+  const visibleItems = category === "all"
+    ? menuItems
+    : menuItems.filter((item) => item.category === category);
+
+  renderMenu(visibleItems);
+});</code></pre>
+        <p class="portal-section-text">preventDefault impede o envio tradicional do formulário. A lógica valida, atualiza os dados, renderiza, limpa o campo e devolve o foco.</p>
+
+        <h3 class="apostila-subheading">Delegação de eventos</h3>
+        <p class="portal-section-text">O exemplo anterior já usa delegação: em vez de registrar um ouvinte em cada botão, registra um no contêiner e descobre qual categoria foi solicitada.</p>
+        <pre class="portal-code-block"><code>const favoriteIds = new Set();
+
+function toggleFavorite(itemId) {
+  if (favoriteIds.has(itemId)) {
+    favoriteIds.delete(itemId);
+  } else {
+    favoriteIds.add(itemId);
+  }
+}
+
+menuList.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-favorite-id]");
+  if (!button) return;
+
+  const itemId = button.dataset.favoriteId;
+  toggleFavorite(itemId);
+});</code></pre>
+        <p class="portal-section-text">O valor de dataset é texto. Mantenha os identificadores do cardápio como strings para evitar conversões desnecessárias.</p>
+
+        <h3 class="apostila-subheading">Separando dados e interface</h3>
+        <p class="portal-section-text">Não use o texto exibido como fonte principal dos dados. Mantenha um array com itens do cardápio e gere a interface a partir dele. Essa separação reduz inconsistências e prepara o caminho para React.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c9">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">09</span> Armazenamento local</h2>
+        <p class="portal-section-text">localStorage guarda pares de texto no navegador. Objetos e arrays precisam ser convertidos para JSON.</p>
+        <pre class="portal-code-block"><code>const STORAGE_KEY = "cafe-horizonte:preferences:v1";
+const defaultPreferences = { category: "all", theme: "light" };
+
+function savePreferences(preferences) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+}
+
+function loadPreferences() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (!saved) return { ...defaultPreferences };
+
+  try {
+    const parsed = JSON.parse(saved);
+    return typeof parsed === "object" && parsed !== null
+      ? { ...defaultPreferences, ...parsed }
+      : { ...defaultPreferences };
+  } catch (error) {
+    console.error("Preferências locais inválidas", error);
+    return { ...defaultPreferences };
+  }
+}
+
+const preferences = loadPreferences();
+renderMenu(menuItems);</code></pre>
+        <p class="portal-section-text">Chame savePreferences(preferences) depois de alterar tema ou filtro. O armazenamento local não é banco de dados, não sincroniza automaticamente entre dispositivos e não deve guardar reservas, senhas ou outros dados sensíveis.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c10">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">10</span> Assincronismo, requisições e erros</h2>
+        <p class="portal-section-text">Operações de rede levam tempo. Uma Promise representa um resultado futuro. async e await tornam a sequência mais legível, mas não eliminam a necessidade de tratar erros.</p>
+
+        <h3 class="apostila-subheading">Carregando dados com fetch</h3>
+        <pre class="portal-code-block"><code>async function loadMenu() {
+  const response = await fetch("data/menu-items.json");
+
+  if (!response.ok) {
+    throw new Error(`Falha HTTP ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  if (!Array.isArray(data)) {
+    throw new Error("Formato de cardápio inválido");
+  }
+
+  return data;
+}</code></pre>
+        <p class="portal-section-text">fetch não rejeita automaticamente a Promise para respostas HTTP como 404 ou 500. Por isso, verifique response.ok.</p>
+        <pre class="portal-code-block"><code>async function showMenu() {
+  menuStatus.textContent = "Carregando cardápio...";
+
+  try {
+    const items = await loadMenu();
+    renderMenu(items);
+  } catch (error) {
+    console.error(error);
+    menuStatus.textContent = "Não foi possível carregar o cardápio.";
+  }
+}</code></pre>
+
+        <h3 class="apostila-subheading">Estados de uma operação</h3>
+        <p class="portal-section-text">Uma interface que depende de rede precisa representar pelo menos carregamento, sucesso, vazio e erro. Não deixe o usuário sem saber se o clique funcionou.</p>
+
+        <h3 class="apostila-subheading">Axios</h3>
+        <p class="portal-section-text">O curso também apresenta Axios. A biblioteca oferece uma API conveniente, interceptadores e transformação automática de JSON. Antes de adotá-la, saiba realizar a operação com fetch e entenda o custo de adicionar uma dependência.</p>
+        <pre class="portal-code-block"><code>const response = await axios.get("/api/menu-items");
+const items = response.data;</code></pre>
+    </article>
+
+    <article class="apostila-chapter" id="c11">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">11</span> Módulos e JavaScript moderno</h2>
+        <p class="portal-section-text">Módulos permitem separar responsabilidades sem criar muitas variáveis globais.</p>
+        <pre class="portal-code-block"><code>&lt;script type="module" src="js/app.js"&gt;&lt;/script&gt;</code></pre>
+        <pre class="portal-code-block"><code>// js/storage.js
+const STORAGE_KEY = "cafe-horizonte:preferences:v1";
+
+export function savePreferences(preferences) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+}</code></pre>
+        <pre class="portal-code-block"><code>// js/app.js
+import { savePreferences } from "./storage.js";</code></pre>
+        <p class="portal-section-text">O navegador exige um servidor local para vários cenários com módulos. Use Live Server ou outro servidor de desenvolvimento.</p>
+
+        <h3 class="apostila-subheading">Classes e orientação a objetos</h3>
+        <p class="portal-section-text">Classes podem modelar entidades com estado e comportamento, mas não são obrigatórias para todo problema.</p>
+        <pre class="portal-code-block"><code>class MenuItem {
+  constructor({ id, name, category, price }) {
+    this.id = id;
+    this.name = name.trim();
+    this.category = category;
+    this.price = price;
+    this.available = true;
+  }
+
+  setAvailability(available) {
+    this.available = Boolean(available);
+  }
+}</code></pre>
+        <p class="portal-section-text">Para dados simples que serão convertidos em JSON, objetos literais e funções costumam ser suficientes. Use classes quando o modelo e o comportamento agrupado melhorarem a clareza.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c12">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">12</span> Projeto final Café Horizonte interativo</h2>
+        <p class="portal-section-text">O projeto final reúne os conceitos anteriores no mesmo site iniciado na primeira apostila. Organize-o assim:</p>
+        <pre class="portal-code-block"><code>cafe-horizonte/
+  index.html
+  css/
+    styles.css
+  img/
+  data/
+    menu-items.json
+  js/
+    app.js
+    storage.js
+    menu.js
+    reservation.js</code></pre>
+
+        <h3 class="apostila-subheading">Responsabilidades dos arquivos</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Arquivo</th><th>Responsabilidade</th></tr></thead>
+                <tbody>
+                    <tr><td>index.html</td><td>Conteúdo, navegação, cardápio e formulário acessíveis.</td></tr>
+                    <tr><td>styles.css</td><td>Layout, responsividade e estados visuais.</td></tr>
+                    <tr><td>menu.js</td><td>Dados, filtros e renderização segura dos itens.</td></tr>
+                    <tr><td>reservation.js</td><td>Normalização e validação dos dados do formulário.</td></tr>
+                    <tr><td>storage.js</td><td>Leitura e escrita das preferências locais.</td></tr>
+                    <tr><td>app.js</td><td>Inicialização, eventos e integração dos módulos.</td></tr>
+                    <tr><td>data/menu-items.json</td><td>Dados usados na seção Sugestões do dia, carregados via fetch.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="apostila-subheading">Funcionalidades mínimas</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Menu móvel</dt><dd>Abrir e fechar o menu móvel e manter aria-expanded coerente.</dd></div>
+            <div class="portal-definition-item"><dt>Filtro</dt><dd>Filtrar o cardápio sem recarregar a página.</dd></div>
+            <div class="portal-definition-item"><dt>Validação</dt><dd>Validar nome, e-mail, data e quantidade de pessoas antes do envio.</dd></div>
+            <div class="portal-definition-item"><dt>Mensagens</dt><dd>Mostrar mensagens junto aos campos e um resumo da reserva válida.</dd></div>
+            <div class="portal-definition-item"><dt>Persistência</dt><dd>Persistir apenas preferências adequadas, como tema e categoria selecionada.</dd></div>
+            <div class="portal-definition-item"><dt>Estados de rede</dt><dd>Informar carregamento, vazio e erro ao buscar sugestões de produtos.</dd></div>
+            <div class="portal-definition-item"><dt>Teclado</dt><dd>Continuar utilizável por teclado.</dd></div>
+        </dl>
+        <p class="portal-section-text">Comece com dados locais. O formato abaixo será reutilizado em React, recebido da API na apostila Full Stack e tipado na apostila TypeScript:</p>
+        <pre class="portal-code-block"><code>const menuItems = [
+  {
+    id: "cafe-coado",
+    name: "Coado do dia",
+    description: "Grão selecionado e preparo individual.",
+    price: 11,
+    category: "bebidas",
+    image: "img/cafe-coado.png",
+    imageAlt: "Café coado sendo preparado no filtro",
+    reservable: false,
+  },
+];</code></pre>
+        <p class="portal-section-text">Ao renderizar textos que poderiam vir de uma API ou formulário, prefira textContent. Use innerHTML apenas quando o conteúdo for confiável e a necessidade estiver clara.</p>
+
+        <h3 class="apostila-subheading">Evolução independente</h3>
+        <p class="portal-section-text">Escolha duas melhorias sem consultar uma solução pronta: busca por nome, ordenação por preço, favoritos, tema escuro, resumo da reserva ou exportação em JSON. Descreva no README o estado dos dados, os eventos e as decisões de segurança.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c13">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">13</span> Projetos originais e competências</h2>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Projeto</th><th>Competência que deve demonstrar</th></tr></thead>
+                <tbody>
+                    <tr><td>Tabuada</td><td>Entradas numéricas, laço, funções e validação.</td></tr>
+                    <tr><td>Gerador de QR Code</td><td>Evento, API externa, estado de carregamento e erro.</td></tr>
+                    <tr><td>Clone de página de produto</td><td>DOM, seleção de variação e atualização visual.</td></tr>
+                    <tr><td>Calculadora de IMC</td><td>Conversão, cálculo, classificação e mensagens.</td></tr>
+                    <tr><td>Lazy Loading</td><td>Observação de elementos e desempenho.</td></tr>
+                    <tr><td>Todo List avançado</td><td>CRUD no navegador, filtros e armazenamento.</td></tr>
+                    <tr><td>Gerador de senhas</td><td>Funções, opções booleanas e aleatoriedade.</td></tr>
+                    <tr><td>Dev Notes</td><td>Organização de dados e persistência.</td></tr>
+                    <tr><td>Gerador de Box Shadow</td><td>Eventos de formulário e geração de CSS.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Refaça cada projeto com dados, identidade visual e organização próprias. Se o projeto só funciona quando você acompanha o vídeo, ele ainda é prática guiada, não demonstra autonomia.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c14">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">14</span> Exercícios de consolidação</h2>
+
+        <h3 class="apostila-subheading">Validador de formulário</h3>
+        <p class="portal-section-text">Crie uma função que receba nome e e-mail e devolva um objeto com valid e errors. Não altere o DOM dentro dessa função. Depois use o resultado para mostrar mensagens na página.</p>
+
+        <h3 class="apostila-subheading">Filtro de produtos</h3>
+        <p class="portal-section-text">Dado um array de produtos com nome, preço e categoria, produza um novo array contendo apenas uma categoria e preço máximo. Exiba o resultado em uma lista.</p>
+
+        <h3 class="apostila-subheading">Consumo de API</h3>
+        <p class="portal-section-text">Consuma uma API pública, exiba carregamento, resultado vazio, sucesso e erro. Adicione um botão para tentar novamente.</p>
+
+        <h3 class="apostila-subheading">Respostas orientadoras</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Separação</dt><dd>Separe cálculo e validação da renderização.</dd></div>
+            <div class="portal-definition-item"><dt>Transformação</dt><dd>Use filter para reduzir a coleção e map para transformar dados em elementos.</dd></div>
+            <div class="portal-definition-item"><dt>Robustez</dt><dd>Verifique response.ok, use try...catch e mantenha a mensagem de erro visível.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c15">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">15</span> Avaliação de autonomia</h2>
+        <p class="portal-section-text">Você está pronto para React quando consegue:</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Tipos</dt><dd>Escolher tipos e converter entradas conscientemente.</dd></div>
+            <div class="portal-definition-item"><dt>Controle de fluxo</dt><dd>Escrever condições, laços e funções pequenas.</dd></div>
+            <div class="portal-definition-item"><dt>Arrays</dt><dd>Transformar arrays sem depender de alterações imprevisíveis.</dd></div>
+            <div class="portal-definition-item"><dt>Modelagem</dt><dd>Modelar dados com objetos.</dd></div>
+            <div class="portal-definition-item"><dt>Depuração</dt><dd>Ler mensagens de erro e usar o depurador.</dd></div>
+            <div class="portal-definition-item"><dt>DOM</dt><dd>Selecionar e criar elementos do DOM com segurança.</dd></div>
+            <div class="portal-definition-item"><dt>Eventos</dt><dd>Tratar eventos de formulário e clique.</dd></div>
+            <div class="portal-definition-item"><dt>Separação de dados</dt><dd>Manter os dados separados da representação visual.</dd></div>
+            <div class="portal-definition-item"><dt>Armazenamento</dt><dd>Salvar e restaurar JSON no armazenamento local.</dd></div>
+            <div class="portal-definition-item"><dt>Rede</dt><dd>Consumir uma API com carregamento, sucesso e erro.</dd></div>
+            <div class="portal-definition-item"><dt>Módulos</dt><dd>Dividir o código em módulos com responsabilidades claras.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c16">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">16</span> Mapa do curso original</h2>
+        <p class="portal-section-text">Esta tabela preserva a ligação entre a nova sequência didática e os módulos usados como fonte. A ordem da apostila foi alterada quando isso melhora a aprendizagem.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Módulo</th><th>Conteúdo de origem</th><th>Arquivo</th></tr></thead>
+                <tbody>
+                    <tr><td>15</td><td>Curso de JavaScript: Introdução</td><td>15-JavaScript-Introducao.md</td></tr>
+                    <tr><td>16</td><td>Tipos de dados e operadores em JavaScript</td><td>16-JS-Tipos-de-Dados-e-Operadores.md</td></tr>
+                    <tr><td>17</td><td>Estruturas de programação</td><td>17-JS-Estruturas-de-Programacao.md</td></tr>
+                    <tr><td>18</td><td>Funções em JavaScript</td><td>18-JS-Funcoes.md</td></tr>
+                    <tr><td>19</td><td>Arrays e Objetos</td><td>19-JS-Arrays-e-Objetos.md</td></tr>
+                    <tr><td>20</td><td>Orientação a objetos com JavaScript</td><td>20-JS-Orientacao-a-Objetos.md</td></tr>
+                    <tr><td>21</td><td>Depuração com JavaScript</td><td>21-JS-Depuracao.md</td></tr>
+                    <tr><td>22</td><td>Programação assíncrona com JavaScript</td><td>22-JS-Programacao-Assincrona.md</td></tr>
+                    <tr><td>23</td><td>JavaScript e o navegador</td><td>23-JS-e-o-Navegador-DOM.md</td></tr>
+                    <tr><td>24</td><td>Eventos no JavaScript</td><td>24-JS-Eventos.md</td></tr>
+                    <tr><td>25</td><td>Projeto 6: Tabuada</td><td>25-Projeto6-Tabuada.md</td></tr>
+                    <tr><td>26</td><td>Projeto 7: Gerador de QR Code</td><td>26-Projeto7-Gerador-QR-Code.md</td></tr>
+                    <tr><td>27</td><td>Projeto 8: Clone da página de vendas do iPhone</td><td>27-Projeto8-Clone-iPhone.md</td></tr>
+                    <tr><td>28</td><td>Projeto 9: Calculadora de IMC</td><td>28-Projeto9-Calculadora-IMC.md</td></tr>
+                    <tr><td>29</td><td>Revisão de JavaScript Moderno ES6+</td><td>29-JS-Revisao-ES6.md</td></tr>
+                    <tr><td>30</td><td>Utilizando o Axios</td><td>30-Axios.md</td></tr>
+                    <tr><td>31</td><td>Projeto 10: Lazy loading com JavaScript</td><td>31-Projeto10-Lazy-Loading.md</td></tr>
+                    <tr><td>32</td><td>Projeto 11: Todo List Avançado</td><td>32-Projeto11-Todo-List-Avancado.md</td></tr>
+                    <tr><td>33</td><td>Projeto 12: Gerador de senhas</td><td>33-Projeto12-Gerador-de-Senhas.md</td></tr>
+                    <tr><td>34</td><td>Projeto 13: Dev Notes</td><td>34-Projeto13-Dev-Notes.md</td></tr>
+                    <tr><td>35</td><td>Projeto 14: Gerador de Box Shadow</td><td>35-Projeto14-Gerador-Box-Shadow.md</td></tr>
+                    <tr><td>58</td><td>Conclusão e próximos passos</td><td>58-Conclusao.md</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c17">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">17</span> Referências para atualização</h2>
+        <ul class="apostila-links">
+            <li>MDN JavaScript Guide — <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide" target="_blank" rel="noopener">developer.mozilla.org/en-US/docs/Web/JavaScript/Guide</a></li>
+            <li>MDN JavaScript Learning — <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting" target="_blank" rel="noopener">developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting</a></li>
+            <li>MDN Fetch API — <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener">developer.mozilla.org/en-US/docs/Web/API/Fetch_API</a></li>
+        </ul>
+    </article>
+
+    <article class="apostila-chapter" id="c18">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">18</span> Próxima etapa</h2>
+        <p class="portal-section-text">Continue na apostila React quando conseguir explicar e implementar as interações do Café Horizonte sem copiar uma solução inteira.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c19">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">19</span> Resumo do que foi estudado</h2>
+        <p class="portal-section-text">Use esta síntese para revisar a sequência da apostila. Tente explicar cada item e reproduzir sua aplicação no projeto antes de consultar os capítulos anteriores.</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Fundamentos</dt><dd>Você trabalhou com valores, tipos, variáveis, operadores, conversão e comparação.</dd></div>
+            <div class="portal-definition-item"><dt>Controle de fluxo</dt><dd>Você tomou decisões com condições e repetiu operações com laços.</dd></div>
+            <div class="portal-definition-item"><dt>Organização</dt><dd>Você criou funções, manipulou arrays e objetos e separou responsabilidades em módulos.</dd></div>
+            <div class="portal-definition-item"><dt>Navegador</dt><dd>Você selecionou elementos, tratou eventos, validou formulários e renderizou conteúdo com segurança.</dd></div>
+            <div class="portal-definition-item"><dt>Dados</dt><dd>Você persistiu preferências no localStorage e consumiu APIs com estados de carregamento, sucesso, vazio e erro.</dd></div>
+            <div class="portal-definition-item"><dt>Projeto</dt><dd>Você transformou o Café Horizonte estático em uma experiência interativa e acessível.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c20">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">20</span> Tabela de comandos e sintaxes</h2>
+        <p class="portal-section-text">A tabela reúne os principais comandos, elementos e padrões utilizados. Ela funciona como consulta rápida e não substitui a compreensão dos exemplos completos.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Tecnologia</th><th>Categoria</th><th>Comando / tag / propriedade</th><th>Descrição</th><th>Exemplo</th></tr></thead>
+                <tbody>
+                    <tr><td>JavaScript</td><td>Variáveis</td><td>const e let</td><td>Declara referências constantes ou reatribuíveis.</td><td>const price = 8; let total = 0;</td></tr>
+                    <tr><td>JavaScript</td><td>Condição</td><td>if else</td><td>Executa caminhos diferentes conforme uma condição.</td><td>if (available) { ... } else { ... }</td></tr>
+                    <tr><td>JavaScript</td><td>Repetição</td><td>for of</td><td>Percorre os itens de uma coleção.</td><td>for (const item of menuItems) { ... }</td></tr>
+                    <tr><td>JavaScript</td><td>Funções</td><td>function e =&gt;</td><td>Agrupa uma operação reutilizável.</td><td>const formatPrice = value =&gt; value.toFixed(2);</td></tr>
+                    <tr><td>JavaScript</td><td>Arrays</td><td>map filter find</td><td>Transforma, filtra ou localiza itens.</td><td>items.filter(item =&gt; item.available)</td></tr>
+                    <tr><td>DOM</td><td>Seleção</td><td>querySelector</td><td>Localiza o primeiro elemento compatível.</td><td>document.querySelector("#menu")</td></tr>
+                    <tr><td>DOM</td><td>Eventos</td><td>addEventListener</td><td>Executa uma função quando ocorre um evento.</td><td>form.addEventListener("submit", handleSubmit)</td></tr>
+                    <tr><td>DOM</td><td>Texto seguro</td><td>textContent</td><td>Atualiza texto sem interpretar HTML.</td><td>message.textContent = "Reserva enviada";</td></tr>
+                    <tr><td>Navegador</td><td>Armazenamento</td><td>localStorage</td><td>Persiste pequenas preferências como texto.</td><td>localStorage.setItem("theme", "dark")</td></tr>
+                    <tr><td>HTTP</td><td>Requisição</td><td>fetch e await</td><td>Solicita dados e aguarda a resposta.</td><td>const response = await fetch(url);</td></tr>
+                    <tr><td>Módulos</td><td>Importação</td><td>import e export</td><td>Compartilha funções e dados entre arquivos.</td><td>import { loadMenu } from "./menu.js";</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c21">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">21</span> O site construído</h2>
+        <p class="portal-section-text">O mesmo projeto Café Horizonte da apostila anterior, agora interativo: menu móvel, filtro de cardápio funcional, sugestões carregadas por fetch e um formulário de reserva com validação em tempo real.</p>
+        <div class="apostila-preview-frame">
+            <div class="apostila-preview-bar">
+                <span class="apostila-preview-dot" style="background: #ff5f56;"></span>
+                <span class="apostila-preview-dot" style="background: #ffbd2e;"></span>
+                <span class="apostila-preview-dot" style="background: #27c93f;"></span>
+                <span class="apostila-preview-url">cafe-horizonte/index.html</span>
+            </div>
+            <iframe src="../projetos/projeto-02-cafe-horizonte/index.html" title="Prévia do site Café Horizonte interativo" loading="lazy"></iframe>
+        </div>
+        <div class="apostila-preview-actions">
+            <a class="btn btn-outline-secondary btn-sm" href="../projetos/projeto-02-cafe-horizonte/index.html" target="_blank" rel="noopener">Abrir em nova aba &#8599;</a>
+        </div>
+    </article>
+
+    </div>
+
+    <p class="portal-subtitle" style="margin-top: 24px;"><a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a></p>
+
+</main>
+
+<footer class="portal-footer">
+    <div class="portal-footer-inner">
+        <span>DevRef &middot; Guia técnico multi-linguagem</span>
+    </div>
+</footer>
+
+</body>
+</html>

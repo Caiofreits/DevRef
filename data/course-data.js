@@ -24,41 +24,19 @@ const COURSE_MODULES = [
     id: "javascript",
     tech: "JavaScript",
     number: "02",
-    title: "JavaScript — Interatividade e Lógica na Página",
-    intro: "O JavaScript é a linguagem de programação que roda no navegador. Ele permite que a página responda a eventos em tempo real sem precisar consultar o servidor a cada clique.",
+    title: "JavaScript — Do Fundamento ao Navegador",
+    readMoreUrl: "curso/javascript.html",
+    intro: "O JavaScript é a linguagem de programação que roda no navegador. Neste módulo, o projeto Café Horizonte construído em HTML e CSS ganha comportamento: menu móvel, filtro de cardápio, formulário validado, preferências salvas e dados carregados de forma assíncrona.",
     sections: [
       {
-        heading: "Vinculando o JS",
-        code: `<script src="script.js"></script>`,
-        codeLang: "html"
-      },
-      {
-        heading: "Código e Explicação Detalhada do JavaScript",
-        codeLabel: "Código JavaScript Completo",
-        codeLang: "javascript",
-        code: `const formulario = document.querySelector('form');
-const inputNome = document.querySelector('#nome');
-
-formulario.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  const nomeDigitado = inputNome.value;
-
-  if (nomeDigitado.trim() === '') {
-    alert('Por favor, digite um nome válido!');
-    return;
-  }
-
-  alert(\`Obrigado pelo contato, \${nomeDigitado}! Seu formulário foi enviado.\`);
-  inputNome.value = '';
-});`,
-        listLabel: "Explicação Detalhada dos Métodos e Lógica",
+        heading: "Preparação e Pré-requisitos",
+        text: "Esta apostila continua diretamente o projeto Café Horizonte construído na apostila HTML e CSS. Em vez de abandonar esse site e começar outro sem contexto, você acrescentará comportamento à estrutura que já conhece.",
+        listLabel: "O que o JavaScript vai acrescentar",
         list: [
-          ["DOM (Document Object Model)", "O JavaScript vê o HTML como uma árvore de objetos. O método document.querySelector permite \"agarrar\" esses objetos para manipulá-los."],
-          ["Event Listeners", "O método addEventListener fica \"ouvindo\" a página. Quando o usuário clica em \"Enviar\", ele dispara a função definida."],
-          ["event.preventDefault()", "Por padrão, um formulário recarrega a página ao ser enviado. Este comando interrompe esse comportamento, permitindo que o JS processe os dados de forma fluida."],
-          ["Validação (trim e Cláusula de Guarda)", "A função .trim() remove espaços em branco inúteis. Se o campo estiver vazio, o return interrompe a função imediatamente, impedindo que o código de sucesso seja executado."],
-          ["Template Literals", "O uso de crases (`) permite inserir variáveis diretamente dentro de textos de forma legível, facilitando a criação de mensagens dinâmicas."]
+          ["Cabeçalho e navegação", "Abrir e fechar o menu em telas pequenas."],
+          ["Cartões do cardápio", "Filtrar itens por categoria e atualizar a contagem."],
+          ["Formulário de reserva", "Validar, apresentar mensagens e preparar os dados."],
+          ["Conteúdo estático", "Carregar sugestões e representar carregamento, vazio e erro."]
         ]
       }
     ]
