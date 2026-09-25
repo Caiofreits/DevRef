@@ -342,6 +342,7 @@ function renderModules() {
             </button>
             <div class="portal-module-body">
                 <p class="portal-module-intro">${escapeHtml(mod.intro)}</p>
+                ${mod.readMoreUrl ? `<a class="btn btn-primary btn-sm" href="${mod.readMoreUrl}" style="margin: -6px 0 18px; display: inline-block;">Ver apostila completa</a>` : ""}
                 ${mod.sections.map(renderModuleSection).join("")}
             </div>
         </article>`)

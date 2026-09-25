@@ -4,6 +4,7 @@ const COURSE_MODULES = [
     tech: "HTML & CSS",
     number: "01",
     title: "HTML & CSS — Estrutura e Estilo de uma Página Web",
+    readMoreUrl: "curso/html-css.html",
     intro: "HTML e CSS trabalham juntos como o esqueleto e o acabamento de uma página: o HTML (HyperText Markup Language) estrutura e dá significado ao conteúdo, enquanto o CSS (Cascading Style Sheets) cuida da apresentação visual e do layout. Neste módulo, as duas tecnologias são aplicadas ao mesmo projeto guiado — o site fictício Café Horizonte — da estrutura de pastas até a publicação final, passando por semântica, modelo de caixa, Flexbox, responsividade, formulários e acessibilidade.",
     sections: [
       {

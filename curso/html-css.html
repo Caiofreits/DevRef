@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML e CSS do Zero — Apostila · DevRef</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="portal-topbar">
+    <div class="portal-topbar-inner">
+        <a href="../index.html" class="portal-brand">
+            <img class="portal-brand-mark" src="../assets/logo-icon.png" alt="DevRef">
+            DevRef
+        </a>
+        <nav class="portal-topnav">
+            <a href="../index.html#curso">Curso</a>
+            <a href="../index.html#reference">Referência</a>
+        </nav>
+    </div>
+</header>
+
+<main class="portal-main">
+
+    <div class="portal-page-header">
+        <div>
+            <a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a>
+            <div class="portal-eyebrow">Módulo 01 · Apostila completa</div>
+            <h1>HTML e CSS do Zero</h1>
+            <p class="portal-subtitle">Construindo e publicando seu primeiro site — apostila prática com explicações progressivas, exemplos completos, exercícios e o projeto guiado Café Horizonte.</p>
+        </div>
+    </div>
+
+    <ul class="apostila-toc">
+        <li><a href="#c1">1. Antes de escrever o primeiro código</a></li>
+        <li><a href="#c2">2. Como um site chega ao navegador</a></li>
+        <li><a href="#c3">3. HTML passo a passo</a></li>
+        <li><a href="#c4">4. Estrutura semântica da página</a></li>
+        <li><a href="#c5">5. CSS desde o primeiro estilo</a></li>
+        <li><a href="#c6">6. Espaçamento e modelo de caixa</a></li>
+        <li><a href="#c7">7. Layout com Flexbox</a></li>
+        <li><a href="#c8">8. Responsividade orientada ao conteúdo</a></li>
+        <li><a href="#c9">9. Formulários compreensíveis</a></li>
+        <li><a href="#c10">10. Projeto guiado Café Horizonte</a></li>
+        <li><a href="#c11">11. Projetos do curso como prática progressiva</a></li>
+        <li><a href="#c12">12. Publicação do site</a></li>
+        <li><a href="#c13">13. Exercícios e respostas orientadoras</a></li>
+        <li><a href="#c14">14. Avaliação de autonomia</a></li>
+        <li><a href="#c15">15. Mapa do curso original</a></li>
+        <li><a href="#c16">16. Referências para atualização</a></li>
+        <li><a href="#c17">17. Próxima etapa</a></li>
+        <li><a href="#c18">18. Resumo do que foi estudado</a></li>
+        <li><a href="#c19">19. Tabela de comandos e sintaxes</a></li>
+    </ul>
+
+    <div class="portal-card" style="padding: 8px 28px;">
+
+    <article class="apostila-chapter" id="c1">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">01</span> Antes de escrever o primeiro código</h2>
+        <p class="portal-section-text">Esta apostila foi escrita para quem nunca programou. Ao terminar, você deverá conseguir criar uma página institucional simples, adaptá-la para celular e computador e publicá-la. O projeto usado durante os capítulos é o site fictício Café Horizonte. Cada parte nova será aplicada ao mesmo site para que você veja como as decisões se conectam.</p>
+
+        <h3 class="apostila-subheading">O que você precisa saber antes de começar</h3>
+        <p class="portal-section-text">Você precisa saber criar, renomear e localizar pastas no computador. Não é necessário conhecer programação. Separe períodos de 40 a 60 minutos e digite os exemplos. Copiar e colar pode ajudar a conferir um erro, mas não substitui a prática de escrever.</p>
+
+        <h3 class="apostila-subheading">Ferramentas necessárias</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Navegador</dt><dd>Um navegador atualizado, como Chrome, Edge ou Firefox.</dd></div>
+            <div class="portal-definition-item"><dt>Editor</dt><dd>O Visual Studio Code ou outro editor de código.</dd></div>
+            <div class="portal-definition-item"><dt>Organização</dt><dd>Uma pasta exclusiva para cada projeto.</dd></div>
+            <div class="portal-definition-item"><dt>Live Server</dt><dd>A extensão Live Server é opcional, mas facilita a atualização da página.</dd></div>
+        </dl>
+
+        <h3 class="apostila-subheading">Método de estudo</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>Leia o objetivo do capítulo.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>Digite o exemplo e abra o resultado no navegador.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>Modifique um valor e observe o que muda.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>Faça o exercício sem consultar a resposta.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>Avance somente quando o critério de conclusão estiver atendido.</dd></div>
+        </dl>
+        <p class="portal-section-text">Se o resultado não aparecer como esperado, não recomece imediatamente. Verifique o nome dos arquivos, salve as alterações e use as ferramentas do navegador para localizar o problema.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c2">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">02</span> Como um site chega ao navegador</h2>
+        <p class="portal-section-text">Um site básico é um conjunto de arquivos. O HTML descreve o conteúdo. O CSS define a apresentação. Imagens, fontes e outros recursos completam a página. Quando você abre index.html, o navegador lê o documento, encontra referências para outros arquivos e monta o resultado visual.</p>
+
+        <h3 class="apostila-subheading">Estrutura inicial do projeto</h3>
+        <p class="portal-section-text">Crie uma pasta chamada cafe-horizonte. Dentro dela, crie a seguinte estrutura:</p>
+        <pre class="portal-code-block"><code>cafe-horizonte/
+  index.html
+  css/
+    styles.css
+  img/</code></pre>
+        <p class="portal-section-text">O nome index.html é usado com frequência porque servidores procuram esse arquivo como página inicial. A pasta css separa os estilos, e a pasta img guarda as imagens.</p>
+
+        <h3 class="apostila-subheading">Primeiro teste no navegador</h3>
+        <p class="portal-section-text">Digite no arquivo index.html:</p>
+        <pre class="portal-code-block"><code>Minha primeira página</code></pre>
+        <p class="portal-section-text">Salve o arquivo e abra-o no navegador. O texto aparece porque o navegador consegue exibir conteúdo mesmo sem uma estrutura completa. Isso é útil para um teste, mas uma página correta precisa declarar seu tipo, idioma, configurações e conteúdo.</p>
+
+        <h3 class="apostila-subheading">Verificação rápida</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Local</dt><dd>Você sabe em qual pasta o projeto está salvo.</dd></div>
+            <div class="portal-definition-item"><dt>Nome do arquivo</dt><dd>O arquivo se chama index.html, sem uma extensão adicional como .txt.</dd></div>
+            <div class="portal-definition-item"><dt>Ciclo de teste</dt><dd>Alterar o texto, salvar e atualizar o navegador muda o resultado.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c3">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">03</span> HTML passo a passo</h2>
+        <p class="portal-section-text">HTML significa linguagem de marcação de hipertexto. Ele marca cada parte do conteúdo com elementos. Um elemento costuma ter uma tag de abertura, conteúdo e tag de fechamento.</p>
+        <pre class="portal-code-block"><code>&lt;p&gt;O café abre às 8 horas.&lt;/p&gt;</code></pre>
+        <p class="portal-section-text">&lt;p&gt; inicia um parágrafo e &lt;/p&gt; encerra o parágrafo. O navegador usa essa informação para entender a função do texto.</p>
+
+        <h3 class="apostila-subheading">Documento completo</h3>
+        <p class="portal-section-text">Substitua o conteúdo de index.html por:</p>
+        <pre class="portal-code-block"><code>&lt;!doctype html&gt;
+&lt;html lang="pt-BR"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Café Horizonte&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Café Horizonte&lt;/h1&gt;
+    &lt;p&gt;Cafés especiais e comida feita com calma.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <h3 class="apostila-subheading">Entendendo cada parte</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Trecho</th><th>Função</th></tr></thead>
+                <tbody>
+                    <tr><td>&lt;!doctype html&gt;</td><td>Informa que o documento usa HTML moderno.</td></tr>
+                    <tr><td>&lt;html lang="pt-BR"&gt;</td><td>Envolve a página e informa o idioma principal.</td></tr>
+                    <tr><td>&lt;head&gt;</td><td>Guarda configurações e informações que não formam o conteúdo principal.</td></tr>
+                    <tr><td>&lt;meta charset="UTF-8"&gt;</td><td>Permite representar corretamente acentos e outros caracteres.</td></tr>
+                    <tr><td>meta viewport</td><td>Faz a largura da página acompanhar a largura do dispositivo.</td></tr>
+                    <tr><td>&lt;title&gt;</td><td>Define o texto mostrado na aba do navegador.</td></tr>
+                    <tr><td>&lt;body&gt;</td><td>Contém o que será exibido na página.</td></tr>
+                    <tr><td>&lt;h1&gt;</td><td>Representa o título principal.</td></tr>
+                    <tr><td>&lt;p&gt;</td><td>Representa um parágrafo.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">O recuo não muda o funcionamento do HTML, mas revela quais elementos estão dentro de outros. Essa relação é chamada de aninhamento.</p>
+
+        <h3 class="apostila-subheading">Títulos e parágrafos</h3>
+        <p class="portal-section-text">HTML oferece títulos de h1 a h6. Os números representam níveis na estrutura, não tamanhos escolhidos para o visual. Use CSS para mudar a aparência.</p>
+        <pre class="portal-code-block"><code>&lt;h1&gt;Café Horizonte&lt;/h1&gt;
+&lt;h2&gt;Nosso cardápio&lt;/h2&gt;
+&lt;h3&gt;Cafés quentes&lt;/h3&gt;
+&lt;p&gt;Escolha entre espresso, coado e cappuccino.&lt;/p&gt;</code></pre>
+        <p class="portal-section-text">Uma página normalmente tem um título principal claro. Os subtítulos organizam seções e subseções em ordem coerente.</p>
+
+        <h3 class="apostila-subheading">Links</h3>
+        <p class="portal-section-text">O elemento a cria um link. O atributo href indica o destino.</p>
+        <pre class="portal-code-block"><code>&lt;a href="https://www.instagram.com/"&gt;Conheça nosso Instagram&lt;/a&gt;
+&lt;a href="cardapio.html"&gt;Abrir o cardápio&lt;/a&gt;</code></pre>
+        <p class="portal-section-text">O primeiro endereço é absoluto e aponta para outro site. O segundo é relativo e procura um arquivo dentro do projeto. Se o arquivo não existir ou o nome estiver diferente, o link falhará.</p>
+
+        <h3 class="apostila-subheading">Imagens</h3>
+        <p class="portal-section-text">Coloque uma imagem chamada fachada.jpg na pasta img e adicione:</p>
+        <pre class="portal-code-block"><code>&lt;img
+  src="img/fachada.jpg"
+  alt="Fachada do Café Horizonte com mesas na calçada"
+/&gt;</code></pre>
+        <p class="portal-section-text">src informa o caminho. alt descreve a informação transmitida pela imagem. Ele ajuda pessoas que usam leitores de tela e aparece quando a imagem não carrega. Uma imagem meramente decorativa pode usar alt="".</p>
+
+        <h3 class="apostila-subheading">Listas</h3>
+        <p class="portal-section-text">Use uma lista quando vários itens pertencem ao mesmo conjunto.</p>
+        <pre class="portal-code-block"><code>&lt;h2&gt;Destaques&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Café de pequenos produtores&lt;/li&gt;
+  &lt;li&gt;Opções sem lactose&lt;/li&gt;
+  &lt;li&gt;Ambiente com Wi-Fi&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        <p class="portal-section-text">ul cria uma lista sem ordem. ol cria uma lista ordenada. Cada item usa li.</p>
+
+        <h3 class="apostila-subheading">Anatomia de uma tag e seus atributos</h3>
+        <p class="portal-section-text">Antes de continuar o projeto, observe como uma instrução HTML é formada:</p>
+        <pre class="portal-code-block"><code>&lt;a class="button" href="#cardapio"&gt;Ver cardápio&lt;/a&gt;</code></pre>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>&lt;a</dt><dd>Inicia a tag de abertura.</dd></div>
+            <div class="portal-definition-item"><dt>class="button"</dt><dd>Atribui uma classe que poderá ser selecionada pelo CSS.</dd></div>
+            <div class="portal-definition-item"><dt>href="#cardapio"</dt><dd>Informa o destino do link.</dd></div>
+            <div class="portal-definition-item"><dt>Ver cardápio</dt><dd>É o conteúdo visível.</dd></div>
+            <div class="portal-definition-item"><dt>&lt;/a&gt;</dt><dd>Fecha o elemento.</dd></div>
+        </dl>
+        <p class="portal-section-text">Alguns elementos não envolvem conteúdo e, por isso, não possuem tag de fechamento, como img, input, meta e link. Aspas nos valores de atributos evitam ambiguidades e devem ser mantidas como padrão do projeto.</p>
+
+        <h3 class="apostila-subheading">Tags utilizadas no Café Horizonte</h3>
+        <p class="portal-section-text">O objetivo não é decorar todas as tags existentes na linguagem. Você deve compreender cada elemento utilizado no projeto, escolher a tag pelo significado e consultar a referência quando surgir uma necessidade nova.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Tag</th><th>Papel no projeto</th><th>Exemplo no Café Horizonte</th></tr></thead>
+                <tbody>
+                    <tr><td>html</td><td>Elemento raiz e idioma da página.</td><td>&lt;html lang="pt-BR"&gt;</td></tr>
+                    <tr><td>head</td><td>Configurações e referências não visíveis no conteúdo.</td><td>Contém meta, title e link.</td></tr>
+                    <tr><td>meta</td><td>Codificação e adaptação da viewport.</td><td>&lt;meta charset="UTF-8"&gt;</td></tr>
+                    <tr><td>title</td><td>Nome exibido na aba do navegador.</td><td>&lt;title&gt;Café Horizonte&lt;/title&gt;</td></tr>
+                    <tr><td>link</td><td>Conecta um recurso externo ao documento.</td><td>&lt;link rel="stylesheet" href="css/styles.css"&gt;</td></tr>
+                    <tr><td>body</td><td>Todo o conteúdo visível e interativo.</td><td>Cabeçalho, conteúdo e rodapé.</td></tr>
+                    <tr><td>header</td><td>Apresentação da página ou de uma seção.</td><td>Marca e navegação principal.</td></tr>
+                    <tr><td>nav</td><td>Grupo importante de links de navegação.</td><td>Links Sobre, Cardápio e Reserva.</td></tr>
+                    <tr><td>main</td><td>Conteúdo principal e único da página.</td><td>Apresentação, cardápio e reserva.</td></tr>
+                    <tr><td>section</td><td>Agrupa um assunto identificado por título.</td><td>Seções Sobre e Cardápio.</td></tr>
+                    <tr><td>article</td><td>Conteúdo que faz sentido como unidade.</td><td>Um item individual do cardápio.</td></tr>
+                    <tr><td>footer</td><td>Informações de encerramento.</td><td>Endereço e horário do café.</td></tr>
+                    <tr><td>h1 a h6</td><td>Hierarquia de títulos.</td><td>h1 para o café e h2 para Cardápio.</td></tr>
+                    <tr><td>p</td><td>Parágrafo de texto.</td><td>Descrição do ambiente ou de um produto.</td></tr>
+                    <tr><td>strong</td><td>Forte importância no conteúdo.</td><td>Aviso sobre horário especial.</td></tr>
+                    <tr><td>em</td><td>Ênfase de leitura.</td><td>Destaque curto em uma descrição.</td></tr>
+                    <tr><td>a</td><td>Navegação para endereço, página ou seção.</td><td>&lt;a href="#reserva"&gt;Reservar&lt;/a&gt;</td></tr>
+                    <tr><td>ul e ol</td><td>Listas sem ordem ou com sequência.</td><td>Diferenciais e etapas de uma reserva.</td></tr>
+                    <tr><td>li</td><td>Item pertencente a uma lista.</td><td>Um diferencial do estabelecimento.</td></tr>
+                    <tr><td>img</td><td>Imagem com alternativa textual.</td><td>Foto de um cappuccino.</td></tr>
+                    <tr><td>figure</td><td>Unidade de mídia autocontida.</td><td>Foto de produto com legenda.</td></tr>
+                    <tr><td>figcaption</td><td>Legenda de uma figure.</td><td>Nome ou crédito da fotografia.</td></tr>
+                    <tr><td>div</td><td>Agrupamento sem significado semântico próprio.</td><td>Contêiner necessário ao layout.</td></tr>
+                    <tr><td>span</td><td>Agrupamento curto dentro de uma linha.</td><td>Parte visual do preço.</td></tr>
+                    <tr><td>form</td><td>Região com controles para envio de dados.</td><td>Formulário de reserva.</td></tr>
+                    <tr><td>fieldset</td><td>Agrupa campos relacionados.</td><td>Dados do cliente ou da visita.</td></tr>
+                    <tr><td>legend</td><td>Nomeia um grupo fieldset.</td><td>Dados da reserva.</td></tr>
+                    <tr><td>label</td><td>Identifica um campo de formulário.</td><td>Rótulo associado ao e-mail.</td></tr>
+                    <tr><td>input</td><td>Campo de entrada de uma linha.</td><td>Nome, e-mail, data e quantidade.</td></tr>
+                    <tr><td>select</td><td>Lista de opções.</td><td>Não usado na versão final (o horário usa input type=time).</td></tr>
+                    <tr><td>option</td><td>Uma escolha disponível no select.</td><td>Não usado na versão final do formulário de reserva.</td></tr>
+                    <tr><td>textarea</td><td>Campo de texto com várias linhas.</td><td>Observações da reserva.</td></tr>
+                    <tr><td>button</td><td>Executa uma ação.</td><td>Enviar a solicitação.</td></tr>
+                    <tr><td>address</td><td>Informações de contato do responsável.</td><td>Endereço e telefone do café.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Veja essas tags trabalhando juntas em uma parte real do projeto:</p>
+        <pre class="portal-code-block"><code>&lt;section id="cardapio" aria-labelledby="titulo-cardapio"&gt;
+  &lt;h2 id="titulo-cardapio"&gt;Cardápio&lt;/h2&gt;
+  &lt;article class="menu-card"&gt;
+    &lt;figure&gt;
+      &lt;img
+        src="img/cappuccino.jpg"
+        alt="Cappuccino servido em uma xícara branca"
+      /&gt;
+      &lt;figcaption&gt;Cappuccino tradicional&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;p&gt;Espresso, leite vaporizado e espuma cremosa.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;R$ 14,00&lt;/strong&gt;&lt;/p&gt;
+    &lt;a class="button" href="#reserva"&gt;Reservar uma mesa&lt;/a&gt;
+  &lt;/article&gt;
+&lt;/section&gt;</code></pre>
+        <p class="portal-section-text">Leia o trecho de fora para dentro: section cria o assunto Cardápio; article representa um produto; figure reúne mídia e legenda; img apresenta a foto; p contém informações; strong marca o preço como importante; e a conduz o visitante ao formulário.</p>
+
+        <h3 class="apostila-subheading">Exercício do capítulo</h3>
+        <p class="portal-section-text">Crie uma seção chamada Horários com um subtítulo, um parágrafo e uma lista dos dias de funcionamento. Acrescente um link para um mapa. Teste todos os caminhos.</p>
+        <p class="portal-section-text"><strong>Critério de conclusão:</strong> você consegue explicar a diferença entre elemento, atributo, conteúdo e caminho de arquivo.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c4">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">04</span> Estrutura semântica da página</h2>
+        <p class="portal-section-text">Elementos semânticos dizem qual é o papel de cada região. Eles ajudam quem lê o código, mecanismos de busca e tecnologias assistivas.</p>
+        <pre class="portal-code-block"><code>&lt;body&gt;
+  &lt;header&gt;
+    &lt;a href="index.html"&gt;Café Horizonte&lt;/a&gt;
+    &lt;nav aria-label="Navegação principal"&gt;
+      &lt;a href="#sobre"&gt;Sobre&lt;/a&gt;
+      &lt;a href="#cardapio"&gt;Cardápio&lt;/a&gt;
+      &lt;a href="#contato"&gt;Contato&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;section id="sobre"&gt;
+      &lt;h1&gt;Café Horizonte&lt;/h1&gt;
+      &lt;p&gt;Cafés especiais e comida feita com calma.&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;section id="cardapio"&gt;
+      &lt;h2&gt;Cardápio&lt;/h2&gt;
+      &lt;article&gt;
+        &lt;h3&gt;Cappuccino&lt;/h3&gt;
+        &lt;p&gt;Espresso, leite vaporizado e espuma.&lt;/p&gt;
+      &lt;/article&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+  &lt;footer id="contato"&gt;
+    &lt;p&gt;Rua Exemplo, 100&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+
+        <h3 class="apostila-subheading">Escolhendo o elemento correto</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Elemento</th><th>Use quando</th></tr></thead>
+                <tbody>
+                    <tr><td>header</td><td>A região apresenta uma página ou seção.</td></tr>
+                    <tr><td>nav</td><td>O conjunto contém links de navegação importantes.</td></tr>
+                    <tr><td>main</td><td>A região contém o assunto principal da página.</td></tr>
+                    <tr><td>section</td><td>O conteúdo forma uma seção temática, normalmente com título.</td></tr>
+                    <tr><td>article</td><td>O conteúdo faz sentido como unidade independente.</td></tr>
+                    <tr><td>aside</td><td>O conteúdo é complementar ao assunto principal.</td></tr>
+                    <tr><td>footer</td><td>A região encerra uma página ou seção.</td></tr>
+                    <tr><td>div</td><td>É necessário apenas um agrupamento sem significado específico.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Semântica não é escolher uma tag diferente para cada bloco. É representar a estrutura real. Uma div continua correta quando nenhum elemento semântico descreve o agrupamento.</p>
+
+        <h3 class="apostila-subheading">Acessibilidade desde o início</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Links descritivos</dt><dd>Escreva textos de link que indiquem o destino. Evite vários links chamados apenas de "clique aqui".</dd></div>
+            <div class="portal-definition-item"><dt>Cor não é suficiente</dt><dd>Não use cor como única forma de transmitir informação.</dd></div>
+            <div class="portal-definition-item"><dt>Ordem lógica</dt><dd>Mantenha uma ordem lógica de títulos.</dd></div>
+            <div class="portal-definition-item"><dt>Elementos nativos</dt><dd>Use elementos interativos nativos, como button para ações e a para navegação.</dd></div>
+            <div class="portal-definition-item"><dt>Foco visível</dt><dd>Não remova o contorno de foco sem fornecer uma alternativa visível.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c5">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">05</span> CSS desde o primeiro estilo</h2>
+        <p class="portal-section-text">CSS é uma linguagem de regras. Cada regra seleciona elementos e declara propriedades.</p>
+        <pre class="portal-code-block"><code>p {
+  color: #333333;
+  font-size: 1rem;
+}</code></pre>
+        <p class="portal-section-text">p é o seletor. color e font-size são propriedades. Os valores vêm depois dos dois-pontos, e cada declaração termina com ponto e vírgula.</p>
+
+        <h3 class="apostila-subheading">Ligando o CSS ao HTML</h3>
+        <p class="portal-section-text">Dentro de head, acrescente:</p>
+        <pre class="portal-code-block"><code>&lt;link rel="stylesheet" href="css/styles.css" /&gt;</code></pre>
+        <p class="portal-section-text">Agora escreva em css/styles.css:</p>
+        <pre class="portal-code-block"><code>body {
+  background-color: #f6f1e8;
+  color: #2f241f;
+  font-family: Arial, sans-serif;
+}</code></pre>
+        <p class="portal-section-text">Se nada mudar, confira se o arquivo foi salvo e se o caminho começa em css/. No navegador, abra as ferramentas de desenvolvimento e verifique se existe um erro 404 ao carregar styles.css.</p>
+
+        <h3 class="apostila-subheading">Classes e identificadores</h3>
+        <p class="portal-section-text">Uma classe pode ser reutilizada. Um identificador deve representar um elemento específico na página.</p>
+        <pre class="portal-code-block"><code>&lt;a class="button" href="#cardapio"&gt;Ver cardápio&lt;/a&gt;</code></pre>
+        <pre class="portal-code-block"><code>.button {
+  background-color: #6b3f2a;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+}</code></pre>
+        <p class="portal-section-text">No CSS, o ponto seleciona uma classe. O caractere # seleciona um id. Prefira classes para estilos e use id principalmente para destinos internos, formulários e integrações específicas.</p>
+
+        <h3 class="apostila-subheading">Cascata e conflito</h3>
+        <p class="portal-section-text">Quando duas regras afetam a mesma propriedade, o navegador considera origem, importância, especificidade e ordem. Para começar, use seletores simples e evite !important.</p>
+        <pre class="portal-code-block"><code>.button {
+  color: white;
+}
+
+.button-secondary {
+  color: #6b3f2a;
+}</code></pre>
+        <p class="portal-section-text">Um elemento com as duas classes recebe a cor da segunda regra porque os seletores têm força semelhante e ela aparece depois.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c6">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">06</span> Espaçamento e modelo de caixa</h2>
+        <p class="portal-section-text">Todo elemento forma uma caixa composta por conteúdo, preenchimento, borda e margem.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Parte</th><th>Significado</th></tr></thead>
+                <tbody>
+                    <tr><td>conteúdo</td><td>Texto, imagem ou área interna do elemento.</td></tr>
+                    <tr><td>padding</td><td>Espaço entre o conteúdo e a borda.</td></tr>
+                    <tr><td>border</td><td>Contorno da caixa.</td></tr>
+                    <tr><td>margin</td><td>Espaço externo entre a caixa e seus vizinhos.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Comece o CSS com uma base previsível:</p>
+        <pre class="portal-code-block"><code>* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}</code></pre>
+        <p class="portal-section-text">Com border-box, a largura declarada inclui preenchimento e borda. max-width: 100% impede uma imagem de ultrapassar o espaço disponível.</p>
+
+        <h3 class="apostila-subheading">Conteúdo centralizado</h3>
+        <pre class="portal-code-block"><code>.container {
+  width: min(100% - 2rem, 70rem);
+  margin-inline: auto;
+}</code></pre>
+        <p class="portal-section-text">A expressão escolhe o menor valor entre a largura disponível com margens e o limite de 70rem. Isso mantém o conteúdo confortável em telas pequenas e evita linhas excessivamente longas em telas grandes.</p>
+
+        <h3 class="apostila-subheading">Inspecionando uma caixa</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>Abra as ferramentas do navegador.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>Use o seletor de elementos e clique em um cartão.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>Abra a área Computed ou Layout.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>Observe os valores de conteúdo, padding, border e margin.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>Altere um valor temporariamente e veja o resultado.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c7">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">07</span> Layout com Flexbox</h2>
+        <p class="portal-section-text">Flexbox organiza itens em uma dimensão principal. A propriedade é aplicada ao elemento pai, chamado contêiner flexível.</p>
+        <pre class="portal-code-block"><code>&lt;section class="menu container" id="cardapio"&gt;
+  &lt;article class="menu-card"&gt;
+    &lt;h2&gt;Espresso&lt;/h2&gt;
+    &lt;p&gt;Intenso e equilibrado.&lt;/p&gt;
+  &lt;/article&gt;
+  &lt;article class="menu-card"&gt;
+    &lt;h2&gt;Cappuccino&lt;/h2&gt;
+    &lt;p&gt;Cremoso e suave.&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/section&gt;</code></pre>
+        <pre class="portal-code-block"><code>.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.menu-card {
+  flex: 1 1 16rem;
+  padding: 1rem;
+  border: 1px solid #d8c9bb;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+}</code></pre>
+        <p class="portal-section-text">gap cria espaço entre os itens. flex-wrap permite a quebra de linha. Em flex: 1 1 16rem, o cartão pode crescer, pode encolher e começa com uma base de 16rem.</p>
+
+        <h3 class="apostila-subheading">Alinhamento</h3>
+        <p class="portal-section-text">justify-content trabalha no eixo principal. align-items trabalha no eixo transversal. O eixo principal muda com flex-direction.</p>
+        <pre class="portal-code-block"><code>.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}</code></pre>
+        <p class="portal-section-text">Não memorize cada valor de uma vez. Abra o DevTools, ative o editor visual de Flexbox e teste as opções.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c8">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">08</span> Responsividade orientada ao conteúdo</h2>
+        <p class="portal-section-text">Um layout responsivo se adapta ao espaço disponível. Comece com a versão estreita e acrescente mudanças apenas quando o conteúdo precisar.</p>
+        <pre class="portal-code-block"><code>.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (min-width: 48rem) {
+  .site-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}</code></pre>
+        <p class="portal-section-text">O breakpoint não significa tablet por definição. Ele indica o ponto em que a composição tem espaço para mudar. Teste larguras intermediárias, aumento de fonte e textos maiores do que os exemplos.</p>
+
+        <h3 class="apostila-subheading">Unidades úteis</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Unidade</th><th>Uso comum</th></tr></thead>
+                <tbody>
+                    <tr><td>px</td><td>Bordas e detalhes que precisam de medida fixa.</td></tr>
+                    <tr><td>rem</td><td>Espaçamentos e fontes relacionados à configuração raiz.</td></tr>
+                    <tr><td>%</td><td>Medidas relativas ao contêiner.</td></tr>
+                    <tr><td>vw e vh</td><td>Medidas relativas à área visível, usadas com cuidado.</td></tr>
+                    <tr><td>fr</td><td>Fração do espaço em layouts Grid.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="apostila-subheading">Checklist responsivo</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Rolagem</dt><dd>Não existe rolagem horizontal inesperada.</dd></div>
+            <div class="portal-definition-item"><dt>Legibilidade</dt><dd>Textos continuam legíveis em 320 pixels de largura.</dd></div>
+            <div class="portal-definition-item"><dt>Toque</dt><dd>Links e botões têm área confortável para toque.</dd></div>
+            <div class="portal-definition-item"><dt>Imagens</dt><dd>Imagens não ultrapassam seus contêineres.</dd></div>
+            <div class="portal-definition-item"><dt>Independência visual</dt><dd>O conteúdo continua compreensível sem depender da posição visual.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c9">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">09</span> Formulários compreensíveis</h2>
+        <p class="portal-section-text">Um formulário coleta dados. HTML fornece controles, identificação e validação básica, mas o envio real normalmente depende de um servidor ou serviço externo.</p>
+        <pre class="portal-code-block"><code>&lt;form class="reservation-form" action="/reservas" method="post"&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Dados da reserva&lt;/legend&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="name"&gt;Nome&lt;/label&gt;
+      &lt;input id="name" name="name" type="text" autocomplete="name" required /&gt;
+    &lt;/div&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="email"&gt;E-mail&lt;/label&gt;
+      &lt;input id="email" name="email" type="email" autocomplete="email" required /&gt;
+    &lt;/div&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="time"&gt;Horário&lt;/label&gt;
+      &lt;input
+        id="time"
+        name="time"
+        type="time"
+        min="08:00"
+        max="18:00"
+        step="1800"
+        aria-describedby="time-hint"
+        required
+      /&gt;
+      &lt;p id="time-hint" class="field-hint"&gt;
+        Escolha um horário entre 8h e 18h, de terça a domingo.
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="field"&gt;
+      &lt;label for="notes"&gt;Observações&lt;/label&gt;
+      &lt;textarea id="notes" name="notes" rows="4"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  &lt;button type="submit"&gt;Solicitar reserva&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        <p class="portal-section-text">form reúne os dados enviados; fieldset agrupa os controles da mesma finalidade; e legend dá um nome ao grupo. label descreve cada controle e seu for aponta para o id correspondente. input recebe textos curtos, min e max restringem um intervalo permitido — como no horário da reserva — e textarea recebe observações maiores. button envia o formulário. O atributo name identifica o dado enviado, type informa o formato esperado, autocomplete ajuda o navegador e required impede o envio vazio no navegador. A API ainda precisará validar tudo novamente.</p>
+        <pre class="portal-code-block"><code>.reservation-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 36rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b5d52;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  padding: 0.75rem;
+  border: 1px solid #8d7b6d;
+  border-radius: 0.4rem;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #f2a65a;
+  outline-offset: 3px;
+}</code></pre>
+
+        <h3 class="apostila-subheading">Erros comuns em formulários</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>placeholder no lugar de label</dt><dd>Faz a identificação desaparecer durante a digitação.</dd></div>
+            <div class="portal-definition-item"><dt>id repetido</dt><dd>Repetir o mesmo id quebra a associação entre rótulo e campo.</dd></div>
+            <div class="portal-definition-item"><dt>name ausente</dt><dd>Esquecer name impede que o valor seja identificado no envio tradicional.</dd></div>
+            <div class="portal-definition-item"><dt>div clicável</dt><dd>Usar uma div clicável no lugar de button remove comportamentos importantes de teclado.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c10">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">10</span> Projeto guiado Café Horizonte</h2>
+        <p class="portal-section-text">Agora você reunirá o conteúdo em uma página completa. Faça uma etapa por vez e abra o navegador depois de cada mudança.</p>
+
+        <h3 class="apostila-subheading">Planejamento do conteúdo</h3>
+        <p class="portal-section-text">O site terá cabeçalho, apresentação, destaques, cardápio, história, contato e rodapé. Antes de estilizar, confirme que todo o conteúdo existe e segue uma hierarquia coerente.</p>
+        <pre class="portal-code-block"><code>&lt;body&gt;
+  &lt;header class="site-header container"&gt;
+    &lt;a class="brand" href="#top"&gt;Café Horizonte&lt;/a&gt;
+    &lt;nav aria-label="Navegação principal"&gt;
+      &lt;a href="#menu"&gt;Cardápio&lt;/a&gt;
+      &lt;a href="#about"&gt;Sobre&lt;/a&gt;
+      &lt;a href="#contact"&gt;Contato&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main id="top"&gt;
+    &lt;section class="hero"&gt;
+      &lt;div class="container hero-content"&gt;
+        &lt;p class="eyebrow"&gt;Café local desde 2018&lt;/p&gt;
+        &lt;h1&gt;Uma pausa boa no meio do dia&lt;/h1&gt;
+        &lt;p&gt;Grãos selecionados, preparo cuidadoso e um lugar tranquilo.&lt;/p&gt;
+        &lt;a class="button" href="#menu"&gt;Conhecer o cardápio&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section class="container section" id="menu"&gt;
+      &lt;h2&gt;Cardápio em destaque&lt;/h2&gt;
+      &lt;div class="menu"&gt;
+        &lt;article class="menu-card"&gt;
+          &lt;img src="img/espresso.jpg" alt="Xícara de espresso recém-preparado" /&gt;
+          &lt;h3&gt;Espresso&lt;/h3&gt;
+          &lt;p&gt;Extração curta e sabor intenso.&lt;/p&gt;
+          &lt;p class="price"&gt;R$ 8&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class="menu-card"&gt;
+          &lt;img src="img/cappuccino.jpg" alt="Cappuccino servido em uma xícara branca" /&gt;
+          &lt;h3&gt;Cappuccino&lt;/h3&gt;
+          &lt;p&gt;Espresso, leite e espuma cremosa.&lt;/p&gt;
+          &lt;p class="price"&gt;R$ 14&lt;/p&gt;
+        &lt;/article&gt;
+        &lt;article class="menu-card"&gt;
+          &lt;img src="img/cafe-coado.jpg" alt="Café coado sendo preparado no filtro" /&gt;
+          &lt;h3&gt;Coado do dia&lt;/h3&gt;
+          &lt;p&gt;Grão selecionado e preparo individual.&lt;/p&gt;
+          &lt;p class="price"&gt;R$ 11&lt;/p&gt;
+        &lt;/article&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section class="section section-alt" id="about"&gt;
+      &lt;div class="container"&gt;
+        &lt;h2&gt;Sobre o café&lt;/h2&gt;
+        &lt;p&gt;Trabalhamos com produtores locais e mudamos os grãos ao longo do ano.&lt;/p&gt;
+        &lt;img src="img/fachada.jpg" alt="Fachada do Café Horizonte com mesas na calçada" /&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section class="container section" id="contact"&gt;
+      &lt;h2&gt;Contato&lt;/h2&gt;
+      &lt;!-- Insira aqui o formulário construído no capítulo anterior --&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+  &lt;footer class="site-footer"&gt;
+    &lt;div class="container"&gt;
+      &lt;p&gt;Café Horizonte · Rua Exemplo, 100&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+
+        <h3 class="apostila-subheading">Estilo completo do projeto</h3>
+        <pre class="portal-code-block"><code>:root {
+  --color-bg: #fbf8f3;
+  --color-surface: #ffffff;
+  --color-text: #2f241f;
+  --color-primary: #6b3f2a;
+  --color-accent: #f2a65a;
+  --color-border: #d8c9bb;
+  --content-width: 70rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+.container {
+  width: min(100% - 2rem, var(--content-width));
+  margin-inline: auto;
+}
+
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+
+.site-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand {
+  color: var(--color-text);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.hero-content {
+  padding-block: clamp(4rem, 10vw, 8rem);
+}
+
+.hero h1 {
+  max-width: 14ch;
+  margin-block: 0.5rem 1rem;
+  font-size: clamp(2.25rem, 7vw, 4.75rem);
+  line-height: 1.05;
+}
+
+.eyebrow {
+  color: #ffd9ad;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.4rem;
+  background: var(--color-accent);
+  color: #2f241f;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.section {
+  padding-block: 4rem;
+}
+
+.section-alt {
+  background: #efe4d6;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.menu-card {
+  flex: 1 1 16rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+}
+
+.menu-card img {
+  margin: 0 0 0.75rem;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+#about img {
+  display: block;
+  max-width: 39rem;
+  width: 100%;
+  border-radius: 0.75rem;
+}
+
+.price {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.site-footer {
+  padding-block: 2rem;
+  background: #241a16;
+  color: #ffffff;
+}
+
+@media (min-width: 48rem) {
+  .site-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}</code></pre>
+
+        <h3 class="apostila-subheading">Teste final</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>Navegue por todos os links usando apenas o teclado.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>Redimensione a janela de 320 pixels até uma tela larga.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>Amplie o navegador para 200 por cento e observe se o conteúdo continua utilizável.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>Abra a guia Network e confirme que não existem arquivos com erro 404.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>Confira se o formulário possui rótulos e se os campos obrigatórios são identificados.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c11">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">11</span> Projetos do curso como prática progressiva</h2>
+        <p class="portal-section-text">Os cinco projetos originais continuam úteis, mas devem ser usados como etapas de autonomia.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Projeto</th><th>Competência principal</th><th>Mudança obrigatória</th></tr></thead>
+                <tbody>
+                    <tr><td>Tributo à banda</td><td>Estrutura HTML e estilos básicos</td><td>Trocar tema e reorganizar o conteúdo sem copiar a marcação.</td></tr>
+                    <tr><td>Formulário</td><td>Controles e validação nativa</td><td>Melhorar rótulos, foco e mensagens de ajuda.</td></tr>
+                    <tr><td>HDC Host</td><td>Flexbox e responsividade</td><td>Refazer mobile first e remover correções paliativas.</td></tr>
+                    <tr><td>Login inspirado no Instagram</td><td>Reprodução de layout</td><td>Criar identidade visual própria e revisar acessibilidade.</td></tr>
+                    <tr><td>Blog semântico</td><td>Estrutura de conteúdo</td><td>Adicionar página de artigo e navegação coerente.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Para cada projeto, faça três passagens: acompanhe a construção, refaça sem consultar e implemente uma variação própria. A terceira versão é a que demonstra aprendizado.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c12">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">12</span> Publicação do site</h2>
+        <p class="portal-section-text">Um site estático pode ser publicado em serviços que recebem os arquivos HTML, CSS e imagens. O processo exato muda conforme o provedor, mas a preparação é semelhante.</p>
+
+        <h3 class="apostila-subheading">Checklist antes do envio</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Arquivo inicial</dt><dd>O arquivo inicial se chama index.html.</dd></div>
+            <div class="portal-definition-item"><dt>Caminhos</dt><dd>Os caminhos usam nomes e letras maiúsculas exatamente como os arquivos.</dd></div>
+            <div class="portal-definition-item"><dt>Sem caminhos locais</dt><dd>Não existem caminhos locais como C:\Users\....</dd></div>
+            <div class="portal-definition-item"><dt>Sem dados sensíveis</dt><dd>Não existem senhas, chaves ou informações privadas nos arquivos.</dd></div>
+            <div class="portal-definition-item"><dt>Testes</dt><dd>Links, imagens e formulário foram testados.</dd></div>
+            <div class="portal-definition-item"><dt>Responsivo</dt><dd>O site funciona em celular e computador.</dd></div>
+        </dl>
+
+        <h3 class="apostila-subheading">Domínio, DNS e HTTPS</h3>
+        <p class="portal-section-text">O domínio é o nome usado para acessar o site. O DNS relaciona esse nome ao serviço que entrega os arquivos. HTTPS protege a comunicação entre navegador e servidor. Muitos provedores de sites estáticos configuram HTTPS automaticamente depois que o domínio aponta corretamente.</p>
+
+        <h3 class="apostila-subheading">Diagnóstico após a publicação</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Sintoma</th><th>Verificação</th></tr></thead>
+                <tbody>
+                    <tr><td>CSS não carrega</td><td>Abra Network, procure 404 e confira maiúsculas e caminho relativo.</td></tr>
+                    <tr><td>Imagem aparece localmente e falha online</td><td>Verifique o nome exato e se a imagem foi enviada.</td></tr>
+                    <tr><td>Mudança antiga continua visível</td><td>Atualize ignorando cache e confirme qual arquivo foi publicado.</td></tr>
+                    <tr><td>Link interno não funciona</td><td>Confira se o href corresponde ao id existente.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c13">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">13</span> Exercícios e respostas orientadoras</h2>
+
+        <h3 class="apostila-subheading">Exercício página pessoal</h3>
+        <p class="portal-section-text">Crie uma página com apresentação, lista de habilidades, dois projetos e contato. Use HTML semântico e pelo menos uma imagem com texto alternativo.</p>
+        <p class="portal-section-text"><strong>Orientação de resposta:</strong> comece pelo conteúdo sem CSS. Depois use uma classe .container, estilize tipografia e transforme os projetos em cartões flexíveis.</p>
+
+        <h3 class="apostila-subheading">Exercício cartões responsivos</h3>
+        <p class="portal-section-text">Crie quatro cartões que ocupem uma coluna em telas estreitas e se distribuam automaticamente quando houver espaço.</p>
+        <p class="portal-section-text"><strong>Orientação de resposta:</strong> aplique display: flex, flex-wrap: wrap e gap ao pai. Nos filhos, experimente flex: 1 1 14rem.</p>
+
+        <h3 class="apostila-subheading">Exercício formulário</h3>
+        <p class="portal-section-text">Crie campos para nome, e-mail, assunto e mensagem. Todos devem possuir rótulo. Nome, e-mail e mensagem são obrigatórios.</p>
+        <p class="portal-section-text"><strong>Orientação de resposta:</strong> associe cada label for ao input id, escolha type="email" para o e-mail e use textarea para a mensagem.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c14">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">14</span> Avaliação de autonomia</h2>
+        <p class="portal-section-text">Você está pronto para a apostila JavaScript quando conseguir realizar estas tarefas sem copiar um projeto inteiro:</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Estrutura</dt><dd>Criar a estrutura de pastas e conectar HTML e CSS.</dd></div>
+            <div class="portal-definition-item"><dt>Elementos</dt><dd>Explicar a função de head, body, títulos, links, imagens e listas.</dd></div>
+            <div class="portal-definition-item"><dt>Semântica</dt><dd>Organizar uma página com elementos semânticos.</dd></div>
+            <div class="portal-definition-item"><dt>Estilo</dt><dd>Aplicar classes, cores, tipografia, espaçamento e bordas.</dd></div>
+            <div class="portal-definition-item"><dt>Layout</dt><dd>Construir um layout com Flexbox e adaptá-lo com media query.</dd></div>
+            <div class="portal-definition-item"><dt>Formulários</dt><dd>Montar um formulário identificado e navegável por teclado.</dd></div>
+            <div class="portal-definition-item"><dt>Depuração</dt><dd>Localizar um caminho incorreto usando o navegador.</dd></div>
+            <div class="portal-definition-item"><dt>Publicação</dt><dd>Publicar a página e testar os arquivos entregues.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c15">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">15</span> Mapa do curso original</h2>
+        <p class="portal-section-text">Esta tabela preserva a ligação entre a nova sequência didática e os módulos usados como fonte. A ordem da apostila foi alterada quando isso melhora a aprendizagem.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Módulo</th><th>Conteúdo de origem</th><th>Arquivo</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Introdução</td><td>01-Introducao.md</td></tr>
+                    <tr><td>2</td><td>Curso de HTML e CSS - Introdução</td><td>02-Curso-HTML-CSS-Introducao.md</td></tr>
+                    <tr><td>3</td><td>Introdução ao HTML</td><td>03-Introducao-ao-HTML.md</td></tr>
+                    <tr><td>4</td><td>Introdução ao CSS</td><td>04-Introducao-ao-CSS.md</td></tr>
+                    <tr><td>5</td><td>Projeto 1: Tributo a banda The Offspring</td><td>05-Projeto1-Tributo-Offspring.md</td></tr>
+                    <tr><td>6</td><td>Formulários</td><td>06-Formularios.md</td></tr>
+                    <tr><td>7</td><td>Projeto 2: Projeto com Formulário</td><td>07-Projeto2-Formulario.md</td></tr>
+                    <tr><td>8</td><td>Responsividade</td><td>08-Responsividade.md</td></tr>
+                    <tr><td>9</td><td>Projeto 3: HDC Host</td><td>09-Projeto3-HDC-Host.md</td></tr>
+                    <tr><td>10</td><td>Flexbox</td><td>10-Flexbox.md</td></tr>
+                    <tr><td>11</td><td>Como Hospedar um site: fazendo deploy do projeto</td><td>11-Hospedagem-Deploy.md</td></tr>
+                    <tr><td>12</td><td>Projeto 4: Página de login Instagram</td><td>12-Projeto4-Login-Instagram.md</td></tr>
+                    <tr><td>13</td><td>HTML Semântico</td><td>13-HTML-Semantico.md</td></tr>
+                    <tr><td>14</td><td>Projeto 5: Blog semântico</td><td>14-Projeto5-Blog-Semantico.md</td></tr>
+                    <tr><td>58</td><td>Conclusão e próximos passos</td><td>58-Conclusao.md</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c16">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">16</span> Referências para atualização</h2>
+        <ul class="apostila-links">
+            <li>MDN Learn Web Development — <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank" rel="noopener">developer.mozilla.org/en-US/docs/Learn_web_development</a></li>
+            <li>MDN HTML — <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener">developer.mozilla.org/en-US/docs/Web/HTML</a></li>
+            <li>MDN CSS — <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener">developer.mozilla.org/en-US/docs/Web/CSS</a></li>
+        </ul>
+    </article>
+
+    <article class="apostila-chapter" id="c17">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">17</span> Próxima etapa</h2>
+        <p class="portal-section-text">Continue na apostila JavaScript quando conseguir montar e publicar uma página responsiva sem copiar um projeto inteiro.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c18">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">18</span> Resumo do que foi estudado</h2>
+        <p class="portal-section-text">Use esta síntese para revisar a sequência da apostila. Tente explicar cada item e reproduzir sua aplicação no projeto antes de consultar os capítulos anteriores.</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Funcionamento da Web</dt><dd>Você compreendeu o papel do navegador, dos arquivos do projeto e dos caminhos entre páginas, estilos e imagens.</dd></div>
+            <div class="portal-definition-item"><dt>HTML semântico</dt><dd>Você estruturou conteúdo com títulos, textos, links, listas, imagens, seções, navegação, conteúdo principal e rodapé.</dd></div>
+            <div class="portal-definition-item"><dt>CSS fundamental</dt><dd>Você aplicou seletores, cascata, cores, tipografia, medidas, espaçamento e modelo de caixa.</dd></div>
+            <div class="portal-definition-item"><dt>Layout responsivo</dt><dd>Você organizou componentes com Flexbox e adaptou o conteúdo a diferentes larguras com media queries.</dd></div>
+            <div class="portal-definition-item"><dt>Formulários e acessibilidade</dt><dd>Você relacionou rótulos e campos, escolheu tipos adequados e preservou navegação por teclado e textos alternativos.</dd></div>
+            <div class="portal-definition-item"><dt>Projeto e publicação</dt><dd>Você construiu, testou e publicou a versão estática do Café Horizonte.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c19">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">19</span> Tabela de comandos e sintaxes</h2>
+        <p class="portal-section-text">A tabela reúne os principais comandos, elementos e padrões utilizados. Ela funciona como consulta rápida e não substitui a compreensão dos exemplos completos.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Tecnologia</th><th>Categoria</th><th>Comando / tag / propriedade</th><th>Descrição</th><th>Exemplo</th></tr></thead>
+                <tbody>
+                    <tr><td>HTML</td><td>Documento</td><td>&lt;!doctype html&gt;</td><td>Declara o documento como HTML moderno.</td><td>&lt;!doctype html&gt;</td></tr>
+                    <tr><td>HTML</td><td>Raiz e seções</td><td>&lt;html&gt; &lt;head&gt; &lt;body&gt;</td><td>Organiza metadados e conteúdo visível.</td><td>&lt;html lang="pt-BR"&gt;...&lt;/html&gt;</td></tr>
+                    <tr><td>HTML</td><td>Metadados</td><td>&lt;meta&gt;</td><td>Define codificação e comportamento da viewport.</td><td>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</td></tr>
+                    <tr><td>HTML</td><td>Texto</td><td>&lt;h1&gt; a &lt;h6&gt; e &lt;p&gt;</td><td>Cria hierarquia de títulos e parágrafos.</td><td>&lt;h1&gt;Café Horizonte&lt;/h1&gt;</td></tr>
+                    <tr><td>HTML</td><td>Navegação</td><td>&lt;a href="..."&gt;</td><td>Cria links para páginas, arquivos ou seções.</td><td>&lt;a href="#cardapio"&gt;Cardápio&lt;/a&gt;</td></tr>
+                    <tr><td>HTML</td><td>Imagem</td><td>&lt;img src alt&gt;</td><td>Insere imagem com alternativa textual.</td><td>&lt;img src="cafe.jpg" alt="Xícara de café"&gt;</td></tr>
+                    <tr><td>HTML</td><td>Formulário</td><td>&lt;form&gt; &lt;fieldset&gt; &lt;legend&gt;</td><td>Agrupa controles e identifica a finalidade.</td><td>&lt;legend&gt;Dados da reserva&lt;/legend&gt;</td></tr>
+                    <tr><td>HTML</td><td>Controles</td><td>&lt;label&gt; &lt;input&gt; &lt;select&gt; &lt;textarea&gt; &lt;button&gt;</td><td>Coleta diferentes tipos de dados com rótulos.</td><td>&lt;label for="time"&gt;Horário&lt;/label&gt;</td></tr>
+                    <tr><td>CSS</td><td>Seletores</td><td>.classe e #id</td><td>Seleciona elementos para estilização.</td><td>.menu-item { padding: 1rem; }</td></tr>
+                    <tr><td>CSS</td><td>Modelo de caixa</td><td>margin padding border</td><td>Controla espaços externos, internos e bordas.</td><td>padding: 1rem; margin-block: 2rem;</td></tr>
+                    <tr><td>CSS</td><td>Flexbox</td><td>display flex</td><td>Organiza e alinha itens em um eixo.</td><td>display: flex; gap: 1rem;</td></tr>
+                    <tr><td>CSS</td><td>Responsividade</td><td>@media</td><td>Aplica regras conforme características da tela.</td><td>@media (min-width: 48rem) { ... }</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    </div>
+
+    <p class="portal-subtitle" style="margin-top: 24px;"><a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a></p>
+
+</main>
+
+<footer class="portal-footer">
+    <div class="portal-footer-inner">
+        <span>DevRef &middot; Guia técnico multi-linguagem</span>
+    </div>
+</footer>
+
+</body>
+</html>
