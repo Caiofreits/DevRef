@@ -140,8 +140,7 @@ const COURSE_SUMMARY = {
   heading: "Tabela de Resumo: Papel de Cada Tecnologia no Projeto",
   columns: ["Tecnologia", "Função Principal", "Analogia no Projeto", "Impacto no Usuário"],
   rows: [
-    ["HTML5", "Estruturação Semântica", "Esqueleto e Fundações", "Acessibilidade e SEO"],
-    ["CSS3", "Estilização e Layout", "Pintura e Acabamento", "Estética e Conforto Visual"],
+    ["HTML & CSS", "Estrutura Semântica e Estilização", "Esqueleto e Acabamento", "Acessibilidade, SEO e Estética"],
     ["JavaScript", "Lógica e Interação", "Sistema Elétrico", "Rapidez e Dinamismo"],
     ["React", "Componentização", "Módulos Pré-fabricados", "Interface Fluida e Moderna"],
     ["TypeScript", "Tipagem e Segurança", "Inspeção Técnica", "Menos Erros e Mais Estabilidade"]

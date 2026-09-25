@@ -20,7 +20,7 @@ const LANG_CONTENT = {
         heroDescription: "HTML, CSS, JavaScript, React e TypeScript reunidos em uma referência rápida, com exemplos prontos para consulta.",
         heroLead: "56 comandos, tags e propriedades organizados por tecnologia, com descrição e exemplo de código prontos para consulta.",
         courseTitle: "Do zero ao React & TypeScript",
-        courseSubtitle: "Guia completo com explicação e código de cada módulo: HTML, CSS, JavaScript, React e TypeScript.",
+        courseSubtitle: "Guia completo com explicação e código de cada módulo: HTML & CSS, JavaScript, React e TypeScript.",
         referenceSubtitle: "Consulta de tags, propriedades e métodos de HTML, CSS, JavaScript, React e TypeScript.",
         get commands() { return DEVREF_DATA; },
         get modules() { return COURSE_MODULES; },
