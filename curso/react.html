@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React com Fundamentos Sólidos — Apostila · DevRef</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="portal-topbar">
+    <div class="portal-topbar-inner">
+        <a href="../index.html" class="portal-brand">
+            <img class="portal-brand-mark" src="../assets/logo-icon.png" alt="DevRef">
+            DevRef
+        </a>
+        <nav class="portal-topnav">
+            <a href="../index.html#curso">Curso</a>
+            <a href="../index.html#reference">Referência</a>
+        </nav>
+    </div>
+</header>
+
+<main class="portal-main">
+
+    <div class="portal-page-header">
+        <div>
+            <a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a>
+            <div class="portal-eyebrow">Módulo 03 · Apostila completa</div>
+            <h1>React com Fundamentos Sólidos</h1>
+            <p class="portal-subtitle">Reconstruindo o Café Horizonte com componentes e estado — apostila prática com explicações progressivas, exemplos completos, exercícios e o projeto guiado.</p>
+        </div>
+    </div>
+
+    <ul class="apostila-toc">
+        <li><a href="#c1">1. Pré-requisitos e objetivo</a></li>
+        <li><a href="#c2">2. Criando o projeto com Vite</a></li>
+        <li><a href="#c3">3. JSX e componentes</a></li>
+        <li><a href="#c4">4. Listas, condições e chaves</a></li>
+        <li><a href="#c5">5. Estado e eventos</a></li>
+        <li><a href="#c6">6. Formulários controlados</a></li>
+        <li><a href="#c7">7. Efeitos e requisições</a></li>
+        <li><a href="#c8">8. CSS no React</a></li>
+        <li><a href="#c9">9. Rotas e páginas</a></li>
+        <li><a href="#c10">10. Contexto, reducer e hooks personalizados</a></li>
+        <li><a href="#c11">11. Projeto guiado Café Horizonte em React</a></li>
+        <li><a href="#c12">12. Projetos do curso e progressão</a></li>
+        <li><a href="#c13">13. Erros comuns e diagnóstico</a></li>
+        <li><a href="#c14">14. Avaliação de autonomia</a></li>
+        <li><a href="#c15">15. Mapa do curso original</a></li>
+        <li><a href="#c16">16. Referências para atualização</a></li>
+        <li><a href="#c17">17. Próxima etapa</a></li>
+        <li><a href="#c18">18. Resumo do que foi estudado</a></li>
+        <li><a href="#c19">19. Tabela de comandos e sintaxes</a></li>
+        <li><a href="#c20">20. O site construído</a></li>
+    </ul>
+
+    <div class="portal-card" style="padding: 8px 28px;">
+
+    <article class="apostila-chapter" id="c1">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">01</span> Pré-requisitos e objetivo</h2>
+        <p class="portal-section-text">React organiza interfaces em componentes. Esta apostila pressupõe que você saiba escrever funções, usar arrays e objetos, tratar eventos, consumir uma API e compreender módulos JavaScript. Se esses pontos ainda exigem cópia constante, revise a apostila JavaScript antes de continuar.</p>
+        <p class="portal-section-text">O projeto progressivo continuará sendo o Café Horizonte. Agora você reconstruirá, de forma consciente, a interface feita com DOM direto. A meta não é apenas obter a mesma tela: é entender como dados, componentes, props e estado substituem as atualizações manuais do HTML.</p>
+
+        <h3 class="apostila-subheading">O que será reaproveitado</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Da versão HTML, CSS e JavaScript</th><th>Na versão React</th></tr></thead>
+                <tbody>
+                    <tr><td>Conteúdo semântico e identidade visual</td><td>Estrutura JSX e estilos globais.</td></tr>
+                    <tr><td>Array de itens do cardápio</td><td>Dados usados para renderizar componentes.</td></tr>
+                    <tr><td>Filtros e formulário</td><td>Estado, eventos e validação controlada.</td></tr>
+                    <tr><td>Funções puras de validação</td><td>Utilitários reaproveitados com poucos ajustes.</td></tr>
+                    <tr><td>Manipulação manual do DOM</td><td>Renderização declarativa baseada no estado.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Não copie document.querySelector, createElement ou ouvintes globais para dentro dos componentes. Compare o comportamento antigo com o novo e migre uma funcionalidade de cada vez.</p>
+
+        <h3 class="apostila-subheading">Modelo mental</h3>
+        <p class="portal-section-text">Em JavaScript direto, você costuma localizar um elemento e mandar alterá-lo. Em React, você descreve qual interface corresponde aos dados atuais. Quando props ou estado mudam, React executa os componentes novamente e atualiza o DOM necessário.</p>
+        <pre class="portal-code-block"><code>function Greeting({ name }) {
+  return &lt;h1&gt;Olá, {name}&lt;/h1&gt;;
+}</code></pre>
+        <p class="portal-section-text">Um componente é uma função que retorna JSX. JSX se parece com HTML, mas é sintaxe JavaScript transformada pela ferramenta de build.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c2">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">02</span> Criando o projeto com Vite</h2>
+        <p class="portal-section-text">Instale uma versão do Node.js compatível com a versão atual do Vite. Como esses requisitos mudam, confira o guia oficial antes de iniciar um projeto novo.</p>
+        <pre class="portal-code-block"><code>npm create vite@latest cafe-horizonte-react -- --template react
+cd cafe-horizonte-react
+npm install
+npm run dev</code></pre>
+        <p class="portal-section-text">O terminal informa o endereço local. Não feche o processo enquanto estiver desenvolvendo.</p>
+
+        <h3 class="apostila-subheading">Arquivos iniciais</h3>
+        <pre class="portal-code-block"><code>cafe-horizonte-react/
+  src/
+    App.jsx
+    main.jsx
+    index.css
+  index.html
+  package.json</code></pre>
+        <p class="portal-section-text">main.jsx localiza o ponto de montagem e renderiza App. package.json registra dependências e scripts. A pasta src contém o código da aplicação.</p>
+
+        <h3 class="apostila-subheading">Scripts essenciais</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Comando</th><th>Finalidade</th></tr></thead>
+                <tbody>
+                    <tr><td>npm run dev</td><td>Inicia o servidor de desenvolvimento.</td></tr>
+                    <tr><td>npm run build</td><td>Gera os arquivos otimizados de produção.</td></tr>
+                    <tr><td>npm run preview</td><td>Visualiza localmente o build gerado.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Não envie a pasta node_modules. Outro desenvolvedor recupera as dependências com npm install.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c3">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">03</span> JSX e componentes</h2>
+        <p class="portal-section-text">JSX permite combinar marcação e expressões JavaScript. Use chaves para inserir uma expressão.</p>
+        <pre class="portal-code-block"><code>function MenuItemCard() {
+  const item = {
+    name: "Café coado",
+    category: "Bebidas",
+  };
+
+  return (
+    &lt;article className="menu-item-card"&gt;
+      &lt;h2&gt;{item.name}&lt;/h2&gt;
+      &lt;p&gt;{item.category}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+}</code></pre>
+        <p class="portal-section-text">Use className em vez de class. Um componente deve começar com letra maiúscula. O retorno precisa ter uma raiz única, que pode ser um elemento ou fragmento.</p>
+
+        <h3 class="apostila-subheading">Separando componentes</h3>
+        <pre class="portal-code-block"><code>src/
+  components/
+    Header.jsx
+    MenuItemCard.jsx
+    MenuList.jsx
+  pages/
+    HomePage.jsx
+  App.jsx</code></pre>
+        <p class="portal-section-text">Separe um componente quando ele tem responsabilidade clara, repete-se ou deixa o componente atual difícil de entender. Não transforme cada linha em um componente.</p>
+
+        <h3 class="apostila-subheading">Props</h3>
+        <p class="portal-section-text">Props são entradas do componente.</p>
+        <pre class="portal-code-block"><code>function MenuItemCard({ name, category, featured = false }) {
+  return (
+    &lt;article className={featured ? "menu-item-card featured" : "menu-item-card"}&gt;
+      &lt;h2&gt;{name}&lt;/h2&gt;
+      &lt;p&gt;{category}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+}</code></pre>
+        <pre class="portal-code-block"><code>&lt;MenuItemCard
+  name="Café coado"
+  category="Bebidas"
+  featured
+/&gt;</code></pre>
+        <p class="portal-section-text">Props são somente leitura. O componente filho não deve modificar o objeto recebido para tentar atualizar o pai.</p>
+
+        <h3 class="apostila-subheading">Children e composição</h3>
+        <pre class="portal-code-block"><code>function Panel({ title, children }) {
+  return (
+    &lt;section className="panel"&gt;
+      &lt;h2&gt;{title}&lt;/h2&gt;
+      {children}
+    &lt;/section&gt;
+  );
+}</code></pre>
+        <p class="portal-section-text">Composição permite que o pai forneça conteúdo sem criar muitas propriedades específicas.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c4">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">04</span> Listas, condições e chaves</h2>
+        <p class="portal-section-text">Use map para transformar dados em elementos.</p>
+        <pre class="portal-code-block"><code>const menuItems = [
+  { id: "cafe-coado", name: "Café coado", category: "bebidas" },
+  { id: "bolo-cenoura", name: "Bolo de cenoura", category: "doces" },
+];
+
+function MenuList({ items }) {
+  if (items.length === 0) {
+    return &lt;p&gt;Nenhum item disponível no cardápio.&lt;/p&gt;;
+  }
+
+  return (
+    &lt;div className="menu-list"&gt;
+      {items.map((item) =&gt; (
+        &lt;MenuItemCard key={item.id} {...item} /&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+        <p class="portal-section-text">key identifica o item entre renderizações. Prefira um identificador estável dos dados. Usar o índice pode causar associações incorretas quando itens são inseridos, removidos ou reordenados.</p>
+
+        <h3 class="apostila-subheading">Renderização condicional</h3>
+        <pre class="portal-code-block"><code>{isLoading && &lt;p&gt;Carregando...&lt;/p&gt;}
+{error && &lt;p role="alert"&gt;{error}&lt;/p&gt;}
+{menuItems.length &gt; 0 ? &lt;MenuList items={menuItems} /&gt; : &lt;EmptyMenu /&gt;}</code></pre>
+        <p class="portal-section-text">Escolha a forma que deixa os estados possíveis fáceis de ler. Se muitas condições se cruzam, calcule variáveis ou retorne cedo.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c5">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">05</span> Estado e eventos</h2>
+        <p class="portal-section-text">Estado é a memória de um componente. useState devolve o valor atual e uma função para solicitar a próxima renderização.</p>
+        <pre class="portal-code-block"><code>import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  function handleIncrement() {
+    setCount((current) =&gt; current + 1);
+  }
+
+  return (
+    &lt;button type="button" onClick={handleIncrement}&gt;
+      Itens favoritos {count}
+    &lt;/button&gt;
+  );
+}</code></pre>
+        <p class="portal-section-text">Não altere a variável diretamente. A função de atualização informa ao React que existe um novo estado.</p>
+
+        <h3 class="apostila-subheading">Estado como instantâneo</h3>
+        <p class="portal-section-text">Cada renderização trabalha com os valores daquele momento. Quando o próximo valor depende do anterior, use a função atualizadora.</p>
+        <pre class="portal-code-block"><code>setCount((current) =&gt; current + 1);</code></pre>
+
+        <h3 class="apostila-subheading">Atualizando arrays e objetos</h3>
+        <pre class="portal-code-block"><code>const [menuItems, setMenuItems] = useState(initialMenuItems);
+
+function addMenuItem(item) {
+  setMenuItems((current) =&gt; [...current, item]);
+}
+
+function toggleAvailable(itemId) {
+  setMenuItems((current) =&gt;
+    current.map((item) =&gt;
+      item.id === itemId
+        ? { ...item, available: !item.available }
+        : item,
+    ),
+  );
+}</code></pre>
+        <p class="portal-section-text">Não use push no array do estado nem altere uma propriedade do objeto existente. Crie os próximos valores.</p>
+
+        <h3 class="apostila-subheading">Onde o estado deve viver</h3>
+        <p class="portal-section-text">Mantenha o estado no componente comum mais próximo que precisa compartilhar os dados. Esse movimento é chamado de elevar o estado. Não torne global um estado que pertence a uma única seção.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c6">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">06</span> Formulários controlados</h2>
+        <p class="portal-section-text">Em um campo controlado, o valor exibido vem do estado e o evento atualiza esse estado.</p>
+        <pre class="portal-code-block"><code>import { useState } from "react";
+
+function ReservationForm({ onCreateReservation }) {
+  const [form, setForm] = useState({ name: "", people: 2 });
+  const [error, setError] = useState("");
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setForm((current) =&gt; ({ ...current, [name]: value }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (form.name.trim().length &lt; 3 || Number(form.people) &lt; 1) {
+      setError("Informe seu nome e ao menos uma pessoa.");
+      return;
+    }
+
+    onCreateReservation({
+      id: crypto.randomUUID(),
+      name: form.name.trim(),
+      people: Number(form.people),
+    });
+
+    setForm({ name: "", people: 2 });
+    setError("");
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;label htmlFor="name"&gt;Nome da reserva&lt;/label&gt;
+      &lt;input
+        id="name"
+        name="name"
+        value={form.name}
+        onChange={handleChange}
+      /&gt;
+
+      &lt;label htmlFor="people"&gt;Número de pessoas&lt;/label&gt;
+      &lt;input
+        id="people"
+        name="people"
+        type="number"
+        min="1"
+        value={form.people}
+        onChange={handleChange}
+      /&gt;
+
+      {error && &lt;p role="alert"&gt;{error}&lt;/p&gt;}
+
+      &lt;button type="submit"&gt;Solicitar reserva&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+        <p class="portal-section-text">O atributo em JSX é htmlFor. O nome dos campos corresponde às propriedades do estado para que uma função trate ambos.</p>
+
+        <h3 class="apostila-subheading">Estado derivado</h3>
+        <p class="portal-section-text">Não armazene no estado um valor que pode ser calculado durante a renderização.</p>
+        <pre class="portal-code-block"><code>const visibleMenuItems = menuItems.filter((item) =&gt;
+  item.name.toLowerCase().includes(search.toLowerCase()),
+);</code></pre>
+        <p class="portal-section-text">Guardar visibleMenuItems em outro estado exigiria sincronização e poderia criar divergências.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c7">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">07</span> Efeitos e requisições</h2>
+        <p class="portal-section-text">Efeitos sincronizam um componente com sistemas externos, como rede, armazenamento, temporizadores ou APIs do navegador. Eles não são a ferramenta padrão para calcular dados derivados.</p>
+        <pre class="portal-code-block"><code>import { useEffect, useState } from "react";
+
+function RemoteMenu() {
+  const [menuItems, setMenuItems] = useState([]);
+  const [status, setStatus] = useState("loading");
+
+  useEffect(() =&gt; {
+    const controller = new AbortController();
+
+    async function loadMenu() {
+      try {
+        setStatus("loading");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/menu-items`, {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Falha HTTP ${response.status}`);
+        }
+
+        const body = await response.json();
+
+        if (!Array.isArray(body.data)) {
+          throw new Error("Formato de cardápio inválido");
+        }
+
+        setMenuItems(body.data);
+        setStatus("success");
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.error(error);
+          setStatus("error");
+        }
+      }
+    }
+
+    loadMenu();
+    return () =&gt; controller.abort();
+  }, []);
+
+  if (status === "loading") return &lt;p&gt;Carregando...&lt;/p&gt;;
+  if (status === "error") return &lt;p role="alert"&gt;Falha ao carregar.&lt;/p&gt;;
+
+  return &lt;MenuList items={menuItems} /&gt;;
+}</code></pre>
+        <p class="portal-section-text">O retorno do efeito é a limpeza. O AbortController cancela a requisição quando o componente deixa de existir. Em aplicações maiores, roteadores e bibliotecas de dados podem oferecer estratégias melhores para carregamento, cache e revalidação.</p>
+
+        <h3 class="apostila-subheading">Dependências do efeito</h3>
+        <p class="portal-section-text">Todo valor reativo usado pelo efeito deve ser considerado na lista de dependências. Não remova uma dependência apenas para silenciar a ferramenta. Reestruture a lógica ou estabilize a entrada quando necessário.</p>
+
+        <h3 class="apostila-subheading">Quando não usar efeito</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Transformar props</dt><dd>Para transformar props antes de exibir.</dd></div>
+            <div class="portal-definition-item"><dt>Calcular lista filtrada</dt><dd>Para calcular uma lista filtrada.</dd></div>
+            <div class="portal-definition-item"><dt>Responder a um clique</dt><dd>Para responder diretamente a um clique.</dd></div>
+            <div class="portal-definition-item"><dt>Reiniciar estado</dt><dd>Para reiniciar estado quando uma chave ou estrutura de componente resolve o problema.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c8">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">08</span> CSS no React</h2>
+        <p class="portal-section-text">React não impõe uma única estratégia de estilo. Comece com CSS comum e classes claras.</p>
+        <pre class="portal-code-block"><code>import "./MenuItemCard.css";
+
+export function MenuItemCard({ name, category, available }) {
+  const className = available
+    ? "menu-item-card"
+    : "menu-item-card menu-item-card--unavailable";
+
+  return (
+    &lt;article className={className}&gt;
+      &lt;h2&gt;{name}&lt;/h2&gt;
+      &lt;p&gt;{category}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+}</code></pre>
+
+        <h3 class="apostila-subheading">Escolha de abordagem</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Abordagem</th><th>Vantagem</th><th>Cuidado</th></tr></thead>
+                <tbody>
+                    <tr><td>CSS global</td><td>Simples para base, tokens e tipografia.</td><td>Classes podem afetar regiões inesperadas.</td></tr>
+                    <tr><td>CSS por componente</td><td>Mantém arquivos próximos do componente.</td><td>O arquivo continua global sem uma técnica de escopo.</td></tr>
+                    <tr><td>CSS Modules</td><td>Cria nomes locais de classe.</td><td>Exige importar e usar o objeto de estilos.</td></tr>
+                    <tr><td>Inline</td><td>Útil para valor calculado pontual.</td><td>Não atende bem pseudoestados e regras complexas.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Evite misturar várias estratégias sem motivo. A equipe deve conseguir prever onde localizar uma regra.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c9">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">09</span> Rotas e páginas</h2>
+        <p class="portal-section-text">Instale a versão de React Router escolhida para o projeto e confira a documentação correspondente. O exemplo abaixo mostra a ideia central de uma configuração declarativa.</p>
+        <pre class="portal-code-block"><code>npm install react-router-dom</code></pre>
+        <pre class="portal-code-block"><code>import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
+import { MenuItemPage } from "./pages/MenuItemPage";
+import { ReservationPage } from "./pages/ReservationPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+
+export default function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;header&gt;
+        &lt;Link to="/"&gt;Café Horizonte&lt;/Link&gt;
+        &lt;Link to="/reservas"&gt;Reservas&lt;/Link&gt;
+      &lt;/header&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;HomePage /&gt;} /&gt;
+        &lt;Route path="/cardapio/:itemId" element={&lt;MenuItemPage /&gt;} /&gt;
+        &lt;Route path="/reservas" element={&lt;ReservationPage /&gt;} /&gt;
+        &lt;Route path="*" element={&lt;NotFoundPage /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+        <p class="portal-section-text">Use Link para navegação interna sem recarregar todo o documento. Parâmetros de rota identificam recursos. A aplicação ainda precisa tratar carregamento, item inexistente e falha de rede.</p>
+
+        <h3 class="apostila-subheading">Publicação de uma SPA</h3>
+        <p class="portal-section-text">Ao atualizar uma rota como /cardapio/cafe-coado, o servidor precisa devolver index.html para que o roteador assuma a navegação. Configure o fallback no provedor. Sem isso, rotas internas podem funcionar por clique e retornar 404 ao atualizar. <strong>É exatamente por isso que o site construído ao final deste módulo usa HashRouter</strong> — o DevRef é hospedado como arquivos estáticos, sem um servidor para configurar esse fallback.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c10">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">10</span> Contexto, reducer e hooks personalizados</h2>
+        <p class="portal-section-text">Contexto fornece um valor a descendentes sem passar a mesma prop por muitos níveis. Use-o para dados realmente compartilhados, não como substituto automático de todas as props.</p>
+        <pre class="portal-code-block"><code>import { createContext, useContext, useState } from "react";
+
+const ThemeContext = createContext(null);
+
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState("light");
+  const value = { theme, setTheme };
+
+  return (
+    &lt;ThemeContext.Provider value={value}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+export function useTheme() {
+  const context = useContext(ThemeContext);
+
+  if (!context) {
+    throw new Error("useTheme deve ser usado dentro de ThemeProvider");
+  }
+
+  return context;
+}</code></pre>
+
+        <h3 class="apostila-subheading">Reducer para transições relacionadas</h3>
+        <pre class="portal-code-block"><code>function menuReducer(state, action) {
+  switch (action.type) {
+    case "added":
+      return [...state, action.item];
+    case "availabilityToggled":
+      return state.map((item) =&gt;
+        item.id === action.itemId
+          ? { ...item, available: !item.available }
+          : item,
+      );
+    case "removed":
+      return state.filter((item) =&gt; item.id !== action.itemId);
+    default:
+      throw new Error(`Ação desconhecida ${action.type}`);
+  }
+}</code></pre>
+        <p class="portal-section-text">Um reducer concentra transições de estado e torna explícito o que pode acontecer. Ele não é necessário para um único booleano.</p>
+
+        <h3 class="apostila-subheading">Hook personalizado</h3>
+        <pre class="portal-code-block"><code>import { useEffect, useState } from "react";
+
+export function useDocumentTitle(title) {
+  useEffect(() =&gt; {
+    const previous = document.title;
+    document.title = title;
+
+    return () =&gt; {
+      document.title = previous;
+    };
+  }, [title]);
+}</code></pre>
+        <p class="portal-section-text">Um hook personalizado reutiliza lógica que usa hooks. O nome começa com use e as regras de hooks continuam válidas.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c11">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">11</span> Projeto guiado Café Horizonte em React</h2>
+
+        <h3 class="apostila-subheading">Estrutura sugerida</h3>
+        <pre class="portal-code-block"><code>src/
+  components/
+    Layout.jsx
+    MenuItemCard.jsx
+    MenuFilter.jsx
+    MenuList.jsx
+    ReservationForm.jsx
+  context/
+    CafeContext.jsx
+  hooks/
+    useMenu.js
+  pages/
+    HomePage.jsx
+    MenuPage.jsx
+    ReservationPage.jsx
+    NotFoundPage.jsx
+  services/
+    cafeApi.js
+  App.jsx
+  main.jsx</code></pre>
+
+        <h3 class="apostila-subheading">Etapas de implementação</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>Renderize o cardápio a partir do mesmo array usado na versão JavaScript.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>Extraia MenuItemCard e defina props claras.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>Adicione categoria e busca como estado e calcule a lista visível.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>Converta a reserva em formulário controlado com validação acessível.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>Adicione rotas para início, cardápio, reserva e página inexistente.</dd></div>
+            <div class="portal-definition-item"><dt>6</dt><dd>Troque os dados locais por uma API ou servidor simulado sem alterar os componentes de apresentação.</dd></div>
+            <div class="portal-definition-item"><dt>7</dt><dd>Represente carregamento, vazio, sucesso e erro.</dd></div>
+            <div class="portal-definition-item"><dt>8</dt><dd>Extraia a comunicação para services e um hook.</dd></div>
+            <div class="portal-definition-item"><dt>9</dt><dd>Use contexto apenas se várias páginas precisarem do cardápio, favoritos ou preferências.</dd></div>
+            <div class="portal-definition-item"><dt>10</dt><dd>Gere o build e teste as rotas no ambiente publicado.</dd></div>
+        </dl>
+
+        <h3 class="apostila-subheading">Critérios de qualidade</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Responsabilidades</dt><dd>Componentes têm responsabilidades identificáveis.</dd></div>
+            <div class="portal-definition-item"><dt>Props imutáveis</dt><dd>Props não são modificadas.</dd></div>
+            <div class="portal-definition-item"><dt>Sem duplicação</dt><dd>Estado não duplica valores derivados.</dd></div>
+            <div class="portal-definition-item"><dt>Chaves estáveis</dt><dd>Listas usam chaves estáveis.</dd></div>
+            <div class="portal-definition-item"><dt>Acessibilidade</dt><dd>Formulários possuem rótulos e mensagens acessíveis.</dd></div>
+            <div class="portal-definition-item"><dt>Efeitos limpos</dt><dd>Efeitos sincronizam sistemas externos e têm limpeza quando necessário.</dd></div>
+            <div class="portal-definition-item"><dt>Resiliência de rede</dt><dd>Falhas de rede não deixam a tela sem resposta.</dd></div>
+            <div class="portal-definition-item"><dt>Documentação</dt><dd>O projeto possui README com instalação, scripts e limitações.</dd></div>
+        </dl>
+        <p class="portal-section-text">Ao concluir, compare as duas implementações. Você deve conseguir explicar por que o filtro que antes chamava renderMenu(items) agora atualiza estado, por que os cartões recebem props e por que a requisição ficou em services/cafeApi.js. Essa explicação demonstra aprendizado; apenas copiar a versão React não demonstra.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c12">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">12</span> Projetos do curso e progressão</h2>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Projeto</th><th>Foco didático</th><th>Evolução recomendada</th></tr></thead>
+                <tbody>
+                    <tr><td>Calculadora de IMC</td><td>Estado, eventos e renderização condicional.</td><td>Separar cálculo, validação e apresentação.</td></tr>
+                    <tr><td>Formulário Multistep</td><td>Estado composto e navegação entre etapas.</td><td>Preservar dados, validar por etapa e indicar progresso.</td></tr>
+                    <tr><td>Quiz</td><td>Listas, seleção e pontuação.</td><td>Adicionar acessibilidade, revisão de respostas e reinício.</td></tr>
+                    <tr><td>Contador regressivo</td><td>Tempo e limpeza de efeitos.</td><td>Tratar término, reinício e mudança de data.</td></tr>
+                    <tr><td>Blog com Axios</td><td>Rotas, formulários e HTTP.</td><td>Representar carregamento, erro, vazio e cancelamento.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c13">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">13</span> Erros comuns e diagnóstico</h2>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Sintoma</th><th>Causa provável</th></tr></thead>
+                <tbody>
+                    <tr><td>Tela em branco</td><td>Erro de importação, sintaxe ou componente que falhou. Leia o console.</td></tr>
+                    <tr><td>Lista atualiza de forma estranha</td><td>Chaves instáveis ou alteração direta do estado.</td></tr>
+                    <tr><td>Efeito executa repetidamente</td><td>Dependência muda a cada renderização ou o efeito atualiza algo de que depende.</td></tr>
+                    <tr><td>Campo não permite digitação</td><td>Existe value, mas onChange não atualiza o estado.</td></tr>
+                    <tr><td>Estado parece atrasado</td><td>O código leu o instantâneo atual logo depois de solicitar atualização.</td></tr>
+                    <tr><td>Rota falha ao atualizar</td><td>O servidor não está configurado para fallback da SPA.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c14">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">14</span> Avaliação de autonomia</h2>
+        <p class="portal-section-text">Você concluiu esta etapa quando consegue:</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Vite</dt><dd>Criar e executar um projeto com Vite.</dd></div>
+            <div class="portal-definition-item"><dt>Fundamentos</dt><dd>Explicar JSX, componente, props e estado.</dd></div>
+            <div class="portal-definition-item"><dt>Listas</dt><dd>Renderizar listas com chaves estáveis.</dd></div>
+            <div class="portal-definition-item"><dt>Imutabilidade</dt><dd>Atualizar arrays e objetos sem mutação.</dd></div>
+            <div class="portal-definition-item"><dt>Formulários</dt><dd>Construir formulário controlado e acessível.</dd></div>
+            <div class="portal-definition-item"><dt>Distinções</dt><dd>Distinguir evento, cálculo derivado e efeito.</dd></div>
+            <div class="portal-definition-item"><dt>Dados remotos</dt><dd>Consumir uma API com estados de interface completos.</dd></div>
+            <div class="portal-definition-item"><dt>Rotas</dt><dd>Configurar rotas e tratar página inexistente.</dd></div>
+            <div class="portal-definition-item"><dt>Compartilhamento de estado</dt><dd>Aplicar contexto, reducer ou hook personalizado apenas quando resolvem um problema real.</dd></div>
+            <div class="portal-definition-item"><dt>Build</dt><dd>Gerar e testar o build de produção.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c15">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">15</span> Mapa do curso original</h2>
+        <p class="portal-section-text">Esta tabela preserva a ligação entre a nova sequência didática e os módulos usados como fonte. A ordem da apostila foi alterada quando isso melhora a aprendizagem.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Módulo</th><th>Conteúdo de origem</th><th>Arquivo</th></tr></thead>
+                <tbody>
+                    <tr><td>36</td><td>Curso de React JS: Introdução</td><td>36-React-Introducao.md</td></tr>
+                    <tr><td>37</td><td>Fundamentos do React JS</td><td>37-React-Fundamentos.md</td></tr>
+                    <tr><td>38</td><td>Avançando no React</td><td>38-React-Avancando.md</td></tr>
+                    <tr><td>39</td><td>CSS no React</td><td>39-CSS-no-React.md</td></tr>
+                    <tr><td>40</td><td>Formulários em React JS</td><td>40-Formularios-React.md</td></tr>
+                    <tr><td>41</td><td>Projeto 15: Calculadora de IMC com React JS</td><td>41-Projeto15-IMC-React.md</td></tr>
+                    <tr><td>42</td><td>Requisições HTTP no React</td><td>42-Requisicoes-HTTP-React.md</td></tr>
+                    <tr><td>43</td><td>Projeto 16: Formulário Multistep com React</td><td>43-Projeto16-Multistep-React.md</td></tr>
+                    <tr><td>44</td><td>React Router</td><td>44-React-Router.md</td></tr>
+                    <tr><td>45</td><td>Projeto 17: Quiz em React</td><td>45-Projeto17-Quiz-React.md</td></tr>
+                    <tr><td>46</td><td>Projeto 18: Contador regressivo</td><td>46-Projeto18-Contador-Regressivo.md</td></tr>
+                    <tr><td>47</td><td>Context API do React</td><td>47-Context-API.md</td></tr>
+                    <tr><td>48</td><td>Hooks do React</td><td>48-Hooks-do-React.md</td></tr>
+                    <tr><td>49</td><td>Projeto 19: Blog com React e Axios</td><td>49-Projeto19-Blog-React-Axios.md</td></tr>
+                    <tr><td>58</td><td>Conclusão e próximos passos</td><td>58-Conclusao.md</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c16">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">16</span> Referências para atualização</h2>
+        <ul class="apostila-links">
+            <li>React Learn — <a href="https://react.dev/learn" target="_blank" rel="noopener">react.dev/learn</a></li>
+            <li>React Reference — <a href="https://react.dev/reference/react" target="_blank" rel="noopener">react.dev/reference/react</a></li>
+            <li>Vite Guide — <a href="https://vite.dev/guide/" target="_blank" rel="noopener">vite.dev/guide</a></li>
+        </ul>
+    </article>
+
+    <article class="apostila-chapter" id="c17">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">17</span> Próxima etapa</h2>
+        <p class="portal-section-text">Continue na apostila Full Stack quando a versão React do Café Horizonte preservar o comportamento, a acessibilidade e os estados da versão anterior.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c18">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">18</span> Resumo do que foi estudado</h2>
+        <p class="portal-section-text">Use esta síntese para revisar a sequência da apostila. Tente explicar cada item e reproduzir sua aplicação no projeto antes de consultar os capítulos anteriores.</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Modelo mental</dt><dd>Você passou de alterações imperativas no DOM para uma interface declarada a partir dos dados.</dd></div>
+            <div class="portal-definition-item"><dt>Componentes</dt><dd>Você estruturou a interface com JSX, componentes, props, children e composição.</dd></div>
+            <div class="portal-definition-item"><dt>Estado e eventos</dt><dd>Você atualizou estado sem mutação e criou formulários controlados.</dd></div>
+            <div class="portal-definition-item"><dt>Dados externos</dt><dd>Você sincronizou a interface com APIs, efeitos e estados completos de requisição.</dd></div>
+            <div class="portal-definition-item"><dt>Aplicação</dt><dd>Você organizou rotas, páginas, contexto, reducer, hooks personalizados e build de produção.</dd></div>
+            <div class="portal-definition-item"><dt>Projeto</dt><dd>Você reconstruiu o Café Horizonte em React sem perder comportamento ou acessibilidade.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c19">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">19</span> Tabela de comandos e sintaxes</h2>
+        <p class="portal-section-text">A tabela reúne os principais comandos, elementos e padrões utilizados. Ela funciona como consulta rápida e não substitui a compreensão dos exemplos completos.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Tecnologia</th><th>Categoria</th><th>Comando / tag / propriedade</th><th>Descrição</th><th>Exemplo</th></tr></thead>
+                <tbody>
+                    <tr><td>Terminal</td><td>Projeto</td><td>npm create vite@latest</td><td>Cria a base do projeto com Vite.</td><td>npm create vite@latest cafe-horizonte-react -- --template react</td></tr>
+                    <tr><td>Terminal</td><td>Dependências</td><td>npm install</td><td>Instala as dependências registradas.</td><td>npm install</td></tr>
+                    <tr><td>Terminal</td><td>Desenvolvimento</td><td>npm run dev</td><td>Inicia o servidor local.</td><td>npm run dev</td></tr>
+                    <tr><td>Terminal</td><td>Produção</td><td>npm run build</td><td>Gera os arquivos otimizados.</td><td>npm run build</td></tr>
+                    <tr><td>React</td><td>Componente</td><td>function Component</td><td>Declara um componente funcional.</td><td>function Header() { return &lt;header /&gt;; }</td></tr>
+                    <tr><td>React</td><td>Props</td><td>{ prop }</td><td>Recebe dados do componente pai.</td><td>function Card({ name }) { ... }</td></tr>
+                    <tr><td>React</td><td>Estado</td><td>useState</td><td>Mantém dados que alteram a interface.</td><td>const [category, setCategory] = useState("all");</td></tr>
+                    <tr><td>React</td><td>Efeito</td><td>useEffect</td><td>Sincroniza com sistemas externos.</td><td>useEffect(() =&gt; { loadMenu(); }, []);</td></tr>
+                    <tr><td>React</td><td>Listas</td><td>map e key</td><td>Renderiza coleções com identidade estável.</td><td>items.map(item =&gt; &lt;Card key={item.id} /&gt;)</td></tr>
+                    <tr><td>React</td><td>Contexto</td><td>createContext useContext</td><td>Compartilha dados entre ramos da árvore.</td><td>const CafeContext = createContext(null);</td></tr>
+                    <tr><td>Router</td><td>Rotas</td><td>Route</td><td>Relaciona caminhos e páginas.</td><td>&lt;Route path="/menu" element={&lt;MenuPage /&gt;} /&gt;</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c20">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">20</span> O site construído</h2>
+        <p class="portal-section-text">O mesmo projeto Café Horizonte, agora reconstruído em React: componentes, estado, rotas (com HashRouter, já que o site é hospedado como arquivos estáticos) e dados carregados da API construída na apostila Full Stack.</p>
+        <div class="apostila-preview-frame">
+            <div class="apostila-preview-bar">
+                <span class="apostila-preview-dot" style="background: #ff5f56;"></span>
+                <span class="apostila-preview-dot" style="background: #ffbd2e;"></span>
+                <span class="apostila-preview-dot" style="background: #27c93f;"></span>
+                <span class="apostila-preview-url">cafe-horizonte-react/dist/index.html</span>
+            </div>
+            <iframe src="../projetos/projeto-03-cafe-horizonte-react/dist/index.html" title="Prévia do site Café Horizonte em React" loading="lazy"></iframe>
+        </div>
+        <div class="apostila-preview-actions">
+            <a class="btn btn-outline-secondary btn-sm" href="../projetos/projeto-03-cafe-horizonte-react/dist/index.html" target="_blank" rel="noopener">Abrir em nova aba &#8599;</a>
+        </div>
+        <p class="portal-section-text" style="margin-top: 14px;"><strong>Nota:</strong> o cardápio e as reservas dependem da API Node/Express/MongoDB da apostila Full Stack. Sem ela rodando, essas seções mostram um estado de erro — o que é, em si, o comportamento correto sendo demonstrado.</p>
+    </article>
+
+    </div>
+
+    <p class="portal-subtitle" style="margin-top: 24px;"><a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a></p>
+
+</main>
+
+<footer class="portal-footer">
+    <div class="portal-footer-inner">
+        <span>DevRef &middot; Guia técnico multi-linguagem</span>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Stack com Node, Express e MongoDB — Apostila · DevRef</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="portal-topbar">
+    <div class="portal-topbar-inner">
+        <a href="../index.html" class="portal-brand">
+            <img class="portal-brand-mark" src="../assets/logo-icon.png" alt="DevRef">
+            DevRef
+        </a>
+        <nav class="portal-topnav">
+            <a href="../index.html#curso">Curso</a>
+            <a href="../index.html#reference">Referência</a>
+        </nav>
+    </div>
+</header>
+
+<main class="portal-main">
+
+    <div class="portal-page-header">
+        <div>
+            <a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a>
+            <div class="portal-eyebrow">Módulo 04 · Apostila completa</div>
+            <h1>Full Stack com Node, Express e MongoDB</h1>
+            <p class="portal-subtitle">Adicionando API, banco de dados e reservas ao Café Horizonte — apostila prática com explicações progressivas, exemplos completos, exercícios e o projeto guiado.</p>
+        </div>
+    </div>
+
+    <ul class="apostila-toc">
+        <li><a href="#c1">1. Objetivo e limites</a></li>
+        <li><a href="#c2">2. HTTP antes do Express</a></li>
+        <li><a href="#c3">3. Criando o servidor Node</a></li>
+        <li><a href="#c4">4. Rotas, middleware e controladores</a></li>
+        <li><a href="#c5">5. MongoDB e Mongoose</a></li>
+        <li><a href="#c6">6. Operações CRUD</a></li>
+        <li><a href="#c7">7. Tratamento centralizado de erros</a></li>
+        <li><a href="#c8">8. CORS e integração com React</a></li>
+        <li><a href="#c9">9. Upload de arquivos</a></li>
+        <li><a href="#c10">10. Segurança e manutenção</a></li>
+        <li><a href="#c11">11. Testando a API</a></li>
+        <li><a href="#c12">12. Projeto guiado API do Café Horizonte</a></li>
+        <li><a href="#c13">13. Party Time e Memories</a></li>
+        <li><a href="#c14">14. Avaliação de autonomia</a></li>
+        <li><a href="#c15">15. Mapa do curso original</a></li>
+        <li><a href="#c16">16. Referências para atualização</a></li>
+        <li><a href="#c17">17. Próxima etapa</a></li>
+        <li><a href="#c18">18. Resumo do que foi estudado</a></li>
+        <li><a href="#c19">19. Tabela de comandos e sintaxes</a></li>
+        <li><a href="#c20">20. O site construído</a></li>
+    </ul>
+
+    <div class="portal-card" style="padding: 8px 28px;">
+
+    <article class="apostila-chapter" id="c1">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">01</span> Objetivo e limites</h2>
+        <p class="portal-section-text">Esta apostila continua o Café Horizonte construído em HTML, CSS, JavaScript e React. Até aqui, o cardápio e as reservas existiam apenas no navegador ou em um servidor simulado. Agora você construirá uma API própria para armazenar itens do cardápio e solicitações de reserva, conectando-a ao front-end React.</p>
+        <p class="portal-section-text">Os projetos Party Time e Memories permanecem como estudos complementares do curso. Seus conceitos de CRUD, relacionamento e upload serão aplicados ao domínio do café, evitando que o aluno precise aprender back-end e um projeto totalmente novo ao mesmo tempo.</p>
+        <p class="portal-section-text">O material pressupõe JavaScript assíncrono, objetos, arrays, módulos, formulários e React. A aplicação é didática. Antes de produção, ainda seriam necessários autenticação, autorização, testes abrangentes, observabilidade, política de arquivos e revisão de segurança.</p>
+
+        <h3 class="apostila-subheading">Arquitetura que será construída</h3>
+        <pre class="portal-code-block"><code>Navegador (React)
+      |
+      | HTTP com JSON e arquivos
+      v
+API Café Horizonte (Node + Express)
+      |
+      | validação e operações
+      v
+MongoDB (por meio do Mongoose)</code></pre>
+        <p class="portal-section-text">O navegador nunca deve receber a string de conexão do banco. O front-end conversa com a API, e a API controla o acesso aos dados.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c2">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">02</span> HTTP antes do Express</h2>
+        <p class="portal-section-text">Uma requisição contém método, endereço, cabeçalhos e, em alguns casos, corpo. A resposta contém status, cabeçalhos e corpo.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Método</th><th>Uso comum</th><th>Exemplo</th></tr></thead>
+                <tbody>
+                    <tr><td>GET</td><td>Ler dados</td><td>GET /api/menu-items</td></tr>
+                    <tr><td>POST</td><td>Criar recurso</td><td>POST /api/reservations</td></tr>
+                    <tr><td>PATCH</td><td>Atualizar parte</td><td>PATCH /api/menu-items/:id</td></tr>
+                    <tr><td>DELETE</td><td>Remover recurso</td><td>DELETE /api/reservations/:id</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="apostila-subheading">Status importantes</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Status</th><th>Significado</th></tr></thead>
+                <tbody>
+                    <tr><td>200</td><td>Requisição concluída com corpo de resposta.</td></tr>
+                    <tr><td>201</td><td>Recurso criado.</td></tr>
+                    <tr><td>204</td><td>Sucesso sem corpo.</td></tr>
+                    <tr><td>400</td><td>Dados da requisição são inválidos.</td></tr>
+                    <tr><td>404</td><td>Recurso não encontrado.</td></tr>
+                    <tr><td>409</td><td>Conflito com o estado existente.</td></tr>
+                    <tr><td>500</td><td>Falha inesperada no servidor.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Status não substitui uma mensagem útil, e a mensagem não substitui o status correto.</p>
+
+        <h3 class="apostila-subheading">Formato de erro consistente</h3>
+        <pre class="portal-code-block"><code>{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Revise os campos enviados",
+    "details": {
+      "name": "O nome é obrigatório"
+    }
+  }
+}</code></pre>
+        <p class="portal-section-text">Um formato previsível permite que o front-end trate erros sem depender de frases variadas.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c3">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">03</span> Criando o servidor Node</h2>
+        <p class="portal-section-text">Crie uma pasta separada para a API.</p>
+        <pre class="portal-code-block"><code>mkdir cafe-horizonte-api
+cd cafe-horizonte-api
+npm init -y
+npm install express mongoose cors multer</code></pre>
+        <p class="portal-section-text">Adicione ao package.json:</p>
+        <pre class="portal-code-block"><code>{
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env --watch src/server.js",
+    "start": "node --env-file=.env src/server.js"
+  }
+}</code></pre>
+        <p class="portal-section-text">Os recursos --watch e --env-file dependem da versão do Node instalada. Confirme a documentação da sua versão; em versões antigas, escolha ferramentas compatíveis e mantenha o mesmo contrato de variáveis.</p>
+
+        <h3 class="apostila-subheading">Estrutura inicial</h3>
+        <pre class="portal-code-block"><code>cafe-horizonte-api/
+  src/
+    app.js
+    server.js
+    routes/
+    controllers/
+    models/
+    middleware/
+  uploads/
+  package.json</code></pre>
+
+        <h3 class="apostila-subheading">Primeiro servidor</h3>
+        <pre class="portal-code-block"><code>// src/app.js
+import express from "express";
+
+export const app = express();
+
+app.use(express.json({ limit: "1mb" }));
+
+app.get("/health", (request, response) =&gt; {
+  response.status(200).json({ status: "ok" });
+});</code></pre>
+        <pre class="portal-code-block"><code>// src/server.js
+import { app } from "./app.js";
+
+const port = process.env.PORT ?? 3000;
+
+app.listen(port, () =&gt; {
+  console.log(`API disponível na porta ${port}`);
+});</code></pre>
+        <p class="portal-section-text">Execute npm run dev e abra http://localhost:3000/health.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c4">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">04</span> Rotas, middleware e controladores</h2>
+        <p class="portal-section-text">Middleware executa durante o caminho da requisição. Ele pode ler ou alterar a requisição, encerrar a resposta ou passar o controle adiante.</p>
+        <pre class="portal-code-block"><code>app.use((request, response, next) =&gt; {
+  const startedAt = Date.now();
+
+  response.on("finish", () =&gt; {
+    const duration = Date.now() - startedAt;
+    console.log(request.method, request.url, response.statusCode, duration);
+  });
+
+  next();
+});</code></pre>
+        <p class="portal-section-text">Nunca registre senhas, tokens, cookies ou corpos sensíveis em logs.</p>
+
+        <h3 class="apostila-subheading">Router</h3>
+        <pre class="portal-code-block"><code>// src/routes/menu.routes.js
+import { Router } from "express";
+import {
+  createMenuItem,
+  deleteMenuItem,
+  listMenuItems,
+  updateMenuItem,
+} from "../controllers/menu.controller.js";
+import { validateMenuItemBody } from "../middleware/validation.js";
+
+export const menuRouter = Router();
+
+menuRouter.get("/", listMenuItems);
+menuRouter.post("/", validateMenuItemBody, createMenuItem);
+menuRouter.patch("/:itemId", updateMenuItem);
+menuRouter.delete("/:itemId", deleteMenuItem);</code></pre>
+        <pre class="portal-code-block"><code>// src/app.js
+import { menuRouter } from "./routes/menu.routes.js";
+
+app.use("/api/menu-items", menuRouter);</code></pre>
+
+        <h3 class="apostila-subheading">Parâmetros, query e corpo</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>request.params</dt><dd>Contém valores da rota, como itemId.</dd></div>
+            <div class="portal-definition-item"><dt>request.query</dt><dd>Contém filtros da URL, como ?page=2.</dd></div>
+            <div class="portal-definition-item"><dt>request.body</dt><dd>Contém o corpo interpretado pelo middleware adequado.</dd></div>
+        </dl>
+        <p class="portal-section-text">Valide todos os três quando influenciam uma operação.</p>
+
+        <h3 class="apostila-subheading">Validação da requisição antes do controlador</h3>
+        <p class="portal-section-text">A validação de entrada merece um módulo próprio. Assim, o controlador cuida da operação e o middleware rejeita cedo um corpo inválido. A validação abaixo é didática; em projetos maiores, uma biblioteca de schemas pode reduzir repetição, desde que você compreenda o contrato produzido.</p>
+        <pre class="portal-code-block"><code>// src/middleware/validation.js
+function validationError(response, details) {
+  return response.status(400).json({
+    error: {
+      code: "VALIDATION_ERROR",
+      message: "Revise os campos enviados",
+      details,
+    },
+  });
+}
+
+export function validateMenuItemBody(request, response, next) {
+  const { name, category, price } = request.body;
+  const details = {};
+
+  if (typeof name !== "string" || name.trim().length &lt; 3) {
+    details.name = "Informe um nome com ao menos três caracteres";
+  }
+
+  if (!["bebidas", "doces", "salgados"].includes(category)) {
+    details.category = "Escolha uma categoria válida";
+  }
+
+  if (typeof price !== "number" || !Number.isFinite(price) || price &lt; 0) {
+    details.price = "Informe um preço numérico maior ou igual a zero";
+  }
+
+  if (Object.keys(details).length &gt; 0) {
+    return validationError(response, details);
+  }
+
+  request.body.name = name.trim();
+  return next();
+}
+
+export function validateReservationBody(request, response, next) {
+  const { name, email, date, time, people } = request.body;
+  const details = {};
+
+  if (typeof name !== "string" || name.trim().length &lt; 3) {
+    details.name = "Informe o nome da reserva";
+  }
+
+  if (typeof email !== "string" || !email.includes("@")) {
+    details.email = "Informe um e-mail válido";
+  }
+
+  if (typeof date !== "string" || Number.isNaN(Date.parse(date))) {
+    details.date = "Informe uma data válida";
+  }
+
+  if (typeof time !== "string" || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) {
+    details.time = "Use o formato HH:MM";
+  }
+
+  if (!Number.isInteger(people) || people &lt; 1 || people &gt; 12) {
+    details.people = "Escolha entre 1 e 12 pessoas";
+  }
+
+  if (Object.keys(details).length &gt; 0) {
+    return validationError(response, details);
+  }
+
+  request.body.name = name.trim();
+  request.body.email = email.trim().toLowerCase();
+  return next();
+}</code></pre>
+        <p class="portal-section-text">Validar formato não basta para todas as regras. A data pode estar bem formada e ainda estar no passado; um horário pode estar correto e fora do expediente. Essas regras de negócio devem ser testadas no servidor.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c5">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">05</span> MongoDB e Mongoose</h2>
+        <p class="portal-section-text">MongoDB armazena documentos em coleções. Mongoose adiciona schemas, modelos, validação e uma camada de acesso orientada a objetos.</p>
+
+        <h3 class="apostila-subheading">Variáveis de ambiente</h3>
+        <pre class="portal-code-block"><code>PORT=3000
+MONGODB_URI=mongodb://127.0.0.1:27017/cafe_horizonte
+CLIENT_ORIGIN=http://localhost:5173</code></pre>
+        <p class="portal-section-text">Não envie o arquivo com segredos ao repositório. Mantenha um .env.example com apenas os nomes e exemplos não sensíveis. Inclua ao menos .env, node_modules/ e os arquivos locais de uploads/ no .gitignore. Se o diretório de upload precisar existir no repositório, mantenha apenas um arquivo marcador sem conteúdo privado.</p>
+
+        <h3 class="apostila-subheading">Conexão</h3>
+        <pre class="portal-code-block"><code>// src/database.js
+import mongoose from "mongoose";
+
+export async function connectDatabase(uri) {
+  if (!uri) {
+    throw new Error("MONGODB_URI não configurada");
+  }
+
+  await mongoose.connect(uri);
+  console.log("Banco conectado");
+}</code></pre>
+        <pre class="portal-code-block"><code>// src/server.js
+import { app } from "./app.js";
+import { connectDatabase } from "./database.js";
+
+const port = process.env.PORT ?? 3000;
+
+try {
+  await connectDatabase(process.env.MONGODB_URI);
+  app.listen(port, () =&gt; console.log(`API na porta ${port}`));
+} catch (error) {
+  console.error("Falha ao iniciar a API", error);
+  process.exit(1);
+}</code></pre>
+        <p class="portal-section-text">O servidor só começa a aceitar requisições depois de conectar ao banco.</p>
+
+        <h3 class="apostila-subheading">Schema e modelo</h3>
+        <pre class="portal-code-block"><code>// src/models/MenuItem.js
+import mongoose from "mongoose";
+
+const menuItemSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 3,
+      maxlength: 120,
+    },
+    category: {
+      type: String,
+      required: true,
+      enum: ["bebidas", "doces", "salgados"],
+    },
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    available: {
+      type: Boolean,
+      default: true,
+    },
+    imagePath: {
+      type: String,
+      default: null,
+    },
+  },
+  { timestamps: true },
+);
+
+export const MenuItem = mongoose.model("MenuItem", menuItemSchema);</code></pre>
+        <p class="portal-section-text">O schema ajuda a validar e normalizar, mas regras de autorização e regras de negócio continuam necessárias na aplicação.</p>
+
+        <h3 class="apostila-subheading">Modelo de reserva</h3>
+        <pre class="portal-code-block"><code>// src/models/Reservation.js
+import mongoose from "mongoose";
+
+const reservationSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, trim: true, minlength: 3 },
+    email: { type: String, required: true, trim: true, lowercase: true },
+    date: { type: Date, required: true },
+    time: { type: String, required: true, match: /^([01]\d|2[0-3]):[0-5]\d$/ },
+    people: { type: Number, required: true, min: 1, max: 12 },
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "cancelled"],
+      default: "pending",
+    },
+    notes: { type: String, trim: true, maxlength: 500, default: "" },
+  },
+  { timestamps: true },
+);
+
+export const Reservation = mongoose.model("Reservation", reservationSchema);</code></pre>
+    </article>
+
+    <article class="apostila-chapter" id="c6">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">06</span> Operações CRUD</h2>
+
+        <h3 class="apostila-subheading">Listagem</h3>
+        <pre class="portal-code-block"><code>import { MenuItem } from "../models/MenuItem.js";
+
+export async function listMenuItems(request, response, next) {
+  try {
+    const items = await MenuItem.find().sort({ category: 1, name: 1 }).lean();
+    response.status(200).json({ data: items });
+  } catch (error) {
+    next(error);
+  }
+}</code></pre>
+        <p class="portal-section-text">lean devolve objetos simples quando recursos do documento Mongoose não são necessários.</p>
+
+        <h3 class="apostila-subheading">Criação</h3>
+        <pre class="portal-code-block"><code>export async function createMenuItem(request, response, next) {
+  try {
+    const { name, category, price } = request.body;
+    const item = await MenuItem.create({
+      name,
+      category,
+      price,
+      imagePath: request.body.imagePath ?? null,
+    });
+    return response.status(201).json({ data: item });
+  } catch (error) {
+    return next(error);
+  }
+}</code></pre>
+        <p class="portal-section-text">O middleware já validou e normalizou o corpo. O schema continua sendo a segunda barreira e protege também gravações feitas por outros caminhos internos.</p>
+
+        <h3 class="apostila-subheading">Atualização parcial</h3>
+        <p class="portal-section-text">Uma atualização parcial deve aceitar somente campos conhecidos. Não passe o corpo inteiro diretamente para o banco.</p>
+        <pre class="portal-code-block"><code>import mongoose from "mongoose";
+
+export async function updateMenuItem(request, response, next) {
+  try {
+    const { itemId } = request.params;
+
+    if (!mongoose.isValidObjectId(itemId)) {
+      return response.status(400).json({
+        error: { code: "INVALID_ID", message: "Identificador inválido" },
+      });
+    }
+
+    const allowedFields = ["name", "category", "price", "available"];
+    const changes = Object.fromEntries(
+      Object.entries(request.body).filter(([key]) =&gt; allowedFields.includes(key)),
+    );
+
+    if (Object.keys(changes).length === 0) {
+      return response.status(400).json({
+        error: { code: "EMPTY_UPDATE", message: "Nenhum campo permitido enviado" },
+      });
+    }
+
+    const item = await MenuItem.findByIdAndUpdate(itemId, changes, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!item) {
+      return response.status(404).json({
+        error: { code: "NOT_FOUND", message: "Item não encontrado" },
+      });
+    }
+
+    return response.status(200).json({ data: item });
+  } catch (error) {
+    return next(error);
+  }
+}</code></pre>
+        <p class="portal-section-text">runValidators: true aplica validações do schema também na atualização. Para regras detalhadas de PATCH, crie um middleware específico que valide apenas os campos presentes.</p>
+
+        <h3 class="apostila-subheading">Módulo de reservas</h3>
+        <pre class="portal-code-block"><code>// src/controllers/reservation.controller.js
+import mongoose from "mongoose";
+import { Reservation } from "../models/Reservation.js";
+
+export async function createReservation(request, response, next) {
+  try {
+    const requestedDate = new Date(request.body.date);
+
+    if (requestedDate &lt; new Date()) {
+      return response.status(400).json({
+        error: {
+          code: "RESERVATION_DATE_IN_PAST",
+          message: "A reserva deve ser feita para uma data futura",
+        },
+      });
+    }
+
+    const reservation = await Reservation.create({
+      ...request.body,
+      date: requestedDate,
+    });
+
+    return response.status(201).json({ data: reservation });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getReservation(request, response, next) {
+  try {
+    if (!mongoose.isValidObjectId(request.params.reservationId)) {
+      return response.status(400).json({
+        error: { code: "INVALID_ID", message: "Identificador inválido" },
+      });
+    }
+
+    const reservation = await Reservation.findById(
+      request.params.reservationId,
+    ).lean();
+
+    if (!reservation) {
+      return response.status(404).json({
+        error: { code: "NOT_FOUND", message: "Reserva não encontrada" },
+      });
+    }
+
+    return response.status(200).json({ data: reservation });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function deleteReservation(request, response, next) {
+  try {
+    if (!mongoose.isValidObjectId(request.params.reservationId)) {
+      return response.status(400).json({
+        error: { code: "INVALID_ID", message: "Identificador inválido" },
+      });
+    }
+
+    const reservation = await Reservation.findByIdAndDelete(
+      request.params.reservationId,
+    );
+
+    if (!reservation) {
+      return response.status(404).json({
+        error: { code: "NOT_FOUND", message: "Reserva não encontrada" },
+      });
+    }
+
+    return response.status(204).send();
+  } catch (error) {
+    return next(error);
+  }
+}</code></pre>
+        <pre class="portal-code-block"><code>// src/routes/reservation.routes.js
+import { Router } from "express";
+import {
+  createReservation,
+  deleteReservation,
+  getReservation,
+} from "../controllers/reservation.controller.js";
+import { validateReservationBody } from "../middleware/validation.js";
+
+export const reservationRouter = Router();
+
+reservationRouter.post("/", validateReservationBody, createReservation);
+reservationRouter.get("/:reservationId", getReservation);
+reservationRouter.delete("/:reservationId", deleteReservation);</code></pre>
+        <p class="portal-section-text">Monte o router em app.js, ao lado do cardápio:</p>
+        <pre class="portal-code-block"><code>import { reservationRouter } from "./routes/reservation.routes.js";
+
+app.use("/api/reservations", reservationRouter);</code></pre>
+
+        <h3 class="apostila-subheading">Remoção e identificador inválido</h3>
+        <pre class="portal-code-block"><code>import mongoose from "mongoose";
+
+export async function deleteMenuItem(request, response, next) {
+  try {
+    const { itemId } = request.params;
+
+    if (!mongoose.isValidObjectId(itemId)) {
+      return response.status(400).json({
+        error: { code: "INVALID_ID", message: "Identificador inválido" },
+      });
+    }
+
+    const item = await MenuItem.findByIdAndDelete(itemId);
+
+    if (!item) {
+      return response.status(404).json({
+        error: { code: "NOT_FOUND", message: "Item não encontrado" },
+      });
+    }
+
+    return response.status(204).send();
+  } catch (error) {
+    return next(error);
+  }
+}</code></pre>
+    </article>
+
+    <article class="apostila-chapter" id="c7">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">07</span> Tratamento centralizado de erros</h2>
+        <p class="portal-section-text">Rotas não devem repetir a mesma conversão de erros inesperados.</p>
+        <pre class="portal-code-block"><code>export function notFound(request, response) {
+  response.status(404).json({
+    error: { code: "ROUTE_NOT_FOUND", message: "Rota não encontrada" },
+  });
+}
+
+export function errorHandler(error, request, response, next) {
+  console.error(error);
+
+  if (error.name === "ValidationError") {
+    return response.status(400).json({
+      error: { code: "VALIDATION_ERROR", message: error.message },
+    });
+  }
+
+  return response.status(500).json({
+    error: { code: "INTERNAL_ERROR", message: "Falha interna" },
+  });
+}</code></pre>
+        <p class="portal-section-text">Registre os middlewares depois das rotas.</p>
+        <pre class="portal-code-block"><code>app.use(notFound);
+app.use(errorHandler);</code></pre>
+        <p class="portal-section-text">Não devolva pilhas de erro nem detalhes internos ao cliente em produção.</p>
+
+        <h3 class="apostila-subheading">Montagem final da aplicação</h3>
+        <p class="portal-section-text">A ordem dos middlewares faz parte do comportamento. Interprete o corpo e aplique CORS antes das rotas; deixe rota inexistente e erro por último.</p>
+        <pre class="portal-code-block"><code>// src/app.js
+import cors from "cors";
+import express from "express";
+import { errorHandler, notFound } from "./middleware/errors.js";
+import { menuRouter } from "./routes/menu.routes.js";
+import { reservationRouter } from "./routes/reservation.routes.js";
+
+export const app = express();
+
+app.use(cors({ origin: process.env.CLIENT_ORIGIN }));
+app.use(express.json({ limit: "1mb" }));
+
+app.get("/health", (request, response) =&gt; {
+  response.status(200).json({ status: "ok" });
+});
+
+app.use("/api/menu-items", menuRouter);
+app.use("/api/reservations", reservationRouter);
+
+app.use(notFound);
+app.use(errorHandler);</code></pre>
+    </article>
+
+    <article class="apostila-chapter" id="c8">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">08</span> CORS e integração com React</h2>
+        <p class="portal-section-text">CORS controla quais origens podem ler respostas do navegador. Ele não é um mecanismo de autenticação.</p>
+        <pre class="portal-code-block"><code>import cors from "cors";
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_ORIGIN,
+  }),
+);</code></pre>
+
+        <h3 class="apostila-subheading">Serviço no front end</h3>
+        <pre class="portal-code-block"><code>const API_URL = import.meta.env.VITE_API_URL;
+
+async function request(path, options = {}) {
+  const response = await fetch(`${API_URL}${path}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+  });
+
+  if (!response.ok) {
+    const body = await response.json().catch(() =&gt; null);
+    throw new Error(body?.error?.message ?? `Falha HTTP ${response.status}`);
+  }
+
+  if (response.status === 204) return null;
+  return response.json();
+}
+
+export async function getMenuItems() {
+  const body = await request("/api/menu-items");
+  return body.data;
+}
+
+export async function postReservation(input) {
+  const body = await request("/api/reservations", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+  return body.data;
+}</code></pre>
+        <p class="portal-section-text">Variáveis com prefixo VITE_ são incorporadas ao front-end e ficam visíveis ao navegador. Nunca coloque segredos nelas.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c9">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">09</span> Upload de arquivos</h2>
+        <p class="portal-section-text">Uploads precisam de limites, nomes gerados pelo servidor, validação de conteúdo e estratégia de armazenamento. O exemplo local usa extensão e MIME declarado como filtros iniciais. Eles não substituem a inspeção da assinatura do arquivo, a varredura e as políticas exigidas em produção.</p>
+        <pre class="portal-code-block"><code>import path from "node:path";
+import { randomUUID } from "node:crypto";
+import multer from "multer";
+
+const allowedExtensions = new Set([".jpg", ".jpeg", ".png", ".webp"]);
+const allowedMimeTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+
+const storage = multer.diskStorage({
+  destination: "uploads/",
+  filename(request, file, callback) {
+    const extension = path.extname(file.originalname).toLowerCase();
+
+    if (!allowedExtensions.has(extension)) {
+      return callback(new Error("Extensão de arquivo não permitida"));
+    }
+
+    return callback(null, `${randomUUID()}${extension}`);
+  },
+});
+
+export const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter(request, file, callback) {
+    callback(null, allowedMimeTypes.has(file.mimetype));
+  },
+});</code></pre>
+        <pre class="portal-code-block"><code>function normalizeMultipartMenuItem(request, response, next) {
+  if (typeof request.body.price === "string") {
+    request.body.price = Number(request.body.price);
+  }
+
+  request.body.imagePath = request.file?.path ?? null;
+  next();
+}
+
+// Substitua a rota POST anterior por esta ao habilitar upload.
+menuRouter.post(
+  "/",
+  upload.single("image"),
+  normalizeMultipartMenuItem,
+  validateMenuItemBody,
+  createMenuItem,
+);</code></pre>
+        <p class="portal-section-text">No front-end, envie FormData e não defina manualmente Content-Type; o navegador precisa incluir o boundary correto.</p>
+        <pre class="portal-code-block"><code>const formData = new FormData();
+formData.append("name", name);
+formData.append("category", category);
+formData.append("price", String(price));
+formData.append("image", file);
+
+await fetch(`${API_URL}/api/menu-items`, {
+  method: "POST",
+  body: formData,
+});</code></pre>
+        <p class="portal-section-text">Em produção, considere armazenamento de objetos, varredura, política de retenção e remoção do arquivo quando o registro for apagado.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c10">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">10</span> Segurança e manutenção</h2>
+
+        <h3 class="apostila-subheading">Controles mínimos</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Validação</dt><dd>Valide corpo, parâmetros e query no servidor.</dd></div>
+            <div class="portal-definition-item"><dt>CORS</dt><dd>Restrinja CORS às origens necessárias.</dd></div>
+            <div class="portal-definition-item"><dt>Limites</dt><dd>Defina limites de corpo e de upload.</dd></div>
+            <div class="portal-definition-item"><dt>Arquivos</dt><dd>Não confie no nome ou tipo declarado pelo navegador.</dd></div>
+            <div class="portal-definition-item"><dt>Segredos</dt><dd>Guarde segredos fora do código e não os envie ao front-end.</dd></div>
+            <div class="portal-definition-item"><dt>Erros</dt><dd>Não exponha detalhes internos em respostas de erro.</dd></div>
+            <div class="portal-definition-item"><dt>Autenticação</dt><dd>Use autenticação e autorização antes de permitir operações privadas.</dd></div>
+            <div class="portal-definition-item"><dt>Abuso</dt><dd>Proteja endpoints contra abuso com limites e monitoramento apropriados.</dd></div>
+            <div class="portal-definition-item"><dt>Dependências</dt><dd>Atualize dependências com revisão de mudanças e testes.</dd></div>
+        </dl>
+
+        <h3 class="apostila-subheading">Consistência entre banco e arquivo</h3>
+        <p class="portal-section-text">Se o upload for salvo e a gravação no banco falhar, remova o arquivo órfão. Se um registro for removido, trate também o arquivo correspondente. Operações distribuídas exigem uma política explícita de compensação.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c11">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">11</span> Testando a API</h2>
+        <p class="portal-section-text">Teste primeiro a API sem o front-end. Use uma ferramenta HTTP ou um arquivo de requisições do editor.</p>
+
+        <h3 class="apostila-subheading">Casos obrigatórios</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Caso</th><th>Resultado esperado</th></tr></thead>
+                <tbody>
+                    <tr><td>Listar sem registros</td><td>200 com array vazio.</td></tr>
+                    <tr><td>Criar com dados válidos</td><td>201 e recurso criado.</td></tr>
+                    <tr><td>Criar item sem nome</td><td>400 e código de validação.</td></tr>
+                    <tr><td>Buscar identificador inexistente</td><td>404.</td></tr>
+                    <tr><td>Enviar identificador malformado</td><td>400.</td></tr>
+                    <tr><td>Remover existente</td><td>204.</td></tr>
+                    <tr><td>Banco indisponível</td><td>Erro controlado e registro interno útil.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Depois teste a integração no navegador e confirme a requisição na guia Network.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c12">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">12</span> Projeto guiado API do Café Horizonte</h2>
+
+        <h3 class="apostila-subheading">Etapas</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>Crie /health e confirme o processo Node.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>Configure JSON, CORS e registro básico de requisições.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>Conecte MongoDB antes de iniciar o servidor.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>Crie os schemas MenuItem e Reservation com validações.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>Implemente primeiro a listagem do cardápio e a criação de reservas sem upload.</dd></div>
+            <div class="portal-definition-item"><dt>6</dt><dd>Adicione consulta, atualização e remoção por identificador.</dd></div>
+            <div class="portal-definition-item"><dt>7</dt><dd>Padronize respostas de erro.</dd></div>
+            <div class="portal-definition-item"><dt>8</dt><dd>Conecte a página de cardápio em React e represente carregamento, vazio e erro.</dd></div>
+            <div class="portal-definition-item"><dt>9</dt><dd>Conecte o formulário de reserva e apresente erros de validação devolvidos pela API.</dd></div>
+            <div class="portal-definition-item"><dt>10</dt><dd>Adicione upload de imagem aos itens do cardápio, com limites e limpeza de falhas.</dd></div>
+            <div class="portal-definition-item"><dt>11</dt><dd>Documente variáveis, scripts, endpoints e limitações.</dd></div>
+        </dl>
+
+        <h3 class="apostila-subheading">Contrato dos endpoints</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Endpoint</th><th>Corpo</th><th>Resposta de sucesso</th></tr></thead>
+                <tbody>
+                    <tr><td>GET /api/menu-items</td><td>nenhum</td><td>200 com { data: [] }.</td></tr>
+                    <tr><td>POST /api/menu-items</td><td>nome, categoria, preço e imagem opcional</td><td>201 com item criado.</td></tr>
+                    <tr><td>PATCH /api/menu-items/:id</td><td>campos permitidos</td><td>200 com item atualizado.</td></tr>
+                    <tr><td>POST /api/reservations</td><td>nome, e-mail, data, horário e pessoas</td><td>201 com reserva criada.</td></tr>
+                    <tr><td>GET /api/reservations/:id</td><td>nenhum</td><td>200 com reserva ou 404.</td></tr>
+                    <tr><td>DELETE /api/reservations/:id</td><td>nenhum</td><td>204.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="apostila-subheading">Critério de conclusão</h3>
+        <p class="portal-section-text">O projeto está didaticamente concluído quando você consegue explicar o caminho completo de uma reserva: evento no formulário React, requisição HTTP, middleware, controlador, validação, modelo, banco, resposta e atualização do estado da interface.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c13">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">13</span> Party Time e Memories</h2>
+        <p class="portal-section-text">Party Time enfatiza entidades relacionadas, upload e montagem de um evento. Memories reforça listagem, publicação e interação com conteúdo. Em ambos, evite construir toda a aplicação de uma vez. Valide a API por recurso e só depois conecte a interface.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Projeto</th><th>Pergunta de arquitetura</th></tr></thead>
+                <tbody>
+                    <tr><td>Party Time</td><td>Quais entidades existem e como os serviços pertencem a uma festa.</td></tr>
+                    <tr><td>Memories</td><td>Quem pode criar, alterar ou remover uma memória.</td></tr>
+                    <tr><td>Ambos</td><td>Como arquivos são validados, armazenados, servidos e removidos.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c14">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">14</span> Avaliação de autonomia</h2>
+        <p class="portal-section-text">Você concluiu esta apostila quando consegue:</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Fundamentos HTTP</dt><dd>Explicar requisição, resposta, método, rota, status e corpo.</dd></div>
+            <div class="portal-definition-item"><dt>Projeto Node</dt><dd>Inicializar um projeto Node e organizar scripts.</dd></div>
+            <div class="portal-definition-item"><dt>Express</dt><dd>Criar rotas e middlewares Express.</dd></div>
+            <div class="portal-definition-item"><dt>Arquitetura</dt><dd>Separar roteamento, controlador e modelo.</dd></div>
+            <div class="portal-definition-item"><dt>Banco de dados</dt><dd>Conectar MongoDB sem expor a string ao navegador.</dd></div>
+            <div class="portal-definition-item"><dt>Modelagem</dt><dd>Modelar e validar documentos com Mongoose.</dd></div>
+            <div class="portal-definition-item"><dt>CRUD</dt><dd>Implementar CRUD com respostas coerentes.</dd></div>
+            <div class="portal-definition-item"><dt>Erros</dt><dd>Centralizar erros sem revelar detalhes internos.</dd></div>
+            <div class="portal-definition-item"><dt>CORS</dt><dd>Configurar CORS conscientemente.</dd></div>
+            <div class="portal-definition-item"><dt>Integração</dt><dd>Conectar um front-end React e tratar todos os estados de rede.</dd></div>
+            <div class="portal-definition-item"><dt>Upload</dt><dd>Explicar riscos e responsabilidades de upload.</dd></div>
+            <div class="portal-definition-item"><dt>Produção</dt><dd>Identificar o que ainda falta antes de uma implantação de produção.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c15">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">15</span> Mapa do curso original</h2>
+        <p class="portal-section-text">Esta tabela preserva a ligação entre a nova sequência didática e os módulos usados como fonte. A ordem da apostila foi alterada quando isso melhora a aprendizagem.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Módulo</th><th>Conteúdo de origem</th><th>Arquivo</th></tr></thead>
+                <tbody>
+                    <tr><td>50</td><td>Projeto 20: Party Time</td><td>50-Projeto20-Party-Time.md</td></tr>
+                    <tr><td>51</td><td>Projeto 21: Memories</td><td>51-Projeto21-Memories.md</td></tr>
+                    <tr><td>58</td><td>Conclusão e próximos passos</td><td>58-Conclusao.md</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c16">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">16</span> Referências para atualização</h2>
+        <ul class="apostila-links">
+            <li>Node.js Documentation — <a href="https://nodejs.org/docs/latest/api/" target="_blank" rel="noopener">nodejs.org/docs/latest/api</a></li>
+            <li>Express Guide — <a href="https://expressjs.com/en/guide/routing.html" target="_blank" rel="noopener">expressjs.com/en/guide/routing.html</a></li>
+            <li>MongoDB Node Driver — <a href="https://www.mongodb.com/docs/drivers/node/current/" target="_blank" rel="noopener">mongodb.com/docs/drivers/node/current</a></li>
+            <li>Mongoose Guide — <a href="https://mongoosejs.com/docs/guide.html" target="_blank" rel="noopener">mongoosejs.com/docs/guide.html</a></li>
+        </ul>
+    </article>
+
+    <article class="apostila-chapter" id="c17">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">17</span> Próxima etapa</h2>
+        <p class="portal-section-text">Continue na apostila TypeScript para tipar o domínio e os contratos do Café Horizonte. Reforce segurança, autenticação, testes e observabilidade antes de tratar o projeto como aplicação de produção.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c18">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">18</span> Resumo do que foi estudado</h2>
+        <p class="portal-section-text">Use esta síntese para revisar a sequência da apostila. Tente explicar cada item e reproduzir sua aplicação no projeto antes de consultar os capítulos anteriores.</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>HTTP e API</dt><dd>Você compreendeu métodos, rotas, status, cabeçalhos, corpos e contratos de erro.</dd></div>
+            <div class="portal-definition-item"><dt>Node e Express</dt><dd>Você criou servidor, router, middleware, controlador e tratamento centralizado de falhas.</dd></div>
+            <div class="portal-definition-item"><dt>Banco de dados</dt><dd>Você conectou MongoDB e modelou documentos com schemas e validação do Mongoose.</dd></div>
+            <div class="portal-definition-item"><dt>CRUD e integração</dt><dd>Você implementou leitura, criação, atualização e remoção e conectou o front-end React.</dd></div>
+            <div class="portal-definition-item"><dt>Arquivos e segurança</dt><dd>Você aplicou limites de upload, variáveis de ambiente, CORS e controles mínimos.</dd></div>
+            <div class="portal-definition-item"><dt>Projeto</dt><dd>Você adicionou cardápio persistente e reservas à aplicação Café Horizonte.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c19">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">19</span> Tabela de comandos e sintaxes</h2>
+        <p class="portal-section-text">A tabela reúne os principais comandos, elementos e padrões utilizados. Ela funciona como consulta rápida e não substitui a compreensão dos exemplos completos.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Tecnologia</th><th>Categoria</th><th>Comando / tag / propriedade</th><th>Descrição</th><th>Exemplo</th></tr></thead>
+                <tbody>
+                    <tr><td>Terminal</td><td>Projeto Node</td><td>npm init -y</td><td>Cria o package.json inicial.</td><td>npm init -y</td></tr>
+                    <tr><td>Terminal</td><td>Dependências</td><td>npm install</td><td>Instala Express, Mongoose, CORS e Multer.</td><td>npm install express mongoose cors multer</td></tr>
+                    <tr><td>Terminal</td><td>Servidor</td><td>node --watch</td><td>Executa e reinicia o servidor durante alterações.</td><td>node --watch src/server.js</td></tr>
+                    <tr><td>Express</td><td>Aplicação</td><td>express()</td><td>Cria a aplicação HTTP.</td><td>const app = express();</td></tr>
+                    <tr><td>Express</td><td>JSON</td><td>express.json()</td><td>Interpreta corpos JSON com limite definido.</td><td>app.use(express.json({ limit: "1mb" }));</td></tr>
+                    <tr><td>Express</td><td>Rota</td><td>router.get/post/patch/delete</td><td>Relaciona método e caminho a um controlador.</td><td>router.get("/", listMenuItems);</td></tr>
+                    <tr><td>Express</td><td>Validação</td><td>middleware(request, response, next)</td><td>Valida corpo, parâmetros ou query antes do controlador.</td><td>router.post("/", validateBody, createItem);</td></tr>
+                    <tr><td>HTTP</td><td>Resposta</td><td>status().json()</td><td>Devolve status e corpo JSON.</td><td>response.status(201).json({ data: item });</td></tr>
+                    <tr><td>Mongoose</td><td>Conexão</td><td>mongoose.connect</td><td>Conecta a API ao MongoDB.</td><td>await mongoose.connect(uri);</td></tr>
+                    <tr><td>Mongoose</td><td>Modelo</td><td>Schema e model</td><td>Define regras e acesso a uma coleção.</td><td>mongoose.model("MenuItem", schema)</td></tr>
+                    <tr><td>Mongoose</td><td>Consulta</td><td>find / findByIdAndDelete</td><td>Lê ou remove documentos.</td><td>await MenuItem.find().lean();</td></tr>
+                    <tr><td>Upload</td><td>Arquivo</td><td>upload.single</td><td>Recebe um arquivo no campo indicado.</td><td>upload.single("image")</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c20">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">20</span> O site construído</h2>
+        <p class="portal-section-text">Este módulo não tem interface própria — o resultado dele é a API que passa a alimentar o mesmo front-end React da apostila anterior. O preview abaixo é o React consumindo dados reais, persistidos no MongoDB através desta API: cardápio, sugestões e reservas deixam de ser locais e passam a vir do banco de dados.</p>
+        <div class="apostila-preview-frame">
+            <div class="apostila-preview-bar">
+                <span class="apostila-preview-dot" style="background: #ff5f56;"></span>
+                <span class="apostila-preview-dot" style="background: #ffbd2e;"></span>
+                <span class="apostila-preview-dot" style="background: #27c93f;"></span>
+                <span class="apostila-preview-url">cafe-horizonte-react/dist/index.html — conectado à API</span>
+            </div>
+            <iframe src="../projetos/projeto-03-cafe-horizonte-react/dist/index.html" title="Prévia do site Café Horizonte consumindo a API" loading="lazy"></iframe>
+        </div>
+        <div class="apostila-preview-actions">
+            <a class="btn btn-outline-secondary btn-sm" href="https://github.com/Caiofreits/DevRef/tree/main/projetos/projeto-04-cafe-horizonte-api" target="_blank" rel="noopener">Ver código da API</a>
+            <a class="btn btn-outline-secondary btn-sm" href="../projetos/projeto-03-cafe-horizonte-react/dist/index.html" target="_blank" rel="noopener">Abrir em nova aba &#8599;</a>
+        </div>
+        <p class="portal-section-text" style="margin-top: 14px;"><strong>Nota:</strong> este preview só mostra dados reais quando a API (projeto-04-cafe-horizonte-api) está rodando localmente com o MongoDB conectado e populado (npm run seed). Sem ela, o cardápio e as reservas mostram o estado de erro — o que também está correto: é exatamente o comportamento que a apostila JavaScript e esta apostila ensinam a tratar.</p>
+    </article>
+
+    </div>
+
+    <p class="portal-subtitle" style="margin-top: 24px;"><a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a></p>
+
+</main>
+
+<footer class="portal-footer">
+    <div class="portal-footer-inner">
+        <span>DevRef &middot; Guia técnico multi-linguagem</span>
+    </div>
+</footer>
+
+</body>
+</html>

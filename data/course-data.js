@@ -45,37 +45,40 @@ const COURSE_MODULES = [
     id: "react",
     tech: "React",
     number: "03",
-    title: "React — Construção de Interfaces Modernas por Componentes",
-    intro: "O React é uma biblioteca para construir interfaces baseada em componentes. Em vez de lidar com o DOM manualmente (como no Módulo 3), você descreve como a interface deve ser e o React cuida da atualização.",
+    title: "React com Fundamentos Sólidos",
+    readMoreUrl: "curso/react.html",
+    intro: "React organiza interfaces em componentes: em vez de manipular o DOM diretamente, você descreve qual interface corresponde aos dados atuais e o React cuida da atualização. Neste módulo, o Café Horizonte é reconstruído do zero em React — mesmo comportamento, mesma acessibilidade, agora com componentes, props, estado, rotas e dados vindos de uma API.",
     sections: [
       {
-        heading: "Código do Componente React (Contador)",
-        codeLang: "jsx",
-        code: `import React, { useState } from 'react';
-
-function ContadorApp() {
-  const [numero, setNumero] = useState(0);
-
-  return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h2>Aplicação Contador em React</h2>
-      <p style={{ fontSize: '24px', fontWeight: 'bold' }}>Valor atual: {numero}</p>
-      <button onClick={() => setNumero(numero + 1)} style={{ marginRight: '10px' }}>
-        Aumentar
-      </button>
-      <button onClick={() => setNumero(numero - 1)}>
-        Diminuir
-      </button>
-    </div>
-  );
-}
-
-export default ContadorApp;`,
-        listLabel: "Conceitos Principais do React",
+        heading: "Pré-requisitos e Objetivo",
+        text: "Esta apostila pressupõe que você saiba escrever funções, usar arrays e objetos, tratar eventos, consumir uma API e compreender módulos JavaScript. O projeto progressivo continua sendo o Café Horizonte: a meta não é só obter a mesma tela, é entender como dados, componentes, props e estado substituem as atualizações manuais do HTML.",
+        listLabel: "O que é reaproveitado da versão HTML/CSS/JS",
         list: [
-          ["Hooks (useState)", "É a forma como o React \"lembra\" de informações. Quando setNumero é chamado, o React entende que algo mudou e atualiza apenas o texto do contador na tela, sem recarregar nada."],
-          ["Componentização", "Você pode criar este ContadorApp uma vez e usá-lo em dez lugares diferentes do seu site como se fosse uma tag HTML customizada."],
-          ["Virtual DOM", "O React mantém uma cópia da sua página na memória. Ele compara a cópia com o que mudou e faz a alteração mínima necessária no navegador real, o que torna a aplicação extremamente rápida."]
+          ["Conteúdo e identidade visual", "Vira estrutura JSX e estilos globais."],
+          ["Array de itens do cardápio", "Vira dados usados para renderizar componentes."],
+          ["Filtros e formulário", "Viram estado, eventos e validação controlada."],
+          ["Manipulação manual do DOM", "Vira renderização declarativa baseada no estado."]
+        ]
+      }
+    ]
+  },
+  {
+    id: "full-stack",
+    tech: "Full Stack",
+    number: "04",
+    title: "Full Stack com Node, Express e MongoDB",
+    readMoreUrl: "curso/full-stack.html",
+    intro: "O cardápio e as reservas do Café Horizonte deixam de existir só no navegador: neste módulo você constrói uma API própria com Node e Express, conectada a um banco MongoDB via Mongoose, e liga essa API ao front-end React construído no módulo anterior.",
+    sections: [
+      {
+        heading: "Objetivo e Limites",
+        text: "Esta apostila continua o Café Horizonte construído em HTML, CSS, JavaScript e React. O material pressupõe JavaScript assíncrono, objetos, arrays, módulos e React. A aplicação é didática: antes de produção, ainda seriam necessários autenticação, autorização, testes abrangentes, observabilidade e revisão de segurança.",
+        listLabel: "Arquitetura construída neste módulo",
+        list: [
+          ["Node + Express", "Servidor HTTP com rotas, middlewares e controladores organizados por responsabilidade."],
+          ["MongoDB + Mongoose", "Schemas, validação e persistência dos itens do cardápio e das reservas."],
+          ["CORS + integração", "A API conversa apenas com a origem do front-end React, que nunca vê a string de conexão do banco."],
+          ["Upload de arquivos", "Imagens de itens do cardápio, com limites de tamanho e tipo."]
         ]
       }
     ]
@@ -83,7 +86,7 @@ export default ContadorApp;`,
   {
     id: "typescript",
     tech: "TypeScript",
-    number: "04",
+    number: "05",
     title: "TypeScript — Segurança e Escala no Código",
     intro: "O TypeScript é um \"superconjunto\" do JavaScript. Ele adiciona tipos, o que significa que você define o que cada variável pode ou não conter, evitando erros comuns de lógica.",
     sections: [
@@ -142,7 +145,8 @@ const COURSE_SUMMARY = {
   rows: [
     ["HTML & CSS", "Estrutura Semântica, Acessibilidade e Layout Responsivo", "Esqueleto, Fundações e Acabamento", "Acessibilidade, SEO e Uso em Qualquer Tela"],
     ["JavaScript", "Interatividade, DOM e Dados Assíncronos", "Sistema Elétrico e Automação", "Interface Dinâmica com Dados Reais"],
-    ["React", "Componentização", "Módulos Pré-fabricados", "Interface Fluida e Moderna"],
+    ["React", "Componentes, Estado e Rotas", "Módulos Pré-fabricados e Conectados", "Interface Fluida e Reativa"],
+    ["Full Stack", "API, Persistência e Integração", "Encanamento e Reservatório de Dados", "Dados Reais, Persistentes e Compartilhados"],
     ["TypeScript", "Tipagem e Segurança", "Inspeção Técnica", "Menos Erros e Mais Estabilidade"]
   ]
 };

@@ -551,6 +551,7 @@ a:hover {
 .portal-badge-htmlcss { background: rgba(228, 122, 38, 0.15); color: #ffab5c; }
 .portal-badge-js     { background: rgba(240, 219, 79, 0.15); color: #f0db4f; }
 .portal-badge-react  { background: rgba(97, 218, 251, 0.15); color: #61dafb; }
+.portal-badge-fullstack { background: rgba(83, 163, 81, 0.18); color: #7fd08a; }
 .portal-badge-ts     { background: rgba(49, 120, 198, 0.15); color: #7ab3ec; }
 .portal-badge-python { background: rgba(255, 212, 59, 0.15); color: #ffd43b; }
 .portal-badge-c      { background: rgba(168, 185, 204, 0.18); color: #b8c6d9; }

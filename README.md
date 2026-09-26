@@ -11,7 +11,7 @@ The site's content is written in **Brazilian Portuguese** (`lang="pt-BR"`).
 
 | Track  | Technologies                                  | Course                                       | Reference entries |
 |--------|-----------------------------------------------|----------------------------------------------|-------------------|
-| FRONT END | HTML, CSS, JavaScript, React, TypeScript   | From zero to React & TypeScript (4 modules)  | 56 |
+| FRONT END | HTML, CSS, JavaScript, React, Node/Express/MongoDB, TypeScript | From zero to Full Stack with React & TypeScript (5 modules) | 56 |
 | Python | Python                                        | From zero to OOP (5 modules)                 | 56 |
 | C      | C                                             | Fundamentals to pointers and structs (5 modules) | 56 |
 | C++    | C++                                           | Syntax to OOP, STL and templates (5 modules) | 56 |
