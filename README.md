@@ -55,12 +55,27 @@ assets/              Images used by the site (logo, favicon, hero illustration)
 source-docs/         Source .docx files (the full course for each track)
 source-logos/        Original logo/illustration images, before final cropping
 
-.claude/launch.json  Local dev server configuration (python http.server on port 5173)
+.claude/launch.json  Local dev server configuration (scripts/dev.mjs on port 5173)
+scripts/dev.mjs      Starts the static site AND the Café Horizonte API together
 ```
 
 ## Running locally
 
-The site is 100% static, so any HTTP server works. From the repository root:
+The site itself is 100% static, so any HTTP server works for browsing the reference and course content. However, the React, Full Stack and TypeScript course modules end with a **live preview** of the Café Horizonte project, which fetches real data from the Node/Express API (`projetos/projeto-04-cafe-horizonte-api`) backed by MongoDB — that preview only shows real data when the API is running.
+
+### Recommended: site + API together
+
+Requires [Node.js](https://nodejs.org/) and a running MongoDB instance on `mongodb://127.0.0.1:27017` (a local install, or adjust `MONGODB_URI`).
+
+```bash
+node scripts/dev.mjs
+```
+
+This serves the static site on `http://localhost:5173` and the API on `http://localhost:3000` in one command. On first run it installs the API's dependencies and seeds the database automatically. Press `Ctrl+C` to stop both. Without MongoDB running, the site still works — the React/Full Stack/TypeScript previews just show their built-in error state instead of real data, which is itself part of what those modules teach.
+
+### Static site only
+
+If you only want to browse the reference and course content:
 
 ```bash
 python -m http.server 5173

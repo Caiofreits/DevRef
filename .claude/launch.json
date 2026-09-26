@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "devref-static",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "5173"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/dev.mjs"],
       "port": 5173
     }
   ]
