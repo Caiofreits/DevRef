@@ -87,52 +87,18 @@ const COURSE_MODULES = [
     id: "typescript",
     tech: "TypeScript",
     number: "05",
-    title: "TypeScript — Segurança e Escala no Código",
-    intro: "O TypeScript é um \"superconjunto\" do JavaScript. Ele adiciona tipos, o que significa que você define o que cada variável pode ou não conter, evitando erros comuns de lógica.",
+    title: "TypeScript Aplicado ao Front End",
+    readMoreUrl: "curso/typescript.html",
+    intro: "TypeScript acrescenta verificação estática ao JavaScript: ele ajuda a detectar combinações incompatíveis durante o desenvolvimento, melhora a navegação do editor e documenta contratos. Neste módulo, o Café Horizonte é migrado gradualmente — cardápio, formulário e serviço de API passam a ter tipos, sem perder o comportamento já construído.",
     sections: [
       {
-        heading: "Código React + TypeScript",
-        codeLang: "tsx",
-        code: `import React, { useState } from 'react';
-
-interface Usuario {
-  id: number;
-  nome: string;
-  email: string;
-}
-
-function CadastroUsuario() {
-  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
-
-  const adicionarUsuario = (novoNome: string, novoEmail: string): void => {
-    const novoObj: Usuario = {
-      id: Date.now(),
-      nome: novoNome,
-      email: novoEmail
-    };
-    setUsuarios([...usuarios, novoObj]);
-  };
-
-  return (
-    <div>
-      <h2>Lista de Usuários Tipada</h2>
-      <ul>
-        {usuarios.map(user => (
-          <li key={user.id}>
-            {user.nome} - {user.email}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default CadastroUsuario;`,
-        listLabel: "Validações e Conceitos do TypeScript",
+        heading: "Objetivo e Pré-requisitos",
+        text: "Você não começa uma aplicação desconectada: migra gradualmente o Café Horizonte das apostilas anteriores. O cardápio fornece entidades concretas para tipar; o formulário fornece eventos e dados opcionais; e a API fornece uma fronteira externa que precisa de contrato e validação em runtime.",
+        listLabel: "O que TypeScript não faz",
         list: [
-          ["Interfaces", "Elas agem como um contrato. Se você tentar criar um Usuario sem o campo email, o código nem chegará a rodar, apresentando um erro durante o desenvolvimento."],
-          ["Generic Types (<Usuario[]>)", "Informa ao React que aquele estado não é apenas uma lista qualquer, mas especificamente uma lista de objetos que seguem a interface Usuario."],
-          ["Prevenção de Erros", "O TypeScript identifica erros de digitação e tipos incompatíveis (como tentar somar um número com um texto) instantaneamente, o que economiza horas de depuração em projetos grandes."]
+          ["Não valida JSON sozinho", "Não valida automaticamente dados recebidos de uma API — isso ainda exige uma função de validação em runtime."],
+          ["Não elimina toda a lógica", "Não impede todos os erros de lógica nem substitui testes."],
+          ["Não corrige um modelo ruim", "Não transforma um modelo de dados impreciso em um bom modelo."]
         ]
       }
     ]

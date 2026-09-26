@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeScript Aplicado ao Front End — Apostila · DevRef</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="portal-topbar">
+    <div class="portal-topbar-inner">
+        <a href="../index.html" class="portal-brand">
+            <img class="portal-brand-mark" src="../assets/logo-icon.png" alt="DevRef">
+            DevRef
+        </a>
+        <nav class="portal-topnav">
+            <a href="../index.html#curso">Curso</a>
+            <a href="../index.html#reference">Referência</a>
+        </nav>
+    </div>
+</header>
+
+<main class="portal-main">
+
+    <div class="portal-page-header">
+        <div>
+            <a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a>
+            <div class="portal-eyebrow">Módulo 05 · Apostila completa</div>
+            <h1>TypeScript Aplicado ao Front End</h1>
+            <p class="portal-subtitle">Migrando o Café Horizonte para contratos seguros — apostila prática com explicações progressivas, exemplos completos, exercícios e o projeto guiado.</p>
+        </div>
+    </div>
+
+    <ul class="apostila-toc">
+        <li><a href="#c1">1. Objetivo e pré-requisitos</a></li>
+        <li><a href="#c2">2. Primeiro projeto TypeScript</a></li>
+        <li><a href="#c3">3. Inferência e tipos cotidianos</a></li>
+        <li><a href="#c4">4. Funções e contratos</a></li>
+        <li><a href="#c5">5. Uniões e narrowing</a></li>
+        <li><a href="#c6">6. Generics e utilitários</a></li>
+        <li><a href="#c7">7. APIs tipadas e validação em runtime</a></li>
+        <li><a href="#c8">8. React com TypeScript</a></li>
+        <li><a href="#c9">9. Reducers, contexto e hooks tipados</a></li>
+        <li><a href="#c10">10. Migração gradual</a></li>
+        <li><a href="#c11">11. Projeto guiado: migração do Café Horizonte</a></li>
+        <li><a href="#c12">12. Projeto complementar GitHub Finder</a></li>
+        <li><a href="#c13">13. Formulário Multistep com TypeScript</a></li>
+        <li><a href="#c14">14. Exercícios</a></li>
+        <li><a href="#c15">15. Avaliação de autonomia</a></li>
+        <li><a href="#c16">16. Mapa do curso original</a></li>
+        <li><a href="#c17">17. Referências para atualização</a></li>
+        <li><a href="#c18">18. Próxima etapa</a></li>
+        <li><a href="#c19">19. Resumo do que foi estudado</a></li>
+        <li><a href="#c20">20. Tabela de comandos e sintaxes</a></li>
+        <li><a href="#c21">21. O site construído</a></li>
+    </ul>
+
+    <div class="portal-card" style="padding: 8px 28px;">
+
+    <article class="apostila-chapter" id="c1">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">01</span> Objetivo e pré-requisitos</h2>
+        <p class="portal-section-text">TypeScript acrescenta verificação estática ao JavaScript. Ele ajuda a detectar combinações incompatíveis durante o desenvolvimento, melhora a navegação do editor e documenta contratos. O código executado continua sendo JavaScript, e dados recebidos em tempo de execução ainda precisam de validação.</p>
+        <p class="portal-section-text">Nesta etapa, você não começará uma aplicação desconectada. Você migrará gradualmente o Café Horizonte criado nas apostilas anteriores. O cardápio fornece entidades concretas para tipar; o formulário fornece eventos e dados opcionais; e a API fornece uma fronteira externa que precisa de contrato e validação em runtime.</p>
+        <p class="portal-section-text">Você deve dominar funções, arrays, objetos, módulos e JavaScript assíncrono. Os capítulos finais também pressupõem componentes, props, estado e eventos em React.</p>
+
+        <h3 class="apostila-subheading">Resultado da trilha até aqui</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Apostila anterior</th><th>Base usada nesta apostila</th></tr></thead>
+                <tbody>
+                    <tr><td>HTML e CSS</td><td>Estrutura semântica e formulário acessível.</td></tr>
+                    <tr><td>JavaScript</td><td>Funções, arrays, objetos, módulos e validação.</td></tr>
+                    <tr><td>React</td><td>Componentes, props, estado, eventos e serviços.</td></tr>
+                    <tr><td>Full Stack</td><td>Contratos HTTP de cardápio e reservas.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">A migração será concluída quando o comportamento permanecer igual, os tipos descreverem o domínio e nenhuma resposta externa for aceita apenas porque recebeu uma anotação TypeScript.</p>
+
+        <h3 class="apostila-subheading">Contextos dos exemplos</h3>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Contexto</th><th>Papel na aprendizagem</th></tr></thead>
+                <tbody>
+                    <tr><td>Café Horizonte</td><td>Migração principal: cardápio, reservas, componentes React e contratos da API.</td></tr>
+                    <tr><td>Projetos</td><td>Exemplos curtos para praticar objetos, listas, utilitários e reducer.</td></tr>
+                    <tr><td>Usuários</td><td>Exemplos de contratos, propriedades opcionais e dados recebidos.</td></tr>
+                    <tr><td>GitHub Finder</td><td>Estudo complementar de requisição, unknown, validação e estados de rede.</td></tr>
+                    <tr><td>Formulário multistep</td><td>Estudo complementar de uniões, estado e validação por etapa.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Os quatro contextos complementares não substituem a migração principal. Eles aparecem em exemplos delimitados para mostrar que os mesmos recursos da linguagem podem ser transferidos para outros domínios.</p>
+
+        <h3 class="apostila-subheading">O que TypeScript não faz</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>JSON da API</dt><dd>Não valida automaticamente JSON recebido de uma API.</dd></div>
+            <div class="portal-definition-item"><dt>Lógica</dt><dd>Não impede todos os erros de lógica.</dd></div>
+            <div class="portal-definition-item"><dt>Testes</dt><dd>Não substitui testes.</dd></div>
+            <div class="portal-definition-item"><dt>Modelagem</dt><dd>Não transforma um modelo de dados impreciso em um bom modelo.</dd></div>
+            <div class="portal-definition-item"><dt>Anotações</dt><dd>Não exige anotar cada variável quando a inferência já é clara.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c2">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">02</span> Primeiro projeto TypeScript</h2>
+        <p class="portal-section-text">Para experimentar o compilador sem React:</p>
+        <pre class="portal-code-block"><code>mkdir typescript-basics
+cd typescript-basics
+npm init -y
+npm install --save-dev typescript
+npx tsc --init</code></pre>
+        <p class="portal-section-text">Crie src/index.ts:</p>
+        <pre class="portal-code-block"><code>const courseName: string = "TypeScript aplicado";
+const lessonCount: number = 10;
+
+console.log(`${courseName} possui ${lessonCount} capítulos.`);</code></pre>
+        <p class="portal-section-text">O compilador analisa o arquivo e produz JavaScript conforme a configuração. Em projetos React com Vite, a ferramenta transforma TypeScript durante o build, enquanto uma verificação separada pode ser executada pelo compilador.</p>
+
+        <h3 class="apostila-subheading">Configuração consciente</h3>
+        <p class="portal-section-text">Ative verificações estritas em projetos novos quando possível.</p>
+        <pre class="portal-code-block"><code>{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  }
+}</code></pre>
+        <p class="portal-section-text">Algumas opções exigem adaptação em código existente. Migre gradualmente e entenda cada erro antes de desativar uma proteção.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c3">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">03</span> Inferência e tipos cotidianos</h2>
+        <p class="portal-section-text">TypeScript infere muitos tipos pelo valor inicial.</p>
+        <pre class="portal-code-block"><code>const title = "GitHub Finder"; // string
+let page = 1;                  // number
+const loading = false;         // false em const e contexto apropriado</code></pre>
+        <p class="portal-section-text">Uma anotação é útil quando a variável nasce sem valor suficiente, quando a função forma um contrato público ou quando a intenção precisa ser mais específica.</p>
+        <pre class="portal-code-block"><code>let selectedUser: string | null = null;
+
+function formatUserName(name: string): string {
+  return name.trim();
+}</code></pre>
+
+        <h3 class="apostila-subheading">Arrays e objetos</h3>
+        <pre class="portal-code-block"><code>const technologies: string[] = ["React", "TypeScript"];
+
+type Project = {
+  id: string;
+  title: string;
+  technologies: string[];
+  published: boolean;
+};
+
+const project: Project = {
+  id: "p1",
+  title: "GitHub Finder",
+  technologies: ["React", "TypeScript"],
+  published: true,
+};</code></pre>
+
+        <h3 class="apostila-subheading">Propriedades opcionais e somente leitura</h3>
+        <pre class="portal-code-block"><code>type User = {
+  readonly id: number;
+  login: string;
+  name?: string;
+};</code></pre>
+        <p class="portal-section-text">name?: string significa que a propriedade pode estar ausente. Isso não é sempre igual a uma propriedade obrigatória com valor string | undefined, especialmente com verificações mais estritas.</p>
+
+        <h3 class="apostila-subheading">Type e interface</h3>
+        <p class="portal-section-text">Ambos podem descrever objetos. Use uma convenção consistente. interface oferece extensão e declaração incremental; type também representa uniões, primitivas e composições.</p>
+        <pre class="portal-code-block"><code>interface Repository {
+  id: number;
+  name: string;
+  stars: number;
+}
+
+type RequestStatus = "idle" | "loading" | "success" | "error";</code></pre>
+    </article>
+
+    <article class="apostila-chapter" id="c4">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">04</span> Funções e contratos</h2>
+        <pre class="portal-code-block"><code>function calculateTotal(price: number, quantity: number): number {
+  return price * quantity;
+}
+
+function logError(message: string): void {
+  console.error(message);
+}</code></pre>
+
+        <h3 class="apostila-subheading">Parâmetros opcionais e valores padrão</h3>
+        <pre class="portal-code-block"><code>function formatPrice(value: number, currency = "BRL"): string {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency,
+  }).format(value);
+}</code></pre>
+        <p class="portal-section-text">Parâmetros opcionais aparecem depois dos obrigatórios.</p>
+        <pre class="portal-code-block"><code>function createLabel(text: string, color?: string): string {
+  return color ? `${text} ${color}` : text;
+}</code></pre>
+
+        <h3 class="apostila-subheading">Callbacks</h3>
+        <pre class="portal-code-block"><code>type ProjectFilter = (project: Project) =&gt; boolean;
+
+function filterProjects(
+  projects: Project[],
+  predicate: ProjectFilter,
+): Project[] {
+  return projects.filter(predicate);
+}</code></pre>
+        <p class="portal-section-text">Nomear contratos reutilizados costuma deixar assinaturas complexas mais legíveis.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c5">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">05</span> Uniões e narrowing</h2>
+        <p class="portal-section-text">Uma união representa alternativas conhecidas.</p>
+        <pre class="portal-code-block"><code>type SearchResult = User | null;</code></pre>
+        <p class="portal-section-text">Antes de usar uma operação específica, reduza a união com uma verificação.</p>
+        <pre class="portal-code-block"><code>function showUser(user: User | null): string {
+  if (user === null) {
+    return "Usuário não encontrado";
+  }
+  return user.name ?? user.login;
+}</code></pre>
+
+        <h3 class="apostila-subheading">Discriminated unions</h3>
+        <p class="portal-section-text">Estados de requisição ficam mais precisos quando cada alternativa possui os dados compatíveis.</p>
+        <pre class="portal-code-block"><code>type LoadState&lt;T&gt; =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; message: string };</code></pre>
+        <pre class="portal-code-block"><code>function getMessage(state: LoadState&lt;User&gt;): string {
+  switch (state.status) {
+    case "idle":
+      return "Digite um usuário";
+    case "loading":
+      return "Carregando";
+    case "success":
+      return state.data.login;
+    case "error":
+      return state.message;
+  }
+}</code></pre>
+        <p class="portal-section-text">O campo status permite ao compilador saber quais propriedades existem em cada caso. Esse modelo evita estados impossíveis, como loading: true com dados antigos e erro simultâneo.</p>
+
+        <h3 class="apostila-subheading">Unknown em fronteiras</h3>
+        <p class="portal-section-text">Use unknown quando o valor realmente é desconhecido. Você precisa verificar antes de usar.</p>
+        <pre class="portal-code-block"><code>function isUser(value: unknown): value is User {
+  if (typeof value !== "object" || value === null) return false;
+  const candidate = value as Record&lt;string, unknown&gt;;
+  return (
+    typeof candidate.id === "number" &&
+    typeof candidate.login === "string"
+  );
+}</code></pre>
+        <p class="portal-section-text">Uma asserção como value as User não valida o valor. Ela apenas informa ao compilador que você assume aquele tipo.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c6">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">06</span> Generics e utilitários</h2>
+        <p class="portal-section-text">Generics preservam relações entre tipos sem usar any.</p>
+        <pre class="portal-code-block"><code>function firstItem&lt;T&gt;(items: T[]): T | undefined {
+  return items[0];
+}
+
+const firstTechnology = firstItem(["React", "TypeScript"]);
+const firstNumber = firstItem([10, 20, 30]);</code></pre>
+
+        <h3 class="apostila-subheading">Restrições</h3>
+        <pre class="portal-code-block"><code>type WithId = { id: string | number };
+
+function findById&lt;T extends WithId&gt;(items: T[], id: T["id"]): T | undefined {
+  return items.find((item) =&gt; item.id === id);
+}</code></pre>
+
+        <h3 class="apostila-subheading">Tipos utilitários</h3>
+        <pre class="portal-code-block"><code>type NewProject = Omit&lt;Project, "id" | "published"&gt;;
+type ProjectUpdate = Partial&lt;Pick&lt;Project, "title" | "published"&gt;&gt;;
+type PublicProject = Readonly&lt;Project&gt;;</code></pre>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Utilitário</th><th>Uso</th></tr></thead>
+                <tbody>
+                    <tr><td>Partial&lt;T&gt;</td><td>Torna propriedades opcionais.</td></tr>
+                    <tr><td>Required&lt;T&gt;</td><td>Torna propriedades obrigatórias.</td></tr>
+                    <tr><td>Pick&lt;T, K&gt;</td><td>Seleciona propriedades.</td></tr>
+                    <tr><td>Omit&lt;T, K&gt;</td><td>Remove propriedades.</td></tr>
+                    <tr><td>Readonly&lt;T&gt;</td><td>Impede atribuição às propriedades no código tipado.</td></tr>
+                    <tr><td>Record&lt;K, V&gt;</td><td>Modela um objeto com chaves e valores definidos.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="portal-section-text">Não use utilitários para esconder um modelo confuso. Nomeie tipos de entrada e saída quando eles representam conceitos importantes.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c7">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">07</span> APIs tipadas e validação em runtime</h2>
+        <p class="portal-section-text">O tipo genérico abaixo descreve o valor esperado depois da validação. Ele não prova que a rede enviou esse formato.</p>
+        <pre class="portal-code-block"><code>async function requestJson(url: string): Promise&lt;unknown&gt; {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Falha HTTP ${response.status}`);
+  }
+
+  return response.json();
+}</code></pre>
+        <pre class="portal-code-block"><code>async function getUser(login: string): Promise&lt;User&gt; {
+  const data = await requestJson(`https://api.github.com/users/${login}`);
+
+  if (!isUser(data)) {
+    throw new Error("Resposta da API em formato inesperado");
+  }
+
+  return data;
+}</code></pre>
+        <p class="portal-section-text">Para modelos extensos, considere uma biblioteca de schema que produza validação em runtime e tipos, ou escreva validadores focados nos campos usados pela aplicação.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c8">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">08</span> React com TypeScript</h2>
+        <p class="portal-section-text">Crie um projeto Vite com o modelo React TypeScript:</p>
+        <pre class="portal-code-block"><code>npm create vite@latest github-finder -- --template react-ts
+cd github-finder
+npm install
+npm run dev</code></pre>
+
+        <h3 class="apostila-subheading">Props</h3>
+        <pre class="portal-code-block"><code>type UserCardProps = {
+  user: User;
+  onSelect?: (user: User) =&gt; void;
+};
+
+export function UserCard({ user, onSelect }: UserCardProps) {
+  return (
+    &lt;article&gt;
+      &lt;h2&gt;{user.name ?? user.login}&lt;/h2&gt;
+      &lt;p&gt;@{user.login}&lt;/p&gt;
+      {onSelect && (
+        &lt;button type="button" onClick={() =&gt; onSelect(user)}&gt;
+          Selecionar
+        &lt;/button&gt;
+      )}
+    &lt;/article&gt;
+  );
+}</code></pre>
+        <p class="portal-section-text">Não use React.FC por hábito. Tipar as props diretamente costuma ser suficiente e deixa o retorno inferido.</p>
+
+        <h3 class="apostila-subheading">Estado</h3>
+        <pre class="portal-code-block"><code>const [query, setQuery] = useState("");
+const [state, setState] = useState&lt;LoadState&lt;User&gt;&gt;({ status: "idle" });</code></pre>
+        <p class="portal-section-text">O primeiro estado é inferido como string. O segundo precisa do tipo genérico porque pode assumir várias formas ao longo do tempo.</p>
+
+        <h3 class="apostila-subheading">Eventos de formulário</h3>
+        <pre class="portal-code-block"><code>import type { ChangeEvent, FormEvent } from "react";
+
+function SearchForm() {
+  const [query, setQuery] = useState("");
+
+  function handleChange(event: ChangeEvent&lt;HTMLInputElement&gt;) {
+    setQuery(event.target.value);
+  }
+
+  function handleSubmit(event: FormEvent&lt;HTMLFormElement&gt;) {
+    event.preventDefault();
+    console.log(query);
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;label htmlFor="query"&gt;Usuário do GitHub&lt;/label&gt;
+      &lt;input id="query" value={query} onChange={handleChange} /&gt;
+      &lt;button type="submit"&gt;Buscar&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+        <p class="portal-section-text">Tipar o elemento específico melhora o acesso a target, currentTarget e propriedades disponíveis.</p>
+
+        <h3 class="apostila-subheading">Children</h3>
+        <pre class="portal-code-block"><code>import type { ReactNode } from "react";
+
+type PanelProps = {
+  title: string;
+  children: ReactNode;
+};</code></pre>
+        <p class="portal-section-text">Use o tipo mais específico possível para a intenção. ReactNode serve para conteúdo renderizável variado.</p>
+
+        <h3 class="apostila-subheading">Refs</h3>
+        <pre class="portal-code-block"><code>const inputRef = useRef&lt;HTMLInputElement&gt;(null);
+
+function focusInput() {
+  inputRef.current?.focus();
+}
+
+return &lt;input ref={inputRef} /&gt;;</code></pre>
+        <p class="portal-section-text">O valor inicial é null porque o elemento ainda não existe durante a primeira execução do componente.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c9">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">09</span> Reducers, contexto e hooks tipados</h2>
+
+        <h3 class="apostila-subheading">Reducer</h3>
+        <pre class="portal-code-block"><code>type ProjectAction =
+  | { type: "added"; project: Project }
+  | { type: "removed"; projectId: string }
+  | { type: "publishedToggled"; projectId: string };
+
+function projectsReducer(
+  state: Project[],
+  action: ProjectAction,
+): Project[] {
+  switch (action.type) {
+    case "added":
+      return [...state, action.project];
+    case "removed":
+      return state.filter((project) =&gt; project.id !== action.projectId);
+    case "publishedToggled":
+      return state.map((project) =&gt;
+        project.id === action.projectId
+          ? { ...project, published: !project.published }
+          : project,
+      );
+  }
+}</code></pre>
+        <p class="portal-section-text">A união discriminada impede ações sem os dados exigidos.</p>
+
+        <h3 class="apostila-subheading">Contexto</h3>
+        <pre class="portal-code-block"><code>import { createContext, useContext } from "react";
+import type { Dispatch } from "react";
+
+type ProjectsContextValue = {
+  projects: Project[];
+  dispatch: Dispatch&lt;ProjectAction&gt;;
+};
+
+const ProjectsContext = createContext&lt;ProjectsContextValue | null&gt;(null);
+
+export function useProjects() {
+  const context = useContext(ProjectsContext);
+
+  if (!context) {
+    throw new Error("useProjects deve estar dentro de ProjectsProvider");
+  }
+
+  return context;
+}</code></pre>
+        <p class="portal-section-text">O hook remove null para consumidores depois de verificar o provider.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c10">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">10</span> Migração gradual</h2>
+        <p class="portal-section-text">Não é necessário converter toda a aplicação em uma única alteração.</p>
+
+        <h3 class="apostila-subheading">Ordem recomendada</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>Configure o compilador e permita JavaScript durante a transição, se necessário.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>Converta funções utilitárias puras.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>Modele entidades e contratos de API.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>Converta componentes de folha com props simples.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>Converta formulários, contexto e reducers.</dd></div>
+            <div class="portal-definition-item"><dt>6</dt><dd>Substitua any temporários por tipos reais.</dd></div>
+            <div class="portal-definition-item"><dt>7</dt><dd>Ative verificações mais estritas gradualmente.</dd></div>
+        </dl>
+
+        <h3 class="apostila-subheading">Tratando erros sem mascarar</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>any temporário</dt><dd>Não troque um erro por any sem registrar por que ele é temporário.</dd></div>
+            <div class="portal-definition-item"><dt>Asserções em cadeia</dt><dd>Evite asserções em cadeia como value as unknown as User.</dd></div>
+            <div class="portal-definition-item"><dt>null/undefined</dt><dd>Modele null e undefined quando fazem parte do domínio.</dd></div>
+            <div class="portal-definition-item"><dt>Fronteiras externas</dt><dd>Valide fronteiras externas.</dd></div>
+            <div class="portal-definition-item"><dt>Inferência</dt><dd>Prefira inferência local e contratos explícitos nas fronteiras.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c11">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">11</span> Projeto guiado: migração do Café Horizonte</h2>
+        <p class="portal-section-text">Comece pela entidade que atravessa todas as camadas:</p>
+        <pre class="portal-code-block"><code>export type MenuItem = {
+  id: string;
+  name: string;
+  category: "bebidas" | "doces" | "salgados";
+  price: number;
+  available: boolean;
+  imageUrl?: string;
+};
+
+export type ReservationInput = {
+  name: string;
+  email: string;
+  date: string;
+  time: string;
+  people: number;
+};</code></pre>
+
+        <h3 class="apostila-subheading">Ordem da migração do projeto</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>Renomeie utilitários puros de .js para .ts e corrija contratos sem usar any.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>Converta MenuItemCard e MenuList, tipando props e callbacks.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>Converta o filtro e faça a categoria aceitar somente valores permitidos.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>Converta o formulário, tipando eventos e o estado dos campos.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>Modele carregamento, sucesso, vazio e erro com união discriminada.</dd></div>
+            <div class="portal-definition-item"><dt>6</dt><dd>Faça o serviço da API receber unknown e validar os dados antes de devolver MenuItem[].</dd></div>
+            <div class="portal-definition-item"><dt>7</dt><dd>Converta contexto e reducer, se existirem.</dd></div>
+            <div class="portal-definition-item"><dt>8</dt><dd>Ative verificações estritas e elimine justificadamente os últimos tipos temporários.</dd></div>
+        </dl>
+        <p class="portal-section-text">O compilador não sabe se a API realmente devolveu um item válido. Uma função de validação deve confirmar os campos usados antes que o valor entre na aplicação.</p>
+        <pre class="portal-code-block"><code>export function isMenuItem(value: unknown): value is MenuItem {
+  if (typeof value !== "object" || value === null) return false;
+  const item = value as Record&lt;string, unknown&gt;;
+  return (
+    typeof item.id === "string" &&
+    typeof item.name === "string" &&
+    typeof item.price === "number" &&
+    typeof item.available === "boolean"
+  );
+}</code></pre>
+        <p class="portal-section-text"><strong>Critério de conclusão:</strong> alterar o contrato de MenuItem deve orientar o editor até os componentes e serviços afetados; receber JSON inválido deve produzir um erro controlado em runtime.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c12">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">12</span> Projeto complementar GitHub Finder</h2>
+
+        <h3 class="apostila-subheading">Modelo mínimo</h3>
+        <pre class="portal-code-block"><code>type GitHubUser = {
+  id: number;
+  login: string;
+  name: string | null;
+  avatar_url: string;
+  bio: string | null;
+  public_repos: number;
+  followers: number;
+};</code></pre>
+
+        <h3 class="apostila-subheading">Fluxo</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>1</dt><dd>O formulário mantém a consulta como string.</dd></div>
+            <div class="portal-definition-item"><dt>2</dt><dd>O envio ignora espaços e impede consulta vazia.</dd></div>
+            <div class="portal-definition-item"><dt>3</dt><dd>O estado muda para loading.</dd></div>
+            <div class="portal-definition-item"><dt>4</dt><dd>O serviço busca unknown e valida os campos usados.</dd></div>
+            <div class="portal-definition-item"><dt>5</dt><dd>O sucesso guarda GitHubUser.</dd></div>
+            <div class="portal-definition-item"><dt>6</dt><dd>O erro guarda uma mensagem compreensível.</dd></div>
+            <div class="portal-definition-item"><dt>7</dt><dd>O componente renderiza cada alternativa da união.</dd></div>
+        </dl>
+        <pre class="portal-code-block"><code>function UserResult({ state }: { state: LoadState&lt;GitHubUser&gt; }) {
+  switch (state.status) {
+    case "idle":
+      return &lt;p&gt;Digite um usuário para começar.&lt;/p&gt;;
+    case "loading":
+      return &lt;p&gt;Buscando usuário...&lt;/p&gt;;
+    case "error":
+      return &lt;p role="alert"&gt;{state.message}&lt;/p&gt;;
+    case "success":
+      return &lt;UserCard user={state.data} /&gt;;
+  }
+}</code></pre>
+
+        <h3 class="apostila-subheading">Evoluções</h3>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Paginação</dt><dd>Listar repositórios com paginação.</dd></div>
+            <div class="portal-definition-item"><dt>Ordenação</dt><dd>Ordenar por estrelas sem alterar o array original.</dd></div>
+            <div class="portal-definition-item"><dt>Histórico</dt><dd>Salvar histórico de buscas no armazenamento local.</dd></div>
+            <div class="portal-definition-item"><dt>Testes</dt><dd>Criar testes para validadores e estados.</dd></div>
+            <div class="portal-definition-item"><dt>Limites</dt><dd>Tratar limite de requisições informado pela API.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c13">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">13</span> Formulário Multistep com TypeScript</h2>
+        <p class="portal-section-text">Modele as etapas e os dados antes de criar componentes.</p>
+        <pre class="portal-code-block"><code>type FormData = {
+  name: string;
+  email: string;
+  review: string;
+  score: number | null;
+};
+
+type Step = "identity" | "review" | "confirmation";</code></pre>
+        <p class="portal-section-text">Cada etapa deve receber apenas o necessário e comunicar mudanças com callbacks tipados. Valide por etapa e novamente na fronteira de envio.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c14">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">14</span> Exercícios</h2>
+
+        <h3 class="apostila-subheading">Conversor de dados</h3>
+        <p class="portal-section-text">Receba unknown, verifique se é um array de projetos e devolva Project[]. Não use any nem uma asserção sem validação.</p>
+
+        <h3 class="apostila-subheading">Estado de upload</h3>
+        <p class="portal-section-text">Modele com união discriminada os estados parado, enviando com progresso, sucesso e erro. Garanta que progresso só exista durante envio.</p>
+
+        <h3 class="apostila-subheading">Componente de tabela</h3>
+        <p class="portal-section-text">Crie props para uma tabela de repositórios com itens, função de seleção e mensagem vazia. Tipar um item como Repository deve orientar todas as props relacionadas.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c15">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">15</span> Avaliação de autonomia</h2>
+        <p class="portal-section-text">Você concluiu esta apostila quando consegue:</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Estática vs. runtime</dt><dd>Explicar a diferença entre verificação estática e validação em runtime.</dd></div>
+            <div class="portal-definition-item"><dt>Inferência</dt><dd>Usar inferência sem anotações redundantes.</dd></div>
+            <div class="portal-definition-item"><dt>Modelagem</dt><dd>Modelar objetos, uniões e propriedades opcionais.</dd></div>
+            <div class="portal-definition-item"><dt>Narrowing</dt><dd>Fazer narrowing de null, uniões e unknown.</dd></div>
+            <div class="portal-definition-item"><dt>Contratos</dt><dd>Escrever funções e callbacks com contratos claros.</dd></div>
+            <div class="portal-definition-item"><dt>Generics</dt><dd>Aplicar generics quando existe uma relação real entre tipos.</dd></div>
+            <div class="portal-definition-item"><dt>Utilitários</dt><dd>Usar utilitários sem esconder o domínio.</dd></div>
+            <div class="portal-definition-item"><dt>React tipado</dt><dd>Tipar props, estado, eventos, refs, contexto e reducers em React.</dd></div>
+            <div class="portal-definition-item"><dt>Estados de interface</dt><dd>Representar estados de interface sem combinações impossíveis.</dd></div>
+            <div class="portal-definition-item"><dt>Migração</dt><dd>Migrar JavaScript gradualmente sem usar any como solução definitiva.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c16">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">16</span> Mapa do curso original</h2>
+        <p class="portal-section-text">Esta tabela preserva a ligação entre a nova sequência didática e os módulos usados como fonte. A ordem da apostila foi alterada quando isso melhora a aprendizagem.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Módulo</th><th>Conteúdo de origem</th><th>Arquivo</th></tr></thead>
+                <tbody>
+                    <tr><td>52</td><td>Extra: Introdução ao TypeScript</td><td>52-TypeScript-Introducao.md</td></tr>
+                    <tr><td>53</td><td>Extra: Fundamentos do TypeScript</td><td>53-TypeScript-Fundamentos.md</td></tr>
+                    <tr><td>54</td><td>Extra: Avançando em tipos do TypeScript</td><td>54-TypeScript-Avancando-em-Tipos.md</td></tr>
+                    <tr><td>55</td><td>React com TypeScript</td><td>55-React-com-TypeScript.md</td></tr>
+                    <tr><td>56</td><td>Projeto 22: Formulário Multistep com React e TypeScript</td><td>56-Projeto22-Multistep-React-TS.md</td></tr>
+                    <tr><td>57</td><td>Projeto 23: GitHub Finder (React + TypeScript)</td><td>57-Projeto23-GitHub-Finder.md</td></tr>
+                    <tr><td>58</td><td>Conclusão e próximos passos</td><td>58-Conclusao.md</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c17">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">17</span> Referências para atualização</h2>
+        <ul class="apostila-links">
+            <li>TypeScript Handbook — <a href="https://www.typescriptlang.org/docs/handbook/" target="_blank" rel="noopener">typescriptlang.org/docs/handbook</a></li>
+            <li>TypeScript for JavaScript Programmers — <a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html" target="_blank" rel="noopener">typescriptlang.org/docs/handbook/typescript-in-5-minutes.html</a></li>
+            <li>React TypeScript Guide — <a href="https://react.dev/learn/typescript" target="_blank" rel="noopener">react.dev/learn/typescript</a></li>
+        </ul>
+    </article>
+
+    <article class="apostila-chapter" id="c18">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">18</span> Próxima etapa</h2>
+        <p class="portal-section-text">A trilha principal termina com o Café Horizonte integrado e tipado. Consolide o aprendizado recriando uma funcionalidade sem consultar a implementação anterior.</p>
+    </article>
+
+    <article class="apostila-chapter" id="c19">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">19</span> Resumo do que foi estudado</h2>
+        <p class="portal-section-text">Use esta síntese para revisar a sequência da apostila. Tente explicar cada item e reproduzir sua aplicação no projeto antes de consultar os capítulos anteriores.</p>
+        <dl class="portal-definition-list">
+            <div class="portal-definition-item"><dt>Fundamentos</dt><dd>Você usou inferência, anotações, arrays, objetos, propriedades opcionais, type e interface.</dd></div>
+            <div class="portal-definition-item"><dt>Contratos</dt><dd>Você tipou funções, callbacks, uniões e realizou narrowing de valores.</dd></div>
+            <div class="portal-definition-item"><dt>Reutilização</dt><dd>Você aplicou generics, restrições e tipos utilitários sem esconder o domínio.</dd></div>
+            <div class="portal-definition-item"><dt>Fronteiras</dt><dd>Você tratou respostas de API como unknown e validou dados em runtime.</dd></div>
+            <div class="portal-definition-item"><dt>React tipado</dt><dd>Você tipou props, estado, eventos, children, refs, reducer, contexto e hooks.</dd></div>
+            <div class="portal-definition-item"><dt>Projeto</dt><dd>Você migrou gradualmente o Café Horizonte e aplicou os tipos também em projetos, usuários, GitHub Finder e formulário multistep.</dd></div>
+        </dl>
+    </article>
+
+    <article class="apostila-chapter" id="c20">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">20</span> Tabela de comandos e sintaxes</h2>
+        <p class="portal-section-text">A tabela reúne os principais comandos, elementos e padrões utilizados. Ela funciona como consulta rápida e não substitui a compreensão dos exemplos completos.</p>
+        <div class="table-responsive">
+            <table class="table portal-table">
+                <thead><tr><th>Tecnologia</th><th>Categoria</th><th>Comando / tag / propriedade</th><th>Descrição</th><th>Exemplo</th></tr></thead>
+                <tbody>
+                    <tr><td>Terminal</td><td>Instalação</td><td>npm install -D typescript</td><td>Instala o compilador como dependência de desenvolvimento.</td><td>npm install --save-dev typescript</td></tr>
+                    <tr><td>Terminal</td><td>Configuração</td><td>npx tsc --init</td><td>Cria o tsconfig.json.</td><td>npx tsc --init</td></tr>
+                    <tr><td>TypeScript</td><td>Alias</td><td>type</td><td>Cria um nome para um tipo ou união.</td><td>type Category = "bebidas" | "doces";</td></tr>
+                    <tr><td>TypeScript</td><td>Contrato</td><td>interface</td><td>Descreve a forma de um objeto.</td><td>interface MenuItem { id: string; name: string; }</td></tr>
+                    <tr><td>TypeScript</td><td>União</td><td>|</td><td>Permite um conjunto controlado de alternativas.</td><td>type Status = "idle" | "loading" | "error";</td></tr>
+                    <tr><td>TypeScript</td><td>Narrowing</td><td>typeof e in</td><td>Refina um tipo após verificações.</td><td>if (typeof value === "string") { ... }</td></tr>
+                    <tr><td>TypeScript</td><td>Entrada externa</td><td>unknown</td><td>Exige verificação antes do uso.</td><td>function parse(value: unknown) { ... }</td></tr>
+                    <tr><td>TypeScript</td><td>Generic</td><td>&lt;T&gt;</td><td>Preserva relações de tipo entre entradas e saídas.</td><td>function first&lt;T&gt;(items: T[]): T | undefined</td></tr>
+                    <tr><td>TypeScript</td><td>Utilitários</td><td>Partial, Pick, Omit</td><td>Deriva contratos a partir de tipos existentes.</td><td>type Update = Partial&lt;Pick&lt;MenuItem, "price"&gt;&gt;;</td></tr>
+                    <tr><td>React TS</td><td>Props</td><td>Props type</td><td>Define as entradas aceitas pelo componente.</td><td>function Card({ item }: { item: MenuItem }) { ... }</td></tr>
+                    <tr><td>React TS</td><td>Evento</td><td>ChangeEvent</td><td>Tipa eventos de campos e formulários.</td><td>ChangeEvent&lt;HTMLInputElement&gt;</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="apostila-chapter" id="c21">
+        <h2 class="apostila-chapter-title"><span class="apostila-chapter-number">21</span> O site construído</h2>
+        <p class="portal-section-text">O Café Horizonte migrado para TypeScript: mesma interface, mesmo comportamento, agora com contratos de tipo em componentes, estado, eventos e no serviço da API — e uma função <code>isMenuItem</code> validando em runtime o que a API realmente devolveu.</p>
+        <div class="apostila-preview-frame">
+            <div class="apostila-preview-bar">
+                <span class="apostila-preview-dot" style="background: #ff5f56;"></span>
+                <span class="apostila-preview-dot" style="background: #ffbd2e;"></span>
+                <span class="apostila-preview-dot" style="background: #27c93f;"></span>
+                <span class="apostila-preview-url">cafe-horizonte-ts/web/dist/index.html</span>
+            </div>
+            <iframe src="../projetos/projeto-05-cafe-horizonte-ts/web/dist/index.html" title="Prévia do site Café Horizonte em React + TypeScript" loading="lazy"></iframe>
+        </div>
+        <div class="apostila-preview-actions">
+            <a class="btn btn-outline-secondary btn-sm" href="https://github.com/Caiofreits/DevRef/tree/main/projetos/projeto-05-cafe-horizonte-ts" target="_blank" rel="noopener">Ver código no GitHub</a>
+            <a class="btn btn-outline-secondary btn-sm" href="../projetos/projeto-05-cafe-horizonte-ts/web/dist/index.html" target="_blank" rel="noopener">Abrir em nova aba &#8599;</a>
+        </div>
+        <p class="portal-section-text" style="margin-top: 14px;"><strong>Nota:</strong> assim como no módulo Full Stack, o cardápio e as reservas dependem da API Node/Express/MongoDB rodando localmente. Sem ela, essas seções mostram o estado de erro tipado — o mesmo LoadState&lt;T&gt; discutido neste módulo.</p>
+    </article>
+
+    </div>
+
+    <p class="portal-subtitle" style="margin-top: 24px;"><a class="apostila-back" href="../index.html#curso">&larr; Voltar ao curso</a></p>
+
+</main>
+
+<footer class="portal-footer">
+    <div class="portal-footer-inner">
+        <span>DevRef &middot; Guia técnico multi-linguagem</span>
+    </div>
+</footer>
+
+</body>
+</html>
